@@ -1,15 +1,10 @@
-﻿namespace Tooded_EFCore_Mihhailenko
-{
-    public static class PasswordHelper
-    {
-        public static string Hash(string password)
-        {
-            return BCrypt.Net.BCrypt.HashPassword(password);
-        }
+﻿namespace Tooded_EFCore;
 
-        public static bool Verify(string password, string hash)
-        {
-            return BCrypt.Net.BCrypt.Verify(password, hash);
-        }
-    }
+public static class PasswordHelper
+{
+    // Teeb paroolist räsi. Sama parool annab iga kord erineva räsi (sool).
+    public static string Hash(string parool) => BCrypt.Net.BCrypt.HashPassword(parool);
+
+    // Kontrollib, kas sisestatud parool vastab salvestatud räsile
+    public static bool Verify(string parool, string rasi) => BCrypt.Net.BCrypt.Verify(parool, rasi);
 }

@@ -1,49 +1,53 @@
-﻿namespace Tooded_EFCore_Mihhailenko
+﻿namespace Tooded_EFCore;
+
+public partial class FormMain : Form
 {
-    public partial class FormMain : Form
+    private readonly Button btnTooted = new(), btnPood = new(), btnArve = new(), btnLogiValja = new();
+    public bool LogisValja { get; private set; }
+
+    public FormMain()
     {
-        public FormMain()
+        InitializeComponent();
+        Text = "Peamenüü";
+        ClientSize = new Size(260, 250);
+
+        SeaNupp(btnTooted, "Tootehaldus", 30, (s, e) => { if (AktiivneKasutaja.OnAdmin) Ava(new Form2()); });
+        SeaNupp(btnPood, "Pood", 80, (s, e) => Ava(new Form3()));
+        SeaNupp(btnArve, "Ostukorv ja arve", 130, (s, e) => Ava(new ArveForm()));
+
+        SeaNupp(btnLogiValja, "Logi välja", 180, btnLogiValja_Click);
+        Controls.AddRange(new Control[] { btnTooted, btnPood, btnArve, btnLogiValja });
+        btnTooted.Visible = AktiivneKasutaja.OnAdmin;
+        if (!AktiivneKasutaja.OnAdmin)
         {
-            InitializeComponent();
-            btnTooted.Visible = AktiivneKasutaja.Roll == "admin";
-
-            if (AktiivneKasutaja.Roll != "admin")
-            {
-                btnPood.Location = new Point(30, 30);
-                btnArve.Location = new Point(30, 80);
-                btnLogiValja.Location = new Point(30, 130);
-                this.ClientSize = new Size(300, 220);
-            }
+            btnPood.Top = 30;
+            btnArve.Top = 80;
+            btnLogiValja.Top = 130;
+            ClientSize = new Size(260, 200);
         }
+        Text = $"Peamenüü – {AktiivneKasutaja.Nimi}";
+    }
 
-        private void btnTooted_Click(object sender, EventArgs e)
-        {
-            if (AktiivneKasutaja.Roll != "admin") return;
+    private void SeaNupp(Button nupp, string tekst, int y, EventHandler kasitleja)
+    {
+        nupp.Text = tekst;
+        nupp.SetBounds(30, y, 200, 40);
+        nupp.Click += kasitleja;
+    }
 
-            Form2 f = new Form2();
-            f.ShowDialog();
-        }
+    private void btnLogiValja_Click(object? sender, EventArgs e)
+    {
+        Ostukorv.Tyhjenda();
+        AktiivneKasutaja.Nimi = "";
+        AktiivneKasutaja.Email = "";
+        AktiivneKasutaja.Roll = "";
+        LogisValja = true;
+        Close();
+    }
 
-        private void btnPood_Click(object sender, EventArgs e)
-        {
-            Form3 poodForm = new Form3();
-            poodForm.ShowDialog();
-        }
-
-        private void btnArve_Click(object sender, EventArgs e)
-        {
-            ArveForm arve = new ArveForm();
-            arve.ShowDialog();
-        }
-
-        private void btnLogiValja_Click(object sender, EventArgs e)
-        {
-            Ostukorv.Read.Clear();
-            AktiivneKasutaja.Roll = "";
-            AktiivneKasutaja.Nimi = "";
-            AktiivneKasutaja.Email = "";
-            this.DialogResult = DialogResult.Retry;
-            this.Close();
-        }
+    private static void Ava(Form vorm)
+    {
+        using (vorm)          // vorm vabastatakse pärast sulgemist
+            vorm.ShowDialog();
     }
 }

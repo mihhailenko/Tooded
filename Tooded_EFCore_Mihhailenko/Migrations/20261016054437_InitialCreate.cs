@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Tooded_EFCore_Mihhailenko.Migrations
+namespace Tooded_EFCore.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -22,6 +22,16 @@ namespace Tooded_EFCore_Mihhailenko.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Kategooriatabel", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Kategooriatabel",
+                columns: new[] { "Id", "Kategooria_nimetus", "Kirjeldus" },
+                values: new object[,]
+                {
+                    { 1, "Joogid", "" },
+                    { 2, "Puu- ja köögiviljad", "" },
+                    { 3, "Maiustused", "" }
                 });
 
             migrationBuilder.CreateTable(

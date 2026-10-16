@@ -1,156 +1,136 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 
-namespace Tooded_EFCore_Mihhailenko
+namespace Tooded_EFCore;
+
+public partial class Form3 : Form
 {
-    public partial class Form3 : Form
+    private readonly ToodedContext _db = new();
+    private readonly TabControl tabPood = new();
+    private readonly Label lblOstukorv = new();
+    private readonly Button btnMineOstukorvi = new();
+
+    public Form3()
     {
-        private readonly ToodedContext _db;
+        InitializeComponent();
+        Text = "Pood";
+        ClientSize = new Size(930, 630);
 
-        public Form3()
+        tabPood.SetBounds(10, 10, 900, 550);
+        lblOstukorv.SetBounds(10, 580, 650, 30);
+        btnMineOstukorvi.SetBounds(710, 575, 200, 35);
+        btnMineOstukorvi.Text = "Mine ostukorvi";
+        btnMineOstukorvi.Click += btnMineOstukorvi_Click;
+        Controls.AddRange(new Control[] { tabPood, lblOstukorv, btnMineOstukorvi });
+
+        LaePood();
+        NaitaKorviSummat();
+    }
+
+    private void LaePood()
+    {
+        tabPood.TabPages.Clear();
+
+        var kategooriad = _db.Kategooriatabel
+            .Include(k => k.Tooded)          // laeb kohe ka kategooria tooted
+            .OrderBy(k => k.Kategooria_nimetus)
+            .ToList();
+
+        foreach (var kat in kategooriad)
         {
-            InitializeComponent();
-            _db = new ToodedContext();
-            LaeKategooriadJaPildid();
-            UuendaOstukorv();
-        }
+            var leht = new TabPage(kat.Kategooria_nimetus) { AutoScroll = true };
 
-        private void LaeKategooriadJaPildid()
-        {
-            tabPood.TabPages.Clear();
-
-            var kategooriad = _db.Kategooriatabel.ToList();
-
-            foreach (var kat in kategooriad)
+            int i = 0;
+            foreach (var toode in kat.Tooded.OrderBy(t => t.Toodenimetus))
             {
-                // Loo uus tab selle kategooria jaoks
-                var page = new TabPage(kat.Kategooria_nimetus);
-                page.AutoScroll = true;
-
-                // Too kategooria tooted andmebaasist
-                var tooted = _db.Toodetabel
-                                .Where(t => t.KategooriaId == kat.Id)
-                                .ToList();
-
-                int x = 10;
-                int y = 10;
-                int count = 0;
-
-                foreach (var t in tooted)
-                {
-                    // Loo paneel iga toote jaoks
-                    Panel p = new Panel();
-                    p.Width = 150;
-                    p.Height = 240;
-                    p.BorderStyle = BorderStyle.FixedSingle;
-
-                    // Pildikast
-                    PictureBox pb = new PictureBox();
-                    pb.Width = 140;
-                    pb.Height = 140;
-                    pb.SizeMode = PictureBoxSizeMode.Zoom;
-                    pb.Location = new Point(5, 5);
-
-                    // lae pilt failist, kui olemas
-                    var piltPath = Path.Combine("Images", t.Pilt ?? "puudub.png");
-                    if (File.Exists(piltPath))
-                        pb.Image = Image.FromFile(piltPath);
-
-                    // Nimetus
-                    Label lbl = new Label();
-                    lbl.Text = t.Toodenimetus;
-                    lbl.AutoSize = false;
-                    lbl.TextAlign = ContentAlignment.MiddleCenter;
-                    lbl.Location = new Point(5, 150);
-                    lbl.Height = 35;
-                    lbl.Width = 140;
-
-                    Label lblHind = new Label();
-                    lblHind.Text = $"Hind: {t.Hind:F2} €";
-                    lblHind.Location = new Point(5, 185);
-                    lblHind.Size = new Size(140, 20);
-                    lblHind.TextAlign = ContentAlignment.MiddleCenter;
-
-                    ComboBox comboKogus = new ComboBox();
-                    comboKogus.DropDownStyle = ComboBoxStyle.DropDownList;
-                    comboKogus.Location = new Point(5, 210);
-                    comboKogus.Size = new Size(45, 25);
-                    for (int i = 1; i <= 10; i++)
-                    {
-                        comboKogus.Items.Add(i);
-                    }
-                    comboKogus.SelectedIndex = 0;
-                    p.Tag = comboKogus;
-
-                    Button btnLisaKorvi = new Button();
-                    btnLisaKorvi.Text = "Lisa ostukorvi";
-                    btnLisaKorvi.Location = new Point(55, 210);
-                    btnLisaKorvi.Size = new Size(90, 25);
-                    btnLisaKorvi.Tag = t;
-                    btnLisaKorvi.Click += btnLisaKorvi_Click;
-
-                    // Lisa elemendid paneelile
-                    p.Controls.Add(pb);
-                    p.Controls.Add(lbl);
-                    p.Controls.Add(lblHind);
-                    p.Controls.Add(comboKogus);
-                    p.Controls.Add(btnLisaKorvi);
-
-                    // Paiguta paneel TabPage-s
-                    p.Location = new Point(x, y);
-                    page.Controls.Add(p);
-
-                    // Järgmise positsioon
-                    x += 160;
-                    count++;
-
-                    // iga 4 pildi järel uus rida
-                    if (count % 4 == 0)
-                    {
-                        x = 10;
-                        y += 250;
-                    }
-                }
-
-                // Lisa TabPage TabControli sisse
-                tabPood.TabPages.Add(page);
+                var kaart = LooTootekaart(toode);
+                // 5 kaarti reas: veerg = i % 5, rida = i / 5
+                kaart.Location = new Point(10 + (i % 5) * 175, 10 + (i / 5) * 250);
+                leht.Controls.Add(kaart);
+                i++;
             }
+
+            tabPood.TabPages.Add(leht);
         }
+    }
 
-        private void btnLisaKorvi_Click(object sender, EventArgs e)
+    private Panel LooTootekaart(Toode t)
+    {
+        var kaart = new Panel { Size = new Size(160, 235), BorderStyle = BorderStyle.FixedSingle };
+
+        var pilt = new PictureBox
         {
-            Button nupp = (Button)sender;
-            Toode toode = (Toode)nupp.Tag;
+            Bounds = new Rectangle(5, 5, 148, 140),
+            SizeMode = PictureBoxSizeMode.Zoom,
+            Image = Kaustad.LaePilt(t.Pilt)
+        };
 
-            ComboBox comboKogus = (ComboBox)nupp.Parent.Tag;
-            int kogus = (int)comboKogus.SelectedItem;
-
-            Ostukorv.LisaToode(toode, kogus);
-            UuendaOstukorv();
-        }
-
-        private void UuendaOstukorv()
+        var silt = new Label
         {
-            int kogus = Ostukorv.Read.Sum(r => r.Kogus);
-            float summa = Ostukorv.Read.Sum(r => r.Summa);
-            lblOstukorv.Text = $"Ostukorvis: {kogus} tk    Kokku: {summa:F2} €";
-        }
+            Bounds = new Rectangle(5, 150, 148, 40),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Text = $"{t.Toodenimetus}\n{t.Hind:F2} €"
+        };
 
-        private void btnMineOstukorvi_Click(object sender, EventArgs e)
+        var kogus = new ComboBox
         {
-            if (Ostukorv.Read.Count == 0)
+            Bounds = new Rectangle(5, 197, 60, 27),
+            DropDownStyle = ComboBoxStyle.DropDownList
+        };
+        for (int i = 1; i <= Math.Min(10, Math.Max(1, t.Kogus)); i++)
+            kogus.Items.Add(i);
+        kogus.SelectedIndex = 0;
+
+        var nupp = new Button
+        {
+            Bounds = new Rectangle(70, 195, 83, 30),
+            Text = "Lisa korvi",
+            Enabled = t.Kogus > 0             // laos pole = nupp hall
+        };
+
+        nupp.Click += (s, e) =>
+        {
+            int valitudKogus = (int)kogus.SelectedItem!;
+            int korvis = Ostukorv.Ridad.Where(r => r.Toode.Id == t.Id).Sum(r => r.Kogus);
+            if (korvis + valitudKogus > t.Kogus)
             {
-                MessageBox.Show("Ostukorv on tühi. Lisa enne mõni toode.");
+                MessageBox.Show($"Laos on ainult {t.Kogus} tk, korvis on juba {korvis} tk.");
                 return;
             }
+            Ostukorv.Lisa(t, valitudKogus);
+            NaitaKorviSummat();
+        };
 
-            using ArveForm arve = new ArveForm();
-            arve.ShowDialog();
-            UuendaOstukorv();
+        pilt.Click += (s, e) =>
+            MessageBox.Show($"{t.Toodenimetus}\nHind: {t.Hind:F2} €\nLaos: {t.Kogus} tk");
+
+        kaart.Controls.AddRange(new Control[] { pilt, silt, kogus, nupp });
+        return kaart;
+    }
+
+    private void NaitaKorviSummat()
+    {
+        lblOstukorv.Text = $"Ostukorvis: {Ostukorv.Ridad.Sum(r => r.Kogus)} tk    Kokku: {Ostukorv.Kokku:F2} €";
+    }
+
+    private void btnMineOstukorvi_Click(object? sender, EventArgs e)
+    {
+        if (Ostukorv.Ridad.Count == 0)
+        {
+            MessageBox.Show("Ostukorv on tühi.");
+            return;
         }
+        using var arve = new ArveForm();
+        arve.ShowDialog();
+        NaitaKorviSummat();
+    }
+
+    protected override void OnFormClosed(FormClosedEventArgs e)
+    {
+        foreach (TabPage leht in tabPood.TabPages)
+            foreach (Panel kaart in leht.Controls)
+                foreach (Control element in kaart.Controls)
+                    if (element is PictureBox pilt) pilt.Image?.Dispose();
+        _db.Dispose();
+        base.OnFormClosed(e);
     }
 }

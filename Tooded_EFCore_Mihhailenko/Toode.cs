@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Tooded_EFCore_Mihhailenko
+namespace Tooded_EFCore;
+
+public class Toode
 {
-    public class Toode
-    {
-        public int Id { get; set; }
-        public string Toodenimetus { get; set; }
-        public int Kogus { get; set; }
-        public float Hind { get; set; }
-        public string Pilt { get; set; }
+    public int Id { get; set; }
+    public string Toodenimetus { get; set; } = "";
+    public int Kogus { get; set; }
 
-        public int KategooriaId { get; set; }
-        public Kategooria Kategooria { get; set; }
-    }
+    [Precision(10, 2)]
+    public decimal Hind { get; set; }
+
+    public string? Pilt { get; set; }   // ? = pilt ei ole kohustuslik
+
+    public int KategooriaId { get; set; }
+    public Kategooria Kategooria { get; set; } = null!;
 }

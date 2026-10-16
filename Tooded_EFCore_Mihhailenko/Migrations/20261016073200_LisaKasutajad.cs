@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Tooded_EFCore_Mihhailenko.Migrations
+namespace Tooded_EFCore.Migrations
 {
     public partial class LisaKasutajad : Migration
     {

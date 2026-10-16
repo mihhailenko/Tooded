@@ -1,9 +1,10 @@
-﻿namespace Tooded_EFCore_Mihhailenko
+﻿namespace Tooded_EFCore;
+
+// Sisseloginud kasutaja andmed, kättesaadavad igast vormist
+public static class AktiivneKasutaja
 {
-    public static class AktiivneKasutaja
-    {
-        public static string Nimi { get; set; } = "";
-        public static string Email { get; set; } = "";
-        public static string Roll { get; set; } = "";
-    }
+    public static string Email { get; set; } = "";
+    public static string Nimi { get; set; } = "";
+    public static string Roll { get; set; } = "";
+    public static bool OnAdmin => Roll == "admin";
 }

@@ -1,56 +1,44 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Tooded_EFCore_Mihhailenko
+namespace Tooded_EFCore;
+
+internal static class Program
 {
-    internal static class Program
+    [STAThread]
+    static void Main()
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        ApplicationConfiguration.Initialize();
+        Kaustad.Loo();
+
+        using (var db = new ToodedContext())
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            try
-            {
-                using var db = new ToodedContext();
-                db.Database.Migrate();
-
-                if (!db.Kasutajad.Any(k => k.Email == "admin@admin.ee"))
-                {
-                    var kasutaja = new Kasutaja
-                    {
-                        Nimi = "Admin",
-                        Email = "admin@admin.ee",
-                        ParoolHash = PasswordHelper.Hash("admin123"),
-                        Roll = "admin"
-                    };
-                    db.Kasutajad.Add(kasutaja);
-                }
-
-                if (!db.Kasutajad.Any(k => k.Email == "kasutaja@pood.ee"))
-                {
-                    var kasutaja = new Kasutaja
-                    {
-                        Nimi = "Kasutaja",
-                        Email = "kasutaja@pood.ee",
-                        ParoolHash = PasswordHelper.Hash("kasutaja123"),
-                        Roll = "kasutaja"
-                    };
-                    db.Kasutajad.Add(kasutaja);
-                }
-
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Andmebaasi viga: " + ex.Message);
-                return;
-            }
-
-            Application.Run(new LoginForm());
+            db.Database.Migrate();
+            LooAlgkategooriad(db);
+            LooAlgkasutajad(db);
         }
+
+        Application.Run(new LoginForm());
+    }
+
+    private static void LooAlgkategooriad(ToodedContext db)
+    {
+        if (db.Kategooriatabel.Any()) return;
+        db.Kategooriatabel.AddRange(
+            new Kategooria { Kategooria_nimetus = "Joogid" },
+            new Kategooria { Kategooria_nimetus = "Puu- ja köögiviljad" },
+            new Kategooria { Kategooria_nimetus = "Maiustused" });
+        db.SaveChanges();
+    }
+
+    private static void LooAlgkasutajad(ToodedContext db)
+    {
+        if (db.Kasutajad.Any()) return;
+
+        db.Kasutajad.AddRange(
+            new Kasutaja { Nimi = "Admin", Email = "admin@admin.ee",
+                           ParoolHash = PasswordHelper.Hash("admin123"), Roll = "admin" },
+            new Kasutaja { Nimi = "Kasutaja", Email = "kasutaja@pood.ee",
+                           ParoolHash = PasswordHelper.Hash("kasutaja123"), Roll = "kasutaja" });
+        db.SaveChanges();
     }
 }

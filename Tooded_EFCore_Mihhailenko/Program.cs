@@ -1,44 +1,76 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tooded_EFCore;
-
 internal static class Program
 {
     [STAThread]
     static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Kaustad.Loo();
-
-        using (var db = new ToodedContext())
+        bool valmis = false;
+        while (!valmis)
         {
-            db.Database.Migrate();
-            LooAlgkategooriad(db);
-            LooAlgkasutajad(db);
+            try
+            {
+                Kaustad.Loo();
+                using ToodedContext db = new ToodedContext();
+                UuendaAndmebaas(db);
+                if (!db.Kasutajad.Any())
+                {
+                    using KasutajateHaldusForm seadistus = new KasutajateHaldusForm(true);
+                    if (seadistus.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+
+                valmis = true;
+            }
+            catch (Exception ex)
+            {
+                Vead.Naita("Poodi ei saanud avada. Proovi uuesti. Kui viga kordub, võta ühendust poe haldajaga.", ex);
+                DialogResult vastus = MessageBox.Show("Kas soovid uuesti proovida?", "Andmebaas", MessageBoxButtons.RetryCancel);
+                if (vastus != DialogResult.Retry)
+                {
+                    return;
+                }
+            }
         }
 
         Application.Run(new LoginForm());
     }
 
-    private static void LooAlgkategooriad(ToodedContext db)
+    private static void UuendaAndmebaas(ToodedContext db)
     {
-        if (db.Kategooriatabel.Any()) return;
-        db.Kategooriatabel.AddRange(
-            new Kategooria { Kategooria_nimetus = "Joogid" },
-            new Kategooria { Kategooria_nimetus = "Puu- ja köögiviljad" },
-            new Kategooria { Kategooria_nimetus = "Maiustused" });
-        db.SaveChanges();
-    }
+        SqlConnectionStringBuilder seaded = new SqlConnectionStringBuilder(db.Database.GetConnectionString());
+        string nimi = seaded.InitialCatalog;
+        seaded.InitialCatalog = "master";
+        using SqlConnection master = new SqlConnection(seaded.ConnectionString);
+        master.Open();
+        using SqlCommand kontroll = new SqlCommand("SELECT DB_ID(@nimi)", master);
+        kontroll.Parameters.AddWithValue("@nimi", nimi);
+        bool olemas = kontroll.ExecuteScalar() != DBNull.Value;
+        try
+        {
+            // Olemasoleva baasi avamise viga ei tohi muutuda uue baasi loomise katseks.
+            if (olemas)
+            {
+                db.Database.OpenConnection();
+            }
 
-    private static void LooAlgkasutajad(ToodedContext db)
-    {
-        if (db.Kasutajad.Any()) return;
-
-        db.Kasutajad.AddRange(
-            new Kasutaja { Nimi = "Admin", Email = "admin@admin.ee",
-                           ParoolHash = PasswordHelper.Hash("admin123"), Roll = "admin" },
-            new Kasutaja { Nimi = "Kasutaja", Email = "kasutaja@pood.ee",
-                           ParoolHash = PasswordHelper.Hash("kasutaja123"), Roll = "kasutaja" });
-        db.SaveChanges();
+            db.Database.Migrate();
+        }
+        catch (SqlException ex) when (!olemas && ex.Number == 1801)
+        {
+            // Teine aken võis sama baasi vahepeal luua.
+            SqlConnection.ClearPool((SqlConnection)db.Database.GetDbConnection());
+            db.Database.OpenConnection();
+            db.Database.Migrate();
+        }
+        finally
+        {
+            db.Database.CloseConnection();
+        }
     }
 }

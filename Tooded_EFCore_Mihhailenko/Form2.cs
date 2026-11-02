@@ -1,226 +1,455 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Tooded_EFCore;
 
 public partial class Form2 : Form
 {
-    private readonly ToodedContext _db = new();
-    private string? valitudPilt;   // uue pildi täistee; null = pilti ei vahetata
-
-    private readonly DataGridView dataGridViewTooted = new();
-    private readonly TextBox txtNimetus = new(), txtKogus = new(), txtHind = new();
-    private readonly ComboBox comboKategooria = new();
-    private readonly PictureBox picturePilt = new();
-    private readonly Button btnValiPilt = new(), btnLisa = new(), btnUuenda = new(),
-                            btnKustuta = new(), btnTyhjenda = new();
-
+    private readonly DataGridView dataGridViewTooted = new DataGridView();
+    private readonly TextBox txtNimetus = new TextBox();
+    private readonly TextBox txtKogus = new TextBox();
+    private readonly TextBox txtHind = new TextBox();
+    private readonly TextBox txtOtsing = new TextBox();
+    private readonly TextBox txtKirjeldus = new TextBox();
+    private readonly ComboBox comboKategooria = new ComboBox();
+    private readonly PictureBox picturePilt = new PictureBox();
+    private readonly CheckBox chkAktiivne = new CheckBox()
+    {
+        Text = "Müügil",
+        Checked = true,
+        AutoSize = true
+    };
+    private readonly Button btnLisa = new Button();
+    private readonly Button btnUuenda = new Button();
+    private readonly Button btnKustuta = new Button();
+    private readonly Label lblReziim = new Label();
+    private Toode? valitudToode;
+    private string? valitudPilt;
+    private bool eemaldaPilt;
     public Form2()
     {
+        if (!AktiivneKasutaja.OnAdmin)
+        {
+            throw new UnauthorizedAccessException();
+        }
+
         InitializeComponent();
         LooLiides();
         LaeKategooriad();
         LaeTooted();
-        if (!AktiivneKasutaja.OnAdmin)
-            btnLisa.Enabled = btnUuenda.Enabled = btnKustuta.Enabled = btnValiPilt.Enabled = false;
+        TyhjendaVorm();
     }
 
-    // ---------- Kasutajaliides ----------
     private void LooLiides()
     {
         Text = "Toodete haldus";
-        ClientSize = new Size(860, 560);
-
-        dataGridViewTooted.SetBounds(12, 12, 600, 530);
-        dataGridViewTooted.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dataGridViewTooted.MultiSelect = false;
+        ClientSize = new Size(1080, 740);
+        StartPosition = FormStartPosition.CenterParent;
+        FlowLayoutPanel andmed = new FlowLayoutPanel();
+        andmed.Dock = DockStyle.Right;
+        andmed.Width = 300;
+        andmed.Padding = new Padding(12);
+        andmed.FlowDirection = FlowDirection.TopDown;
+        andmed.WrapContents = false;
+        andmed.AutoScroll = true;
+        lblReziim.Height = 30;
+        txtNimetus.PlaceholderText = "Toote nimetus";
+        txtNimetus.MaxLength = 200;
+        txtKogus.PlaceholderText = "Kogus";
+        txtHind.PlaceholderText = "Hind, näiteks 2,50";
+        txtKirjeldus.PlaceholderText = "Kirjeldus";
+        txtKirjeldus.Multiline = true;
+        txtKirjeldus.Height = 70;
+        txtKirjeldus.MaxLength = 2000;
+        comboKategooria.DropDownStyle = ComboBoxStyle.DropDownList;
+        picturePilt.Height = 130;
+        picturePilt.SizeMode = PictureBoxSizeMode.Zoom;
+        Control[] valjad = { lblReziim, txtNimetus, txtKogus, txtHind, comboKategooria, txtKirjeldus, chkAktiivne, picturePilt };
+        foreach (Control vali in valjad)
+        {
+            vali.Width = 260;
+            andmed.Controls.Add(vali);
+        }
+        Button pilt = new Button();
+        pilt.Text = "Vali pilt";
+        pilt.Click += ValiPilt;
+        Button eemalda = new Button();
+        eemalda.Text = "Eemalda pilt";
+        eemalda.Click += eemalda_Click;
+        btnLisa.Text = "Lisa toode";
+        btnLisa.Click += (s,e) => Salvesta(false);
+        btnUuenda.Text = "Salvesta muudatused";
+        btnUuenda.Click += (s,e) => Salvesta(true);
+        btnKustuta.Text = "Eemalda toode";
+        btnKustuta.Click += Kustuta;
+        Button uus = new Button();
+        uus.Text = "Uus toode";
+        uus.Click += (s,e) => TyhjendaVorm();
+        foreach (Button nupp in new[] { pilt, eemalda, btnLisa, btnUuenda, btnKustuta, uus })
+        {
+            nupp.Width = 260;
+            nupp.Height = 34;
+            andmed.Controls.Add(nupp);
+        }
+        Panel tabeliAla = new Panel();
+        tabeliAla.Dock = DockStyle.Fill;
+        txtOtsing.Dock = DockStyle.Top;
+        txtOtsing.PlaceholderText = "Otsi nime järgi";
+        txtOtsing.TextChanged += (s,e) => { LaeTooted(); TyhjendaVorm(); };
+        dataGridViewTooted.Dock = DockStyle.Fill;
         dataGridViewTooted.ReadOnly = true;
         dataGridViewTooted.AllowUserToAddRows = false;
-        dataGridViewTooted.CellClick += dataGridViewTooted_CellClick;
-
-        txtNimetus.SetBounds(630, 12, 200, 27);  txtNimetus.PlaceholderText = "Toote nimetus";
-        txtKogus.SetBounds(630, 50, 200, 27);    txtKogus.PlaceholderText = "Kogus";
-        txtHind.SetBounds(630, 88, 200, 27);     txtHind.PlaceholderText = "Hind €, nt 2,50";
-        comboKategooria.SetBounds(630, 126, 200, 27);
-        comboKategooria.DropDownStyle = ComboBoxStyle.DropDownList;
-
-        picturePilt.SetBounds(630, 166, 150, 150);
-        picturePilt.SizeMode = PictureBoxSizeMode.Zoom;
-        picturePilt.BorderStyle = BorderStyle.FixedSingle;
-
-        SeaNupp(btnValiPilt, "Vali pilt", 326, btnValiPilt_Click);
-        SeaNupp(btnLisa, "Lisa", 376, btnLisa_Click);
-        SeaNupp(btnUuenda, "Uuenda", 416, btnUuenda_Click);
-        SeaNupp(btnKustuta, "Kustuta", 456, btnKustuta_Click);
-        SeaNupp(btnTyhjenda, "Tühjenda väljad", 506, (s, e) => TyhjendaVorm());
-
-        Controls.AddRange(new Control[] { dataGridViewTooted, txtNimetus, txtKogus, txtHind,
-            comboKategooria, picturePilt, btnValiPilt, btnLisa, btnUuenda, btnKustuta, btnTyhjenda });
+        dataGridViewTooted.MultiSelect = false;
+        dataGridViewTooted.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dataGridViewTooted.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dataGridViewTooted.CellClick += ValiToode;
+        tabeliAla.Controls.Add(dataGridViewTooted);
+        tabeliAla.Controls.Add(txtOtsing);
+        Controls.Add(tabeliAla);
+        Controls.Add(andmed);
     }
 
-    private void SeaNupp(Button nupp, string tekst, int y, EventHandler kasitleja)
-    {
-        nupp.Text = tekst;
-        nupp.SetBounds(630, y, 200, 32);
-        nupp.Click += kasitleja;
-    }
-
-    // ---------- Andmete laadimine ----------
     private void LaeKategooriad()
     {
-        comboKategooria.DataSource = _db.Kategooriatabel.OrderBy(k => k.Kategooria_nimetus).ToList();
-        comboKategooria.DisplayMember = "Kategooria_nimetus";
-        comboKategooria.ValueMember = "Id";
+        try
+        {
+            using ToodedContext db = new ToodedContext();
+            comboKategooria.DisplayMember = "Kategooria_nimetus";
+            comboKategooria.ValueMember = "Id";
+            comboKategooria.DataSource = db.Kategooriatabel.AsNoTracking().OrderBy(k => k.Kategooria_nimetus).ToList();
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Kategooriate laadimine ei õnnestunud.", ex);
+        }
     }
 
     private void LaeTooted()
     {
-        dataGridViewTooted.DataSource = _db.Toodetabel
-            .Select(t => new
-            {
-                t.Id,
-                t.Toodenimetus,
-                t.Kogus,
-                t.Hind,
-                t.KategooriaId,                          // vajalik ComboBoxi jaoks
-                Kategooria = t.Kategooria.Kategooria_nimetus,
-                t.Pilt
-            })
-            .ToList();
-
-        dataGridViewTooted.Columns["KategooriaId"]!.Visible = false;
-        dataGridViewTooted.ClearSelection();
-    }
-
-    // ---------- Pildi valimine ----------
-    private void btnValiPilt_Click(object? sender, EventArgs e)
-    {
-        if (!AktiivneKasutaja.OnAdmin) return;
-
-        using var ofd = new OpenFileDialog { Filter = "Pildid|*.jpg;*.jpeg;*.png" };
-        if (ofd.ShowDialog() != DialogResult.OK) return;
-
-        valitudPilt = ofd.FileName;
-        using var ajutine = Image.FromFile(valitudPilt);
-        picturePilt.Image?.Dispose();
-        picturePilt.Image = new Bitmap(ajutine);
-    }
-
-    // ---------- Vormi andmete kontroll ----------
-    // Täidab toote väljad vormilt. Tagastab false, kui midagi on valesti.
-    private bool LoeVorm(Toode toode)
-    {
-        if (string.IsNullOrWhiteSpace(txtNimetus.Text))
-        { MessageBox.Show("Sisesta toote nimetus."); return false; }
-
-        if (!int.TryParse(txtKogus.Text, out int kogus) || kogus < 0)
-        { MessageBox.Show("Kogus peab olema täisarv (0 või rohkem)."); return false; }
-
-        // Lubame nii koma kui punkti: 2,50 või 2.50
-        if (!decimal.TryParse(txtHind.Text.Replace(',', '.'), NumberStyles.Number,
-                              CultureInfo.InvariantCulture, out decimal hind) || hind < 0)
-        { MessageBox.Show("Hind peab olema arv, nt 2,50."); return false; }
-
-        if (comboKategooria.SelectedValue is not int kategooriaId)
-        { MessageBox.Show("Vali kategooria."); return false; }
-
-        toode.Toodenimetus = txtNimetus.Text.Trim();
-        toode.Kogus = kogus;
-        toode.Hind = hind;
-        toode.KategooriaId = kategooriaId;
-
-        if (valitudPilt != null)   // valiti uus pilt
+        try
         {
-            toode.Pilt = Path.GetFileName(valitudPilt);
-            string siht = Path.Combine(Kaustad.Pildid, toode.Pilt);
-            if (!string.Equals(Path.GetFullPath(valitudPilt), siht, StringComparison.OrdinalIgnoreCase))
-                File.Copy(valitudPilt, siht, true);
+            using ToodedContext db = new ToodedContext();
+            string otsing = txtOtsing.Text.Trim();
+            dataGridViewTooted.DataSource = db.Toodetabel.AsNoTracking().Where(t => t.Toodenimetus.Contains(otsing)).OrderBy(t => t.Toodenimetus).Select(t => new { t.Id, Nimetus = t.Toodenimetus, t.Kogus, t.Hind, Kategooria = t.Kategooria.Kategooria_nimetus, t.Aktiivne }).ToList();
+            dataGridViewTooted.Columns["Hind"].DefaultCellStyle.Format = "N2";
+            dataGridViewTooted.Columns["Id"].Visible = false;
+            Vaade.VeeruNimi(dataGridViewTooted, "Nimetus", "Toote nimetus", 200);
+            Vaade.VeeruNimi(dataGridViewTooted, "Kogus", "Laos (tk)", 65);
+            Vaade.VeeruNimi(dataGridViewTooted, "Hind", "Hind (€)", 75);
+            Vaade.VeeruNimi(dataGridViewTooted, "Kategooria", "Kategooria", 120);
+            dataGridViewTooted.ClearSelection();
         }
-        return true;
-    }
-
-    private int? ValitudId()
-    {
-        if (dataGridViewTooted.SelectedRows.Count == 0)
+        catch (Exception ex)
         {
-            MessageBox.Show("Vali tabelist toode.");
-            return null;
+            Vead.Naita("Toodete laadimine ei õnnestunud.", ex);
         }
-        return (int)dataGridViewTooted.SelectedRows[0].Cells["Id"].Value;
     }
 
     private void TyhjendaVorm()
     {
+        valitudToode = null;
+        valitudPilt = null;
+        eemaldaPilt = false;
+        dataGridViewTooted.CurrentCell = null;
+        dataGridViewTooted.ClearSelection();
         txtNimetus.Clear();
         txtKogus.Clear();
         txtHind.Clear();
-        valitudPilt = null;
+        txtKirjeldus.Clear();
+        chkAktiivne.Checked = true;
         picturePilt.Image?.Dispose();
         picturePilt.Image = null;
+        lblReziim.Text = "Uue toote lisamine";
+        btnLisa.Visible = true;
+        btnUuenda.Visible = false;
+        btnLisa.Enabled = true;
+        btnKustuta.Enabled = false;
+        btnUuenda.Enabled = false;
     }
 
-    // ---------- CRUD ----------
-    private void btnLisa_Click(object? sender, EventArgs e)
+    private void ValiToode(object? sender, DataGridViewCellEventArgs e)
     {
-        if (!AktiivneKasutaja.OnAdmin) return;
+        if (e.RowIndex < 0)
+        {
+            return;
+        }
 
-        var uus = new Toode();
-        if (!LoeVorm(uus)) return;
+        try
+        {
+            using ToodedContext db = new ToodedContext();
+            int id = (int)dataGridViewTooted.Rows[e.RowIndex].Cells["Id"].Value;
+            valitudToode = db.Toodetabel.AsNoTracking().FirstOrDefault(t => t.Id == id);
+            if (valitudToode == null)
+            {
+                TyhjendaVorm();
+                LaeTooted();
+                return;
+            }
 
-        _db.Toodetabel.Add(uus);
-        _db.SaveChanges();
-        TyhjendaVorm();
-        LaeTooted();
+            txtNimetus.Text = valitudToode.Toodenimetus;
+            txtKogus.Text = valitudToode.Kogus.ToString();
+            txtHind.Text = valitudToode.Hind.ToString("F2");
+            txtKirjeldus.Text = valitudToode.Kirjeldus;
+            comboKategooria.SelectedValue = valitudToode.KategooriaId;
+            chkAktiivne.Checked = valitudToode.Aktiivne;
+            valitudPilt = null;
+            eemaldaPilt = false;
+            picturePilt.Image?.Dispose();
+            picturePilt.Image = Kaustad.LaePilt(valitudToode.Pilt);
+            lblReziim.Text = "Muudan toodet nr " + id;
+            btnLisa.Visible = false;
+            btnUuenda.Visible = true;
+            btnLisa.Enabled = false;
+            btnKustuta.Enabled = true;
+            btnUuenda.Enabled = true;
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Toote avamine ei õnnestunud.", ex);
+        }
     }
 
-    private void dataGridViewTooted_CellClick(object? sender, DataGridViewCellEventArgs e)
+    private void ValiPilt(object? sender, EventArgs e)
     {
-        if (e.RowIndex < 0) return;   // klikk päisel
+        using OpenFileDialog aken = new OpenFileDialog
+        {
+            Filter = "Pildid|*.jpg;*.jpeg;*.png"
+        };
+        if (aken.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
 
-        var rida = dataGridViewTooted.Rows[e.RowIndex];
-        txtNimetus.Text = rida.Cells["Toodenimetus"].Value?.ToString();
-        txtKogus.Text = rida.Cells["Kogus"].Value?.ToString();
-        txtHind.Text = rida.Cells["Hind"].Value?.ToString();
-        comboKategooria.SelectedValue = rida.Cells["KategooriaId"].Value;
+        try
+        {
+            if (new FileInfo(aken.FileName).Length > 10 * 1024 * 1024)
+            {
+                MessageBox.Show("Pilt võib olla kuni 10 MB.");
+                return;
+            }
 
-        valitudPilt = null;   // olemasolevat pilti ei kopeerita uuesti
-        picturePilt.Image?.Dispose();
-        picturePilt.Image = Kaustad.LaePilt(rida.Cells["Pilt"].Value?.ToString());
+            using Image pilt = Image.FromFile(aken.FileName);
+            if (pilt.Width > 8000 || pilt.Height > 8000)
+            {
+                MessageBox.Show("Pildi mõõtmed võivad olla kuni 8000 × 8000.");
+                return;
+            }
+
+            Bitmap koopia = new Bitmap(pilt);
+            picturePilt.Image?.Dispose();
+            picturePilt.Image = koopia;
+            valitudPilt = aken.FileName;
+            eemaldaPilt = false;
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Valitud pildifaili ei saa avada.", ex);
+        }
     }
 
-    private void btnUuenda_Click(object? sender, EventArgs e)
+    private bool KontrolliAndmed(out int kogus, out decimal hind)
     {
-        if (!AktiivneKasutaja.OnAdmin) return;
-
-        if (ValitudId() is not int id) return;
-        var toode = _db.Toodetabel.Find(id);
-        if (toode == null || !LoeVorm(toode)) return;
-
-        _db.SaveChanges();
-        LaeTooted();
+        kogus = 0;
+        hind = 0;
+        if (string.IsNullOrWhiteSpace(txtNimetus.Text))
+        {
+            MessageBox.Show("Sisesta toote nimetus.");
+            return false;
+        }
+        if (!int.TryParse(txtKogus.Text, out kogus) || kogus < 0)
+        {
+            MessageBox.Show("Laokogus peab olema täisarv ja vähemalt 0.");
+            return false;
+        }
+        string hindTekst = txtHind.Text.Trim().Replace(',', '.');
+        if (!decimal.TryParse(hindTekst, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out hind))
+        {
+            MessageBox.Show("Sisesta hind arvuna, näiteks 2,50.");
+            return false;
+        }
+        if (hind < 0)
+        {
+            MessageBox.Show("Hind ei saa olla negatiivne.");
+            return false;
+        }
+        if (hind > 99999999.99m)
+        {
+            MessageBox.Show("See hind on liiga suur. Sisesta väiksem hind.");
+            return false;
+        }
+        if (decimal.Round(hind, 2) != hind)
+        {
+            MessageBox.Show("Sisesta hind kuni kahe komakohaga, näiteks 2,50.");
+            return false;
+        }
+        if (comboKategooria.SelectedValue == null)
+        {
+            MessageBox.Show("Vali kategooria.");
+            return false;
+        }
+        return true;
     }
 
-    private void btnKustuta_Click(object? sender, EventArgs e)
+    private void Salvesta(bool muutmine)
     {
-        if (!AktiivneKasutaja.OnAdmin) return;
+        if (!AktiivneKasutaja.OnAdmin || (muutmine && valitudToode == null))
+        {
+            return;
+        }
 
-        if (ValitudId() is not int id) return;
-        if (MessageBox.Show("Kas kustutan valitud toote?", "Kinnitus",
-                MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+        int kogus;
+        decimal hind;
+        if (!KontrolliAndmed(out kogus, out hind))
+        {
+            return;
+        }
 
-        var toode = _db.Toodetabel.Find(id);
-        if (toode == null) return;
+        if (muutmine && MessageBox.Show("Kas salvestan valitud toote muudatused?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+        {
+            return;
+        }
 
-        _db.Toodetabel.Remove(toode);
-        _db.SaveChanges();
-        TyhjendaVorm();
-        LaeTooted();
+        string? uusPilt = null;
+        bool salvestatud = false;
+        try
+        {
+            using ToodedContext db = new ToodedContext();
+            Toode? toode = new Toode();
+            if (muutmine && valitudToode != null)
+            {
+                toode = db.Toodetabel.Find(valitudToode.Id);
+            }
+            if (toode == null)
+            {
+                MessageBox.Show("Toode on vahepeal kustutatud. Värskenda tabelit.");
+                return;
+            }
+
+            string? vanaPilt = toode.Pilt;
+            if (muutmine)
+            {
+                db.Entry(toode).Property(t => t.ReaVersioon).OriginalValue = valitudToode!.ReaVersioon;
+            }
+
+            toode.Toodenimetus = txtNimetus.Text.Trim();
+            toode.Kogus = kogus;
+            toode.Hind = hind;
+            toode.KategooriaId = Convert.ToInt32(comboKategooria.SelectedValue);
+            toode.Kirjeldus = txtKirjeldus.Text.Trim();
+            toode.Aktiivne = chkAktiivne.Checked;
+            if (eemaldaPilt)
+            {
+                toode.Pilt = null;
+            }
+
+            if (valitudPilt != null)
+            {
+                // Salvestame alati oma PNG koopia: allika nimi ei saa teist pilti asendada.
+                uusPilt = Guid.NewGuid().ToString("N") + ".png";
+                using Image pilt = Image.FromFile(valitudPilt);
+                pilt.Save(Path.Combine(Kaustad.Pildid, uusPilt), System.Drawing.Imaging.ImageFormat.Png);
+                toode.Pilt = uusPilt;
+            }
+
+            if (!muutmine)
+            {
+                db.Toodetabel.Add(toode);
+            }
+
+            db.SaveChanges();
+            salvestatud = true;
+            if (vanaPilt != toode.Pilt)
+            {
+                Kaustad.KustutaKasutamataPilt(vanaPilt);
+            }
+
+            TyhjendaVorm();
+            LaeTooted();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            MessageBox.Show("Toote andmed on muutunud. Vajuta Värskenda ja vali toode uuesti.");
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Toote salvestamine ei õnnestunud.", ex);
+        }
+        finally
+        {
+            if (!salvestatud && uusPilt != null)
+            {
+                // Ühendus võis katkeda pärast salvestamist: enne kustutamist kontrollime viiteid.
+                Kaustad.KustutaKasutamataPilt(uusPilt);
+            }
+        }
+    }
+
+    private void Kustuta(object? sender, EventArgs e)
+    {
+        if (!AktiivneKasutaja.OnAdmin || valitudToode == null)
+        {
+            return;
+        }
+
+        try
+        {
+            using ToodedContext db = new ToodedContext();
+            Toode? toode = db.Toodetabel.Find(valitudToode.Id);
+            if (toode == null)
+            {
+                TyhjendaVorm();
+                LaeTooted();
+                return;
+            }
+
+            bool kasutatud = db.TellimuseRead.Any(r => r.ToodeId == toode.Id);
+            string teade = kasutatud ? "Seda toodet on juba ostetud. Kas eemaldada see müügist? Varasemad ostud jäävad alles." : "Kas kustutan toote lõplikult?";
+            if (MessageBox.Show(teade, "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            db.Entry(toode).Property(t => t.ReaVersioon).OriginalValue = valitudToode.ReaVersioon;
+            string? vanaPilt = toode.Pilt;
+            if (kasutatud)
+            {
+                toode.Aktiivne = false;
+            }
+            else
+            {
+                db.Toodetabel.Remove(toode);
+            }
+
+            db.SaveChanges();
+            if (!kasutatud)
+            {
+                Kaustad.KustutaKasutamataPilt(vanaPilt);
+            }
+
+            TyhjendaVorm();
+            LaeTooted();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            MessageBox.Show("Toodet on vahepeal muudetud. Värskenda tabelit.");
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Toodet ei saanud eemaldada. Proovi uuesti.", ex);
+        }
     }
 
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
         picturePilt.Image?.Dispose();
-        _db.Dispose();   // suleb andmebaasiühenduse
         base.OnFormClosed(e);
+    }
+
+    private void eemalda_Click(object? s, EventArgs e)
+    {
+        valitudPilt = null;
+        eemaldaPilt = true;
+        picturePilt.Image?.Dispose();
+        picturePilt.Image = null;
     }
 }

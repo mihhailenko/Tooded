@@ -1,136 +1,315 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tooded_EFCore;
 
 public partial class Form3 : Form
 {
-    private readonly ToodedContext _db = new();
-    private readonly TabControl tabPood = new();
-    private readonly Label lblOstukorv = new();
-    private readonly Button btnMineOstukorvi = new();
-
+    private readonly TabControl tabPood = new TabControl();
+    private readonly Label lblOstukorv = new Label();
+    private readonly TextBox txtOtsing = new TextBox();
+    private readonly ComboBox sortimine = new ComboBox();
+    private readonly CheckBox ainultLaos = new CheckBox()
+    {
+        Text = "Ainult laos olevad",
+        AutoSize = true
+    };
     public Form3()
     {
         InitializeComponent();
-        Text = "Pood";
-        ClientSize = new Size(930, 630);
+        LooLiides();
+    }
 
-        tabPood.SetBounds(10, 10, 900, 550);
-        lblOstukorv.SetBounds(10, 580, 650, 30);
-        btnMineOstukorvi.SetBounds(710, 575, 200, 35);
-        btnMineOstukorvi.Text = "Mine ostukorvi";
-        btnMineOstukorvi.Click += btnMineOstukorvi_Click;
-        Controls.AddRange(new Control[] { tabPood, lblOstukorv, btnMineOstukorvi });
+    private void VabastaKaardid()
+    {
+        foreach (TabPage leht in tabPood.TabPages)
+        {
+            foreach (Control pilt in leht.Controls.Find("Tootepilt", true))
+            {
+                if (pilt is PictureBox vaade)
+                {
+                    vaade.Image?.Dispose();
+                }
+            }
+        }
 
-        LaePood();
-        NaitaKorviSummat();
+        while (tabPood.TabPages.Count > 0)
+        {
+            TabPage leht = tabPood.TabPages[0];
+            tabPood.TabPages.Remove(leht);
+            leht.Dispose();
+        }
     }
 
     private void LaePood()
     {
-        tabPood.TabPages.Clear();
-
-        var kategooriad = _db.Kategooriatabel
-            .Include(k => k.Tooded)          // laeb kohe ka kategooria tooted
-            .OrderBy(k => k.Kategooria_nimetus)
-            .ToList();
-
-        foreach (var kat in kategooriad)
+        try
         {
-            var leht = new TabPage(kat.Kategooria_nimetus) { AutoScroll = true };
-
-            int i = 0;
-            foreach (var toode in kat.Tooded.OrderBy(t => t.Toodenimetus))
+            using ToodedContext db = new ToodedContext();
+            List<Kategooria> kategooriad = db.Kategooriatabel.AsNoTracking().OrderBy(k => k.Kategooria_nimetus).ToList();
+            string otsing = txtOtsing.Text.Trim();
+            IQueryable<Toode> paring = db.Toodetabel.AsNoTracking().Where(t => t.Aktiivne && t.Toodenimetus.Contains(otsing));
+            if (ainultLaos.Checked)
             {
-                var kaart = LooTootekaart(toode);
-                // 5 kaarti reas: veerg = i % 5, rida = i / 5
-                kaart.Location = new Point(10 + (i % 5) * 175, 10 + (i / 5) * 250);
-                leht.Controls.Add(kaart);
-                i++;
+                paring = paring.Where(t => t.Kogus > 0);
             }
 
-            tabPood.TabPages.Add(leht);
+            List<Toode> tooted = paring.ToList();
+            if (sortimine.SelectedIndex == 1)
+            {
+                tooted = tooted.OrderByDescending(t => t.Toodenimetus).ToList();
+            }
+            else if (sortimine.SelectedIndex == 2)
+            {
+                tooted = tooted.OrderBy(t => t.Hind).ThenBy(t => t.Toodenimetus).ToList();
+            }
+            else if (sortimine.SelectedIndex == 3)
+            {
+                tooted = tooted.OrderByDescending(t => t.Hind).ThenBy(t => t.Toodenimetus).ToList();
+            }
+            else
+            {
+                tooted = tooted.OrderBy(t => t.Toodenimetus).ToList();
+            }
+
+            int valitud = tabPood.SelectedIndex;
+            VabastaKaardid();
+            foreach (Kategooria kat in kategooriad)
+            {
+                TabPage leht = new TabPage(kat.Kategooria_nimetus)
+                {
+                    BackColor = Vaade.Taust
+                };
+                FlowLayoutPanel paneel = new FlowLayoutPanel
+                {
+                    Dock = DockStyle.Fill,
+                    AutoScroll = true,
+                    Padding = new Padding(8),
+                    WrapContents = true,
+                    BackColor = Vaade.Taust
+                };
+                foreach (Toode toode in tooted)
+                {
+                    if (toode.KategooriaId == kat.Id)
+                    {
+                        paneel.Controls.Add(LooTootekaart(toode));
+                    }
+                }
+
+                if (paneel.Controls.Count == 0)
+                {
+                    paneel.Controls.Add(new Label { Text = "Sobivaid tooteid ei leitud. Muuda otsingut või laoseisu filtrit.", AutoSize = true, Padding = new Padding(16), ForeColor = Vaade.Vaikne });
+                }
+
+                leht.Controls.Add(paneel);
+                tabPood.TabPages.Add(leht);
+            }
+
+            if (valitud >= 0 && valitud < tabPood.TabCount)
+            {
+                tabPood.SelectedIndex = valitud;
+            }
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Poe laadimine ei õnnestunud.", ex);
         }
     }
 
     private Panel LooTootekaart(Toode t)
     {
-        var kaart = new Panel { Size = new Size(160, 235), BorderStyle = BorderStyle.FixedSingle };
-
-        var pilt = new PictureBox
+        Panel kaart = new Panel
         {
-            Bounds = new Rectangle(5, 5, 148, 140),
+            Size = new Size(252, 470),
+            Margin = new Padding(8),
+            BackColor = Color.White,
+            Padding = new Padding(14)
+        };
+        TableLayoutPanel sisu = Vaade.Veerg();
+        PictureBox pilt = new PictureBox
+        {
+            Name = "Tootepilt",
+            Dock = DockStyle.Top,
+            Height = 150,
             SizeMode = PictureBoxSizeMode.Zoom,
-            Image = Kaustad.LaePilt(t.Pilt)
+            Image = Kaustad.LaePilt(t.Pilt),
+            BackColor = Vaade.Taust,
+            Cursor = Cursors.Hand,
+            AccessibleName = t.Toodenimetus + " – ava tootepilt",
+            Margin = new Padding(0, 0, 0, 12)
         };
-
-        var silt = new Label
+        Label nimi = new Label
         {
-            Bounds = new Rectangle(5, 150, 148, 40),
-            TextAlign = ContentAlignment.MiddleCenter,
-            Text = $"{t.Toodenimetus}\n{t.Hind:F2} €"
+            Dock = DockStyle.Top,
+            Height = 52,
+            Text = t.Toodenimetus,
+            AutoEllipsis = true,
+            Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+            Cursor = Cursors.Hand,
+            UseMnemonic = false
         };
-
-        var kogus = new ComboBox
+        Label kirjeldus = new Label
         {
-            Bounds = new Rectangle(5, 197, 60, 27),
-            DropDownStyle = ComboBoxStyle.DropDownList
+            Dock = DockStyle.Top,
+            Height = 46,
+            Text = string.IsNullOrWhiteSpace(t.Kirjeldus) ? "Täpsema vaate avamiseks klõpsa pildil." : t.Kirjeldus,
+            AutoEllipsis = true,
+            ForeColor = Vaade.Vaikne,
+            UseMnemonic = false
         };
-        for (int i = 1; i <= Math.Min(10, Math.Max(1, t.Kogus)); i++)
-            kogus.Items.Add(i);
-        kogus.SelectedIndex = 0;
-
-        var nupp = new Button
+        Label hind = new Label
         {
-            Bounds = new Rectangle(70, 195, 83, 30),
+            Dock = DockStyle.Top,
+            Height = 34,
+            Text = $"{t.Hind:F2} €",
+            Font = new Font("Segoe UI", 16F, FontStyle.Bold),
+            ForeColor = Vaade.Sinine
+        };
+        Label laoseis = new Label
+        {
+            Dock = DockStyle.Top,
+            Height = 28,
+            Text = t.Kogus > 0 ? $"Laos: {t.Kogus} tk" : "Laost otsas",
+            ForeColor = t.Kogus > 0 ? Color.FromArgb(41, 111, 76) : Vaade.Punane
+        };
+        NumericUpDown kogus = new NumericUpDown
+        {
+            Dock = DockStyle.Top,
+            Minimum = 1,
+            Maximum = Math.Max(1, t.Kogus),
+            Value = 1,
+            Enabled = t.Kogus > 0,
+            AccessibleName = "Kogus: " + t.Toodenimetus,
+            Margin = new Padding(0, 3, 8, 0)
+        };
+        Button nupp = new Button
+        {
             Text = "Lisa korvi",
-            Enabled = t.Kogus > 0             // laos pole = nupp hall
+            Enabled = t.Kogus > 0,
+            Dock = DockStyle.Top
         };
-
-        nupp.Click += (s, e) =>
+        Vaade.Nupp(nupp, true);
+        TableLayoutPanel tegevused = new TableLayoutPanel
         {
-            int valitudKogus = (int)kogus.SelectedItem!;
-            int korvis = Ostukorv.Ridad.Where(r => r.Toode.Id == t.Id).Sum(r => r.Kogus);
-            if (korvis + valitudKogus > t.Kogus)
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            ColumnCount = 2,
+            Margin = Padding.Empty
+        };
+        tegevused.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34));
+        tegevused.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66));
+        tegevused.Controls.Add(kogus, 0, 0);
+        tegevused.Controls.Add(nupp, 1, 0);
+        Vaade.Lisa(sisu, pilt);
+        Vaade.Lisa(sisu, nimi);
+        Vaade.Lisa(sisu, kirjeldus);
+        Vaade.Lisa(sisu, hind);
+        Vaade.Lisa(sisu, laoseis);
+        Label koguseSilt = Vaade.Tekstirida("Kogus");
+        koguseSilt.Margin = new Padding(0, 4, 0, 4);
+        Vaade.Lisa(sisu, koguseSilt);
+        Vaade.Lisa(sisu, tegevused);
+        kaart.Controls.Add(sisu);
+        nupp.Tag = t.Id;
+        kogus.Name = "Kogus";
+        nupp.Click += LisaKorvi;
+        pilt.Click += (s, e) => AvaToode(t);
+        nimi.Click += (s, e) => AvaToode(t);
+        // Esimesel avamisel skaleerib vorm ise; hilisemal värskendamisel skaleerime uue kaardi.
+        if (IsHandleCreated && DeviceDpi != 96)
+        {
+            kaart.Scale(new SizeF(DeviceDpi / 96F, DeviceDpi / 96F));
+        }
+
+        return kaart;
+    }
+
+    private void LisaKorvi(object? sender, EventArgs e)
+    {
+        Button nupp = (Button)sender!;
+        int id = (int)nupp.Tag!;
+        NumericUpDown kogus = (NumericUpDown)nupp.Parent!.Controls["Kogus"]!;
+        try
+        {
+            using ToodedContext db = new ToodedContext();
+            Toode? toode = db.Toodetabel.AsNoTracking().FirstOrDefault(t => t.Id == id);
+            if (toode == null || !toode.Aktiivne)
             {
-                MessageBox.Show($"Laos on ainult {t.Kogus} tk, korvis on juba {korvis} tk.");
+                MessageBox.Show("See toode ei ole enam müügil. Värskenda poodi.");
                 return;
             }
-            Ostukorv.Lisa(t, valitudKogus);
+            Ostukorv.Lisa(toode, (int)kogus.Value);
             NaitaKorviSummat();
+        }
+        catch (ArgumentException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Vead.Naita("Toodet ei saanud ostukorvi lisada. Proovi uuesti.", ex);
+        }
+    }
+
+    private void AvaToode(Toode t)
+    {
+        using Form aken = new Form();
+        Vaade.Vorm(aken, t.Toodenimetus, 680, 650);
+        aken.MinimumSize = new Size(500, 460);
+        using Image? suurPilt = Kaustad.LaePilt(t.Pilt);
+        TableLayoutPanel raam = Vaade.Raam(aken, "Toote üksikasjad", $"{t.Hind:F2} € · Laos {t.Kogus} tk");
+        TableLayoutPanel sisu = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            RowCount = 2,
+            ColumnCount = 1
         };
-
-        pilt.Click += (s, e) =>
-            MessageBox.Show($"{t.Toodenimetus}\nHind: {t.Hind:F2} €\nLaos: {t.Kogus} tk");
-
-        kaart.Controls.AddRange(new Control[] { pilt, silt, kogus, nupp });
-        return kaart;
+        sisu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        sisu.RowStyles.Add(new RowStyle(SizeType.Percent, 65));
+        sisu.RowStyles.Add(new RowStyle(SizeType.Percent, 35));
+        sisu.Controls.Add(new PictureBox { Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = suurPilt, BackColor = Color.White }, 0, 0);
+        sisu.Controls.Add(new TextBox { Dock = DockStyle.Fill, Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical, BackColor = Color.White, Text = t.Toodenimetus + "\r\n\r\n" + t.Kirjeldus }, 0, 1);
+        raam.Controls.Add(sisu, 0, 1);
+        aken.ResumeLayout(true);
+        aken.ShowDialog(this);
     }
 
     private void NaitaKorviSummat()
     {
-        lblOstukorv.Text = $"Ostukorvis: {Ostukorv.Ridad.Sum(r => r.Kogus)} tk    Kokku: {Ostukorv.Kokku:F2} €";
-    }
-
-    private void btnMineOstukorvi_Click(object? sender, EventArgs e)
-    {
-        if (Ostukorv.Ridad.Count == 0)
-        {
-            MessageBox.Show("Ostukorv on tühi.");
-            return;
-        }
-        using var arve = new ArveForm();
-        arve.ShowDialog();
-        NaitaKorviSummat();
+        lblOstukorv.Text = $"Ostukorvis: {Ostukorv.Ridad.Count} toodet, {Ostukorv.KogusKokku} tk · {Ostukorv.Kokku:F2} €";
     }
 
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
-        foreach (TabPage leht in tabPood.TabPages)
-            foreach (Panel kaart in leht.Controls)
-                foreach (Control element in kaart.Controls)
-                    if (element is PictureBox pilt) pilt.Image?.Dispose();
-        _db.Dispose();
+        VabastaKaardid();
         base.OnFormClosed(e);
+    }
+
+    private void LooLiides()
+    {
+        Text = "Pood";
+        ClientSize = new Size(1000, 700);
+        tabPood.Dock = DockStyle.Fill;
+        FlowLayoutPanel all = new FlowLayoutPanel();
+        all.Dock = DockStyle.Bottom;
+        all.Height = 60;
+        lblOstukorv.Width = 650;
+        lblOstukorv.Height = 35;
+        Button korv = new Button();
+        korv.Text = "Ava ostukorv";
+        korv.Width = 200;
+        korv.Height = 35;
+        korv.Click += (s,e) =>
+        {
+            using ArveForm vorm = new ArveForm();
+            vorm.ShowDialog(this);
+            NaitaKorviSummat();
+            LaePood();
+        };
+        all.Controls.Add(lblOstukorv);
+        all.Controls.Add(korv);
+        Controls.Add(tabPood);
+        Controls.Add(all);
+        Load += (s,e) => LaePood();
+        NaitaKorviSummat();
     }
 }

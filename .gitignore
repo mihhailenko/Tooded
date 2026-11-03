@@ -20,3 +20,8 @@ packages/
 *.ndf
 Arved/
 .env
+
+# Local secrets, backups and test output
+post.json
+*.bak
+KontrolliPDF/

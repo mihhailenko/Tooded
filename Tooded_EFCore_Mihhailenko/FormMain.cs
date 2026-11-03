@@ -140,6 +140,12 @@ public partial class FormMain : Form
             LisaNupp(sisu, "Kategooriad", (s,e) => Ava(new KategooriateHaldusForm()));
             LisaNupp(sisu, "Kasutajad", (s,e) => Ava(new KasutajateHaldusForm()));
         }
+        if (AktiivneKasutaja.OnAdmin)
+        {
+            LisaNupp(sisu, "E-posti seaded", (s,e) => Ava(new PostiSeadedForm()));
+            LisaNupp(sisu, "Kontrolli ühendust", KontrolliUhendust);
+            LisaNupp(sisu, "Salvesta varukoopia", Varunda);
+        }
         LisaNupp(sisu, "Muuda parooli", (s,e) => Ava(new MuudaParooliForm()));
         LisaNupp(sisu, "Logi välja", LogiValja);
         UuendaKorvi();

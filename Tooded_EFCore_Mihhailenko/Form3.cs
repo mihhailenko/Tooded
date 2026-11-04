@@ -286,30 +286,79 @@ public partial class Form3 : Form
 
     private void LooLiides()
     {
-        Text = "Pood";
-        ClientSize = new Size(1000, 700);
-        tabPood.Dock = DockStyle.Fill;
-        FlowLayoutPanel all = new FlowLayoutPanel();
-        all.Dock = DockStyle.Bottom;
-        all.Height = 60;
-        lblOstukorv.Width = 650;
-        lblOstukorv.Height = 35;
-        Button korv = new Button();
-        korv.Text = "Ava ostukorv";
-        korv.Width = 200;
-        korv.Height = 35;
-        korv.Click += (s,e) =>
+        Vaade.Vorm(this, "Pood", 1120, 800);
+        MinimumSize = new Size(820, 600);
+        TableLayoutPanel raam = Vaade.Raam(this, "Pood", "Leia sobiv toode. Pildi või nimetuse klõps avab täpsema vaate.");
+        TableLayoutPanel sisu = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 1,
+            RowCount = 3
+        };
+        sisu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        sisu.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        sisu.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        sisu.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        raam.Controls.Add(sisu, 0, 1);
+        FlowLayoutPanel riba = Vaade.Nupuriba();
+        riba.BackColor = Color.White;
+        riba.Padding = new Padding(12);
+        txtOtsing.PlaceholderText = "Otsi toote nime järgi";
+        txtOtsing.Width = 250;
+        txtOtsing.MaxLength = 200;
+        txtOtsing.AccessibleName = "Toote otsing";
+        sortimine.DropDownStyle = ComboBoxStyle.DropDownList;
+        sortimine.Width = 200;
+        sortimine.AccessibleName = "Toodete järjestus";
+        sortimine.Items.AddRange(new object[] { "Nimi A–Z", "Nimi Z–A", "Hind kasvavalt", "Hind kahanevalt" });
+        sortimine.SelectedIndex = 0;
+        ainultLaos.Margin = new Padding(10, 7, 16, 8);
+        Button uuenda = new Button
+        {
+            Text = "Värskenda"
+        };
+        Vaade.Nupp(uuenda);
+        uuenda.Click += (s, e) => LaePood();
+        riba.Controls.AddRange(new Control[] { txtOtsing, sortimine, ainultLaos, uuenda });
+        sisu.Controls.Add(riba, 0, 0);
+        TableLayoutPanel all = new TableLayoutPanel
+        {
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            ColumnCount = 2,
+            BackColor = Color.White,
+            Padding = new Padding(12)
+        };
+        all.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        all.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        lblOstukorv.AutoSize = true;
+        lblOstukorv.Dock = DockStyle.Fill;
+        lblOstukorv.TextAlign = ContentAlignment.MiddleLeft;
+        lblOstukorv.Margin = new Padding(0, 4, 12, 4);
+        Button korv = new Button
+        {
+            Text = "Mine ostukorvi"
+        };
+        Vaade.Nupp(korv, true);
+        korv.Click += (s, e) =>
         {
             using ArveForm vorm = new ArveForm();
             vorm.ShowDialog(this);
             NaitaKorviSummat();
             LaePood();
         };
-        all.Controls.Add(lblOstukorv);
-        all.Controls.Add(korv);
-        Controls.Add(tabPood);
-        Controls.Add(all);
-        Load += (s,e) => LaePood();
+        all.Controls.Add(lblOstukorv, 0, 0);
+        all.Controls.Add(korv, 1, 0);
+        sisu.Controls.Add(all, 0, 2);
+        tabPood.Dock = DockStyle.Fill;
+        tabPood.Padding = new Point(14, 8);
+        tabPood.Margin = new Padding(0, 12, 0, 12);
+        sisu.Controls.Add(tabPood, 0, 1);
+        txtOtsing.TextChanged += (s, e) => LaePood();
+        sortimine.SelectedIndexChanged += (s, e) => LaePood();
+        ainultLaos.CheckedChanged += (s, e) => LaePood();
+        Load += (s, e) => LaePood();
         NaitaKorviSummat();
+        ResumeLayout(true);
     }
 }

@@ -121,33 +121,62 @@ public partial class FormMain : Form
 
     private void LooLiides()
     {
-        Text = "Õppepood";
-        ClientSize = new Size(470, 700);
-        TableLayoutPanel sisu = Vaade.Veerg();
-        sisu.Padding = new Padding(20);
-        Controls.Add(Vaade.Kerimine(sisu));
-        kasutaja.Text = AktiivneKasutaja.Nimi + "\n" + AktiivneKasutaja.Email;
-        kasutaja.AutoSize = true;
+        Vaade.Vorm(this, "Õppepood – peamenüü", 900, 760);
+        MinimumSize = new Size(780, 560);
+        StartPosition = FormStartPosition.CenterScreen;
+        TableLayoutPanel raam = Vaade.Raam(this, "Õppepood", "Tooted, ostud ja konto ühes kohas.");
+        TableLayoutPanel sisu = new TableLayoutPanel
+        {
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            ColumnCount = 2,
+            RowCount = 0
+        };
+        sisu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55));
+        sisu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45));
+        raam.Controls.Add(Vaade.Kerimine(sisu), 0, 1);
+        TableLayoutPanel pood = Vaade.Veerg();
+        Vaade.Lisa(pood, Vaade.Tekstirida("Ostlemine", true));
         korv.AutoSize = true;
-        Vaade.Lisa(sisu, kasutaja);
-        Vaade.Lisa(sisu, korv);
-        LisaNupp(sisu, "Pood", (s,e) => Ava(new Form3()));
-        LisaNupp(sisu, "Ostukorv", (s,e) => Ava(new ArveForm()));
-        LisaNupp(sisu, "Tellimused", (s,e) => Ava(new TellimusteForm()));
+        korv.Dock = DockStyle.Top;
+        korv.Margin = new Padding(0, 0, 0, 16);
+        Vaade.Lisa(pood, korv);
+        LisaNupp(pood, "Ava pood", (s, e) => Ava(new Form3()), true);
+        LisaNupp(pood, "Ostukorv ja ostu kinnitamine", (s, e) => Ava(new ArveForm()));
+        LisaNupp(pood, AktiivneKasutaja.OnAdmin ? "Kõik tellimused ja müük" : "Minu tellimused", (s, e) => Ava(new TellimusteForm()));
+        sisu.Controls.Add(Vaade.Kaart(pood), 0, 0);
+        TableLayoutPanel konto = Vaade.Veerg();
+        Vaade.Lisa(konto, Vaade.Tekstirida("Minu konto", true));
+        kasutaja.AutoSize = true;
+        kasutaja.Dock = DockStyle.Top;
+        kasutaja.UseMnemonic = false;
+        kasutaja.Margin = new Padding(0, 0, 0, 16);
+        kasutaja.Text = $"{AktiivneKasutaja.Nimi}\n{AktiivneKasutaja.Email}\nRoll: {(AktiivneKasutaja.OnAdmin ? "administraator" : "kasutaja")}";
+        Vaade.Lisa(konto, kasutaja);
+        LisaNupp(konto, "Muuda parooli", (s, e) => Ava(new MuudaParooliForm()));
+        LisaNupp(konto, "Logi välja", LogiValja);
+        sisu.Controls.Add(Vaade.Kaart(konto), 1, 0);
         if (AktiivneKasutaja.OnAdmin)
         {
-            LisaNupp(sisu, "Tooted", (s,e) => Ava(new Form2()));
-            LisaNupp(sisu, "Kategooriad", (s,e) => Ava(new KategooriateHaldusForm()));
-            LisaNupp(sisu, "Kasutajad", (s,e) => Ava(new KasutajateHaldusForm()));
+            TableLayoutPanel haldus = Vaade.Veerg();
+            Vaade.Lisa(haldus, Vaade.Tekstirida("Haldamine", true));
+            Vaade.Lisa(haldus, Vaade.Tekstirida("Tootevalik ja kasutajate ligipääs."));
+            LisaNupp(haldus, "Toodete haldus", (s, e) => Ava(new Form2()));
+            LisaNupp(haldus, "Kategooriate haldus", (s, e) => Ava(new KategooriateHaldusForm()));
+            LisaNupp(haldus, "Kasutajate haldus", (s, e) => Ava(new KasutajateHaldusForm()));
+            sisu.Controls.Add(Vaade.Kaart(haldus), 0, 1);
         }
+
         if (AktiivneKasutaja.OnAdmin)
         {
-            LisaNupp(sisu, "E-posti seaded", (s,e) => Ava(new PostiSeadedForm()));
-            LisaNupp(sisu, "Kontrolli ühendust", KontrolliUhendust);
-            LisaNupp(sisu, "Salvesta varukoopia", Varunda);
+            TableLayoutPanel seaded = Vaade.Veerg();
+            Vaade.Lisa(seaded, Vaade.Tekstirida("Poe seaded", true));
+            LisaNupp(seaded, "E-posti seaded", (s, e) => Ava(new PostiSeadedForm()));
+            LisaNupp(seaded, "Kontrolli ühendust", KontrolliUhendust);
+            LisaNupp(seaded, "Salvesta varukoopia", Varunda);
+            sisu.Controls.Add(Vaade.Kaart(seaded), 1, 1);
         }
-        LisaNupp(sisu, "Muuda parooli", (s,e) => Ava(new MuudaParooliForm()));
-        LisaNupp(sisu, "Logi välja", LogiValja);
         UuendaKorvi();
+        ResumeLayout(true);
     }
 }

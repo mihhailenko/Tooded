@@ -94,6 +94,36 @@ namespace Tooded_EFCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Tooded_EFCore.PostiSeaded", b =>
+                {
+                    b.Property<string>("WindowsiKasutaja")
+                        .HasMaxLength(184)
+                        .HasColumnType("nvarchar(184)");
+
+                    b.Property<string>("KaitstudParool")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Kasutajanimi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Port")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Saatja")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Server")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WindowsiKasutaja");
+
+                    b.ToTable("PostiSeaded");
+                });
+
             modelBuilder.Entity("Tooded_EFCore.Tellimus", b =>
                 {
                     b.Property<int>("Id")

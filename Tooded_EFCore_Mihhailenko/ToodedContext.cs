@@ -4,6 +4,14 @@ namespace Tooded_EFCore;
 
 public class ToodedContext : DbContext
 {
+    public DbSet<PostiSeaded> PostiSeaded
+    {
+        get
+        {
+            return Set<PostiSeaded>();
+        }
+    }
+
     public DbSet<Tellimus> Tellimused
     {
         get

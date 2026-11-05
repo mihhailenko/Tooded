@@ -42,71 +42,147 @@ public partial class Form2 : Form
 
     private void LooLiides()
     {
-        Text = "Toodete haldus";
-        ClientSize = new Size(1080, 740);
-        StartPosition = FormStartPosition.CenterParent;
-        FlowLayoutPanel andmed = new FlowLayoutPanel();
-        andmed.Dock = DockStyle.Right;
-        andmed.Width = 300;
-        andmed.Padding = new Padding(12);
-        andmed.FlowDirection = FlowDirection.TopDown;
-        andmed.WrapContents = false;
-        andmed.AutoScroll = true;
-        lblReziim.Height = 30;
-        txtNimetus.PlaceholderText = "Toote nimetus";
-        txtNimetus.MaxLength = 200;
-        txtKogus.PlaceholderText = "Kogus";
-        txtHind.PlaceholderText = "Hind, näiteks 2,50";
-        txtKirjeldus.PlaceholderText = "Kirjeldus";
-        txtKirjeldus.Multiline = true;
-        txtKirjeldus.Height = 70;
-        txtKirjeldus.MaxLength = 2000;
-        comboKategooria.DropDownStyle = ComboBoxStyle.DropDownList;
-        picturePilt.Height = 130;
-        picturePilt.SizeMode = PictureBoxSizeMode.Zoom;
-        Control[] valjad = { lblReziim, txtNimetus, txtKogus, txtHind, comboKategooria, txtKirjeldus, chkAktiivne, picturePilt };
-        foreach (Control vali in valjad)
+        Vaade.Vorm(this, "Toodete haldus", 1220, 820);
+        MinimumSize = new Size(1000, 650);
+        TableLayoutPanel raam = Vaade.Raam(this, "Toodete haldus", "Vali tabelist toode muutmiseks või alusta uue toote lisamist.");
+        TableLayoutPanel paigutus = new TableLayoutPanel
         {
-            vali.Width = 260;
-            andmed.Controls.Add(vali);
-        }
-        Button pilt = new Button();
-        pilt.Text = "Vali pilt";
-        pilt.Click += ValiPilt;
-        Button eemalda = new Button();
-        eemalda.Text = "Eemalda pilt";
+            Dock = DockStyle.Fill,
+            ColumnCount = 2,
+            RowCount = 1
+        };
+        paigutus.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        paigutus.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 340));
+        raam.Controls.Add(paigutus, 0, 1);
+        TableLayoutPanel editor = Vaade.Veerg();
+        lblReziim.AutoSize = true;
+        lblReziim.Dock = DockStyle.Top;
+        lblReziim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        lblReziim.ForeColor = Vaade.Sinine;
+        lblReziim.Margin = new Padding(0, 0, 0, 16);
+        Vaade.Lisa(editor, lblReziim);
+        txtNimetus.MaxLength = 200;
+        txtKogus.PlaceholderText = "Näiteks 25";
+        txtHind.PlaceholderText = "Näiteks 2,50";
+        txtKirjeldus.Multiline = true;
+        txtKirjeldus.Height = 80;
+        txtKirjeldus.MaxLength = 2000;
+        txtKirjeldus.ScrollBars = ScrollBars.Vertical;
+        comboKategooria.DropDownStyle = ComboBoxStyle.DropDownList;
+        Vaade.Vali(editor, "Toote nimetus", txtNimetus);
+        Vaade.Vali(editor, "Laokogus (tk)", txtKogus);
+        Vaade.Vali(editor, "Ühiku hind (€)", txtHind);
+        Vaade.Vali(editor, "Kategooria", comboKategooria);
+        Vaade.Vali(editor, "Kirjeldus", txtKirjeldus);
+        Vaade.Lisa(editor, chkAktiivne);
+        picturePilt.Height = 150;
+        picturePilt.Dock = DockStyle.Top;
+        picturePilt.SizeMode = PictureBoxSizeMode.Zoom;
+        picturePilt.BackColor = Vaade.Taust;
+        Vaade.Vali(editor, "Tootepilt", picturePilt);
+        Button vali = new Button
+        {
+            Text = "Vali pilt"
+        };
+        vali.Click += ValiPilt;
+        Button eemalda = new Button
+        {
+            Text = "Eemalda pilt"
+        };
         eemalda.Click += eemalda_Click;
-        btnLisa.Text = "Lisa toode";
-        btnLisa.Click += (s,e) => Salvesta(false);
+        FlowLayoutPanel pildinupud = Vaade.Nupuriba();
+        Vaade.Nupp(vali);
+        Vaade.Nupp(eemalda);
+        pildinupud.Controls.AddRange(new Control[] { vali, eemalda });
+        Vaade.Lisa(editor, pildinupud);
+        btnLisa.Text = "Lisa uus toode";
+        btnLisa.Click += (s, e) => Salvesta(false);
         btnUuenda.Text = "Salvesta muudatused";
-        btnUuenda.Click += (s,e) => Salvesta(true);
+        btnUuenda.Click += (s, e) => Salvesta(true);
         btnKustuta.Text = "Eemalda toode";
         btnKustuta.Click += Kustuta;
-        Button uus = new Button();
-        uus.Text = "Uus toode";
-        uus.Click += (s,e) => TyhjendaVorm();
-        foreach (Button nupp in new[] { pilt, eemalda, btnLisa, btnUuenda, btnKustuta, uus })
+        Button tyhjenda = new Button
         {
-            nupp.Width = 260;
-            nupp.Height = 34;
-            andmed.Controls.Add(nupp);
+            Text = "Alusta uut toodet"
+        };
+        tyhjenda.Click += (s, e) => TyhjendaVorm();
+        Button kategooriad = new Button
+        {
+            Text = "Halda kategooriaid"
+        };
+        kategooriad.Click += (s, e) =>
+        {
+            using KategooriateHaldusForm vorm = new KategooriateHaldusForm();
+            vorm.ShowDialog(this);
+            LaeKategooriad();
+            LaeTooted();
+            TyhjendaVorm();
+        };
+        foreach (Button nupp in new[]
+        {
+            btnLisa,
+            btnUuenda,
+            tyhjenda,
+            btnKustuta,
+            kategooriad
+        })
+        {
+            Vaade.Nupp(nupp, nupp == btnLisa || nupp == btnUuenda, nupp == btnKustuta);
+            nupp.Dock = DockStyle.Top;
+            Vaade.Lisa(editor, nupp);
         }
-        Panel tabeliAla = new Panel();
-        tabeliAla.Dock = DockStyle.Fill;
-        txtOtsing.Dock = DockStyle.Top;
-        txtOtsing.PlaceholderText = "Otsi nime järgi";
-        txtOtsing.TextChanged += (s,e) => { LaeTooted(); TyhjendaVorm(); };
+
+        paigutus.Controls.Add(Vaade.Kerimine(Vaade.Kaart(editor)), 1, 0);
+        TableLayoutPanel keskel = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 1,
+            RowCount = 2,
+            Margin = new Padding(0, 0, 16, 0)
+        };
+        keskel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        keskel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        keskel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        FlowLayoutPanel otsinguriba = Vaade.Nupuriba();
+        txtOtsing.Width = 270;
+        txtOtsing.PlaceholderText = "Otsi toodet nime järgi";
+        txtOtsing.AccessibleName = "Toote otsing";
+        txtOtsing.TextChanged += (s, e) =>
+        {
+            LaeTooted();
+            TyhjendaVorm();
+        };
+        Button uuenda = new Button
+        {
+            Text = "Värskenda"
+        };
+        Vaade.Nupp(uuenda);
+        uuenda.Click += (s, e) =>
+        {
+            LaeKategooriad();
+            LaeTooted();
+            TyhjendaVorm();
+        };
+        otsinguriba.Controls.AddRange(new Control[] { txtOtsing, uuenda });
         dataGridViewTooted.Dock = DockStyle.Fill;
         dataGridViewTooted.ReadOnly = true;
-        dataGridViewTooted.AllowUserToAddRows = false;
-        dataGridViewTooted.MultiSelect = false;
         dataGridViewTooted.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dataGridViewTooted.MultiSelect = false;
+        dataGridViewTooted.AllowUserToAddRows = false;
         dataGridViewTooted.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        Vaade.Tabel(dataGridViewTooted);
         dataGridViewTooted.CellClick += ValiToode;
-        tabeliAla.Controls.Add(dataGridViewTooted);
-        tabeliAla.Controls.Add(txtOtsing);
-        Controls.Add(tabeliAla);
-        Controls.Add(andmed);
+        dataGridViewTooted.KeyUp += (s, e) =>
+        {
+            if ((e.KeyCode == Keys.Up || e.KeyCode == Keys.Down) && dataGridViewTooted.CurrentCell != null)
+            {
+                ValiToode(s, new DataGridViewCellEventArgs(dataGridViewTooted.CurrentCell.ColumnIndex, dataGridViewTooted.CurrentCell.RowIndex));
+            }
+        };
+        keskel.Controls.Add(otsinguriba, 0, 0);
+        keskel.Controls.Add(dataGridViewTooted, 0, 1);
+        paigutus.Controls.Add(keskel, 0, 0);
+        ResumeLayout(true);
     }
 
     private void LaeKategooriad()

@@ -57,7 +57,7 @@ public class KategooriateHaldusForm : Form
 
         if (string.IsNullOrWhiteSpace(nimi.Text) || (muutmine && valitudId == null))
         {
-            MessageBox.Show("Sisesta nimetus ning muutmiseks vali kategooria tabelist.");
+            Vaade.Teade("Sisesta nimetus ning muutmiseks vali kategooria tabelist.");
             return;
         }
 
@@ -66,7 +66,7 @@ public class KategooriateHaldusForm : Form
             using ToodedContext db = new ToodedContext();
             if (db.Kategooriatabel.Any(k => k.Kategooria_nimetus == nimi.Text.Trim() && (!muutmine || k.Id != valitudId)))
             {
-                MessageBox.Show("Selle nimega kategooria on juba olemas.");
+                Vaade.Teade("Selle nimega kategooria on juba olemas.");
                 return;
             }
 
@@ -77,7 +77,7 @@ public class KategooriateHaldusForm : Form
             }
             if (k == null)
             {
-                MessageBox.Show("Kategooria on kustutatud. Värskenda tabelit.");
+                Vaade.Teade("Kategooria on kustutatud. Värskenda tabelit.");
                 return;
             }
 
@@ -109,11 +109,11 @@ public class KategooriateHaldusForm : Form
             using ToodedContext db = new ToodedContext();
             if (db.Toodetabel.Any(t => t.KategooriaId == valitudId))
             {
-                MessageBox.Show("Kategoorias on tooteid (ka peidetud). Vii need enne teise kategooriasse.");
+                Vaade.Teade("Kategoorias on tooteid (ka peidetud). Vii need enne teise kategooriasse.");
                 return;
             }
 
-            if (MessageBox.Show("Kas kustutan kategooria?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (Vaade.Teade("Kas kustutan kategooria?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
             {
                 return;
             }

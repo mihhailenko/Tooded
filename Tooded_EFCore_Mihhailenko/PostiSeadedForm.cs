@@ -52,7 +52,7 @@ public class PostiSeadedForm : Form
         {
             if (string.IsNullOrWhiteSpace(server.Text) || !MailAddress.TryCreate(saatja.Text.Trim(), out _) || string.IsNullOrWhiteSpace(kasutaja.Text))
             {
-                MessageBox.Show("Täida posti server, saatja e-post ja kasutajanimi.");
+                Vaade.Teade("Täida posti server, saatja e-post ja kasutajanimi.");
                 return;
             }
 
@@ -80,7 +80,7 @@ public class PostiSeadedForm : Form
         Vaade.Nupp(eemalda, false, true);
         eemalda.Click += (s, e) =>
         {
-            if (MessageBox.Show("Kas eemaldada salvestatud e-posti parool?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (Vaade.Teade("Kas eemaldada salvestatud e-posti parool?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
             {
                 return;
             }
@@ -89,7 +89,7 @@ public class PostiSeadedForm : Form
             {
                 seaded.Salvesta("");
                 parool.Clear();
-                MessageBox.Show("Salvestatud parool eemaldatud.");
+                Vaade.Teade("Salvestatud parool eemaldatud.");
             }
             catch (Exception ex)
             {

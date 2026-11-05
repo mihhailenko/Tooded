@@ -143,7 +143,7 @@ public class KasutajateHaldusForm : Form
             using IDbContextTransaction tehing = db.Database.BeginTransaction(IsolationLevel.Serializable);
             if (esmane && db.Kasutajad.Any())
             {
-                MessageBox.Show("Esimene konto on juba loodud. Sulge aken ja logi sisse.");
+                Vaade.Teade("Esimene konto on juba loodud. Sulge aken ja logi sisse.");
                 return;
             }
 
@@ -186,11 +186,11 @@ public class KasutajateHaldusForm : Form
         int id = (int)tabel.SelectedRows[0].Cells["Id"].Value;
         if (id == AktiivneKasutaja.Id)
         {
-            MessageBox.Show("Enda rolli siin muuta ei saa. Nii jääb administraatori ligipääs alles.");
+            Vaade.Teade("Enda rolli siin muuta ei saa. Nii jääb administraatori ligipääs alles.");
             return;
         }
 
-        if (MessageBox.Show("Kas muudan valitud kasutaja rolli? Muutus rakendub tema järgmisel sisselogimisel.", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+        if (Vaade.Teade("Kas muudan valitud kasutaja rolli? Muutus rakendub tema järgmisel sisselogimisel.", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
         {
             return;
         }
@@ -202,13 +202,13 @@ public class KasutajateHaldusForm : Form
             Kasutaja? kasutaja = db.Kasutajad.Find(id);
             if (kasutaja == null)
             {
-                MessageBox.Show("Kasutajat enam ei ole.");
+                Vaade.Teade("Kasutajat enam ei ole.");
                 return;
             }
 
             if (kasutaja.Roll == "admin" && valitudRoll.Text != "admin" && db.Kasutajad.Count(k => k.Roll == "admin") <= 1)
             {
-                MessageBox.Show("Viimase administraatori rolli ei saa muuta.");
+                Vaade.Teade("Viimase administraatori rolli ei saa muuta.");
                 return;
             }
 

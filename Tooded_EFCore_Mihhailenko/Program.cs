@@ -30,7 +30,7 @@ internal static class Program
             catch (Exception ex)
             {
                 Vead.Naita("Poodi ei saanud avada. Proovi uuesti. Kui viga kordub, võta ühendust poe haldajaga.", ex);
-                DialogResult vastus = MessageBox.Show("Kas soovid uuesti proovida?", "Andmebaas", MessageBoxButtons.RetryCancel);
+                DialogResult vastus = Vaade.Teade("Kas soovid uuesti proovida?", "Andmebaas", MessageBoxButtons.RetryCancel);
                 if (vastus != DialogResult.Retry)
                 {
                     return;

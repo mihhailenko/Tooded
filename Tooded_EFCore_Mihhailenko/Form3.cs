@@ -234,7 +234,7 @@ public partial class Form3 : Form
             Toode? toode = db.Toodetabel.AsNoTracking().FirstOrDefault(t => t.Id == id);
             if (toode == null || !toode.Aktiivne)
             {
-                MessageBox.Show("See toode ei ole enam müügil. Värskenda poodi.");
+                Vaade.Teade("See toode ei ole enam müügil. Värskenda poodi.");
                 return;
             }
             Ostukorv.Lisa(toode, (int)kogus.Value);
@@ -242,7 +242,7 @@ public partial class Form3 : Form
         }
         catch (ArgumentException ex)
         {
-            MessageBox.Show(ex.Message);
+            Vaade.Teade(ex.Message);
         }
         catch (Exception ex)
         {

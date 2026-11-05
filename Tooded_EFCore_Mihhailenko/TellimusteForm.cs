@@ -23,7 +23,7 @@ public class TellimusteForm : Form
     {
         if (algus.Value.Date > lopp.Value.Date)
         {
-            MessageBox.Show("Alguskuupäev ei või olla lõppkuupäevast hilisem.");
+            Vaade.Teade("Alguskuupäev ei või olla lõppkuupäevast hilisem.");
             return;
         }
 
@@ -62,7 +62,7 @@ public class TellimusteForm : Form
     {
         if (tabel.SelectedRows.Count == 0)
         {
-            MessageBox.Show("Vali tabelist tellimus.");
+            Vaade.Teade("Vali tabelist tellimus.");
             return;
         }
 

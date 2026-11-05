@@ -60,7 +60,7 @@ public partial class FormMain : Form
         // Ühte faili ei asendata: nii jääb eelmine kontrollitud varukoopia alles.
         if (File.Exists(aken.FileName))
         {
-            MessageBox.Show("Vali uus failinimi. Olemasolevat varukoopiat ei asendata.");
+            Vaade.Teade("Vali uus failinimi. Olemasolevat varukoopiat ei asendata.");
             return;
         }
 
@@ -76,7 +76,7 @@ public partial class FormMain : Form
             kask.ExecuteNonQuery();
             kask.CommandText = "RESTORE VERIFYONLY FROM DISK = @tee WITH CHECKSUM";
             kask.ExecuteNonQuery();
-            MessageBox.Show("Varukoopia on salvestatud.\n" + "Tootepildid asuvad eraldi kaustas: " + Kaustad.Pildid + "\nVajadusel varunda ka see kaust.");
+            Vaade.Teade("Varukoopia on salvestatud.\n" + "Tootepildid asuvad eraldi kaustas: " + Kaustad.Pildid + "\nVajadusel varunda ka see kaust.");
         }
         catch (Exception ex)
         {
@@ -106,11 +106,11 @@ public partial class FormMain : Form
             using ToodedContext db = new ToodedContext();
             if (db.Database.CanConnect())
             {
-                MessageBox.Show("Ühendus toimib.");
+                Vaade.Teade("Ühendus toimib.");
             }
             else
             {
-                MessageBox.Show("Ühendust ei saanud luua. Proovi hiljem uuesti.");
+                Vaade.Teade("Ühendust ei saanud luua. Proovi hiljem uuesti.");
             }
         }
         catch (Exception ex)

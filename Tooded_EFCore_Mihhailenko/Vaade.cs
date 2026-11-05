@@ -8,6 +8,58 @@ internal static class Vaade
     public static readonly Color Sinine = Color.FromArgb(40, 94, 190);
     public static readonly Color Punane = Color.FromArgb(174, 47, 57);
     public static readonly Color Piir = Color.FromArgb(216, 223, 233);
+
+    public static DialogResult Teade(string tekst, string pealkiri = "Teade",
+        MessageBoxButtons nupud = MessageBoxButtons.OK, MessageBoxIcon ikoon = MessageBoxIcon.None)
+    {
+        TaskDialogButton kinnita = new TaskDialogButton("Selge");
+        TaskDialogButton loobu = new TaskDialogButton("Loobu");
+        DialogResult kinnitatud = DialogResult.OK;
+        DialogResult suletud = DialogResult.OK;
+        if (nupud == MessageBoxButtons.YesNo)
+        {
+            kinnita.Text = "Jah";
+            loobu.Text = "Ei";
+            kinnitatud = DialogResult.Yes;
+            suletud = DialogResult.No;
+        }
+        else if (nupud == MessageBoxButtons.RetryCancel)
+        {
+            kinnita.Text = "Proovi uuesti";
+            kinnitatud = DialogResult.Retry;
+            suletud = DialogResult.Cancel;
+        }
+        else if (nupud != MessageBoxButtons.OK)
+        {
+            throw new ArgumentOutOfRangeException(nameof(nupud));
+        }
+
+        TaskDialogPage aken = new TaskDialogPage
+        {
+            Caption = pealkiri,
+            Text = tekst,
+            AllowCancel = true,
+            DefaultButton = kinnita,
+            Icon = ikoon == MessageBoxIcon.Warning ? TaskDialogIcon.Warning : TaskDialogIcon.None
+        };
+        aken.Buttons.Add(kinnita);
+        if (nupud != MessageBoxButtons.OK)
+        {
+            aken.Buttons.Add(loobu);
+        }
+        Form? omanik = Form.ActiveForm;
+        TaskDialogButton vastus;
+        if (omanik == null)
+        {
+            vastus = TaskDialog.ShowDialog(aken);
+        }
+        else
+        {
+            vastus = TaskDialog.ShowDialog(omanik, aken);
+        }
+        return vastus == kinnita ? kinnitatud : suletud;
+    }
+
     public static void Vorm(Form vorm, string nimi, int laius, int korgus)
     {
         vorm.SuspendLayout();

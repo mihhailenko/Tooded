@@ -41,7 +41,7 @@ public partial class ArveForm : Form
             tellimus = db.Tellimused.AsNoTracking().Include(t => t.Read).FirstOrDefault(t => t.Id == id && (AktiivneKasutaja.OnAdmin || t.KasutajaId == AktiivneKasutaja.Id));
             if (tellimus == null)
             {
-                MessageBox.Show("Tellimust ei leitud või sul puudub ligipääs.");
+                Vaade.Teade("Tellimust ei leitud või sul puudub ligipääs.");
                 Shown += (s, e) => Close();
                 return;
             }
@@ -127,7 +127,7 @@ public partial class ArveForm : Form
         if (!int.TryParse(e.FormattedValue?.ToString(), out int kogus) || kogus < 1)
         {
             e.Cancel = true;
-            MessageBox.Show("Sisesta kogus vähemalt 1. Toote eemaldamiseks vajuta Eemalda valitud.");
+            Vaade.Teade("Sisesta kogus vähemalt 1. Toote eemaldamiseks vajuta Eemalda valitud.");
             return;
         }
 
@@ -138,7 +138,7 @@ public partial class ArveForm : Form
             if (toode == null || !toode.Aktiivne || kogus > toode.Kogus)
             {
                 e.Cancel = true;
-                MessageBox.Show("Toode ei ole müügil või soovitud kogust ei ole laos. Vajadusel vajuta Esc ja eemalda rida.");
+                Vaade.Teade("Toode ei ole müügil või soovitud kogust ei ole laos. Vajadusel vajuta Esc ja eemalda rida.");
                 return;
             }
 
@@ -191,7 +191,7 @@ public partial class ArveForm : Form
             else if (Ostukorv.OstuKontrollVajalik)
             {
                 Ostukorv.OstuKontrollVajalik = false;
-                MessageBox.Show("Selle ostu tellimust ei leitud. Kontrolli korvi ja kinnita ost uuesti.");
+                Vaade.Teade("Selle ostu tellimust ei leitud. Kontrolli korvi ja kinnita ost uuesti.");
             }
             else
             {
@@ -199,10 +199,10 @@ public partial class ArveForm : Form
                 Tellimus uus = OstuTeenus.Koosta(db, AktiivneKasutaja.Id, out hinnadMuutusid);
                 if (hinnadMuutusid)
                 {
-                    MessageBox.Show("Mõne toote hind muutus. Vaata uus summa üle ja kinnita ost uuesti.");
+                    Vaade.Teade("Mõne toote hind muutus. Vaata uus summa üle ja kinnita ost uuesti.");
                     return;
                 }
-                DialogResult vastus = MessageBox.Show("Kas kinnitad ostu summas " + uus.Summa.ToString("F2") + " €?",
+                DialogResult vastus = Vaade.Teade("Kas kinnitad ostu summas " + uus.Summa.ToString("F2") + " €?",
                     "Kinnita ost", MessageBoxButtons.YesNo);
                 if (vastus != DialogResult.Yes)
                 {
@@ -216,11 +216,11 @@ public partial class ArveForm : Form
         }
         catch (DbUpdateConcurrencyException)
         {
-            MessageBox.Show("Toote hind või kogus on muutunud. Ost jäi kinnitamata. Vaata ostukorv üle ja proovi uuesti.");
+            Vaade.Teade("Toote hind või kogus on muutunud. Ost jäi kinnitamata. Vaata ostukorv üle ja proovi uuesti.");
         }
         catch (ArgumentException ex)
         {
-            MessageBox.Show(ex.Message);
+            Vaade.Teade(ex.Message);
         }
         catch (Exception ex)
         {
@@ -322,7 +322,7 @@ public partial class ArveForm : Form
 
         if (!MailAddress.TryCreate(txtEmail.Text.Trim(), out var saaja))
         {
-            MessageBox.Show("Sisesta korrektne e-post.");
+            Vaade.Teade("Sisesta korrektne e-post.");
             return;
         }
 
@@ -351,7 +351,7 @@ public partial class ArveForm : Form
                 {
                     teade += " E-posti saad seadistada peamenüüs.";
                 }
-                MessageBox.Show(teade);
+                Vaade.Teade(teade);
                 lblOlek.Text = "E-post pole seadistatud.";
                 return;
             }
@@ -387,7 +387,7 @@ public partial class ArveForm : Form
             return;
         }
 
-        if (MessageBox.Show("Kas tühjendan ostukorvi?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+        if (Vaade.Teade("Kas tühjendan ostukorvi?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
         {
             return;
         }
@@ -517,7 +517,7 @@ public partial class ArveForm : Form
         tabel.DataError += (s, e) =>
         {
             e.ThrowException = false;
-            MessageBox.Show("Sisesta korrektne täisarv.");
+            Vaade.Teade("Sisesta korrektne täisarv.");
         };
         Vaade.Tabel(tabel);
         Vaade.VeeruNimi(tabel, "Nimetus", "Toode", 220);
@@ -542,7 +542,7 @@ public partial class ArveForm : Form
             if (saatmine || kinnitamine)
             {
                 e.Cancel = true;
-                MessageBox.Show("Oota toimingu lõppu.");
+                Vaade.Teade("Oota toimingu lõppu.");
             }
         };
         if (tellimuseId != null)

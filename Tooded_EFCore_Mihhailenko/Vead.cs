@@ -27,6 +27,6 @@ public static class Vead
         // Teade kuvatakse ka siis, kui logi ei saa salvestada.
         }
 
-        MessageBox.Show(tegevus, "Toiming ei õnnestunud", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        Vaade.Teade(tegevus, "Toiming ei õnnestunud", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 }

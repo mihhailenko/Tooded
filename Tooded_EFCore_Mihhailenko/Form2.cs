@@ -300,14 +300,14 @@ public partial class Form2 : Form
         {
             if (new FileInfo(aken.FileName).Length > 10 * 1024 * 1024)
             {
-                MessageBox.Show("Pilt võib olla kuni 10 MB.");
+                Vaade.Teade("Pilt võib olla kuni 10 MB.");
                 return;
             }
 
             using Image pilt = Image.FromFile(aken.FileName);
             if (pilt.Width > 8000 || pilt.Height > 8000)
             {
-                MessageBox.Show("Pildi mõõtmed võivad olla kuni 8000 × 8000.");
+                Vaade.Teade("Pildi mõõtmed võivad olla kuni 8000 × 8000.");
                 return;
             }
 
@@ -329,38 +329,38 @@ public partial class Form2 : Form
         hind = 0;
         if (string.IsNullOrWhiteSpace(txtNimetus.Text))
         {
-            MessageBox.Show("Sisesta toote nimetus.");
+            Vaade.Teade("Sisesta toote nimetus.");
             return false;
         }
         if (!int.TryParse(txtKogus.Text, out kogus) || kogus < 0)
         {
-            MessageBox.Show("Laokogus peab olema täisarv ja vähemalt 0.");
+            Vaade.Teade("Laokogus peab olema täisarv ja vähemalt 0.");
             return false;
         }
         string hindTekst = txtHind.Text.Trim().Replace(',', '.');
         if (!decimal.TryParse(hindTekst, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out hind))
         {
-            MessageBox.Show("Sisesta hind arvuna, näiteks 2,50.");
+            Vaade.Teade("Sisesta hind arvuna, näiteks 2,50.");
             return false;
         }
         if (hind < 0)
         {
-            MessageBox.Show("Hind ei saa olla negatiivne.");
+            Vaade.Teade("Hind ei saa olla negatiivne.");
             return false;
         }
         if (hind > 99999999.99m)
         {
-            MessageBox.Show("See hind on liiga suur. Sisesta väiksem hind.");
+            Vaade.Teade("See hind on liiga suur. Sisesta väiksem hind.");
             return false;
         }
         if (decimal.Round(hind, 2) != hind)
         {
-            MessageBox.Show("Sisesta hind kuni kahe komakohaga, näiteks 2,50.");
+            Vaade.Teade("Sisesta hind kuni kahe komakohaga, näiteks 2,50.");
             return false;
         }
         if (comboKategooria.SelectedValue == null)
         {
-            MessageBox.Show("Vali kategooria.");
+            Vaade.Teade("Vali kategooria.");
             return false;
         }
         return true;
@@ -380,7 +380,7 @@ public partial class Form2 : Form
             return;
         }
 
-        if (muutmine && MessageBox.Show("Kas salvestan valitud toote muudatused?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+        if (muutmine && Vaade.Teade("Kas salvestan valitud toote muudatused?", "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
         {
             return;
         }
@@ -397,7 +397,7 @@ public partial class Form2 : Form
             }
             if (toode == null)
             {
-                MessageBox.Show("Toode on vahepeal kustutatud. Värskenda tabelit.");
+                Vaade.Teade("Toode on vahepeal kustutatud. Värskenda tabelit.");
                 return;
             }
 
@@ -444,7 +444,7 @@ public partial class Form2 : Form
         }
         catch (DbUpdateConcurrencyException)
         {
-            MessageBox.Show("Toote andmed on muutunud. Vajuta Värskenda ja vali toode uuesti.");
+            Vaade.Teade("Toote andmed on muutunud. Vajuta Värskenda ja vali toode uuesti.");
         }
         catch (Exception ex)
         {
@@ -480,7 +480,7 @@ public partial class Form2 : Form
 
             bool kasutatud = db.TellimuseRead.Any(r => r.ToodeId == toode.Id);
             string teade = kasutatud ? "Seda toodet on juba ostetud. Kas eemaldada see müügist? Varasemad ostud jäävad alles." : "Kas kustutan toote lõplikult?";
-            if (MessageBox.Show(teade, "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (Vaade.Teade(teade, "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
             {
                 return;
             }
@@ -507,7 +507,7 @@ public partial class Form2 : Form
         }
         catch (DbUpdateConcurrencyException)
         {
-            MessageBox.Show("Toodet on vahepeal muudetud. Värskenda tabelit.");
+            Vaade.Teade("Toodet on vahepeal muudetud. Värskenda tabelit.");
         }
         catch (Exception ex)
         {

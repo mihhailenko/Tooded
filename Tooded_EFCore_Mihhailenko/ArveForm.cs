@@ -22,6 +22,10 @@ public partial class ArveForm : Form
     private readonly KorviNupp btnPDF = new() { Ikoon = "icons/ic_download_invoice.svg" };
     private readonly KorviNupp btnAva = new();
     private readonly KorviNupp btnSaada = new() { Pohiline = true };
+    private readonly KorviNupp btnKirjaEelvaade = new();
+    private readonly KorviNupp btnSaateleht = new();
+    private readonly ComboBox kirjaLiik = new() { DropDownStyle = ComboBoxStyle.DropDownList };
+    private TellimuseKirjaLiik ValitudKirjaLiik => (TellimuseKirjaLiik)Math.Max(0, kirjaLiik.SelectedIndex);
     private readonly TableLayoutPanel arvePaneel = new();
     private readonly CancellationTokenSource elu = new();
     private readonly Dictionary<int, Toode> tooteAndmed = new();
@@ -140,6 +144,7 @@ public partial class ArveForm : Form
         arvePaneel.Visible = tellimus != null;
         txtEmail.Enabled = tellimus != null && !saatmine;
         btnSaada.Enabled = btnAva.Enabled = btnPDF.Enabled = tellimus != null && !saatmine;
+        btnKirjaEelvaade.Enabled = btnSaateleht.Enabled = kirjaLiik.Enabled = tellimus != null && !saatmine;
         MahutaRead();
         readPaneel.ResumeLayout(true);
         readPaneel.AutoScrollPosition = scroll;
@@ -376,7 +381,8 @@ public partial class ArveForm : Form
             return;
         }
 
-        if (viimanePdf == null || !File.Exists(viimanePdf))
+        var liik = ValitudKirjaLiik;
+        if (liik == TellimuseKirjaLiik.Arve && (viimanePdf == null || !File.Exists(viimanePdf)))
         {
             if (!LooPdf())
             {
@@ -388,6 +394,7 @@ public partial class ArveForm : Form
         btnAva.Enabled = false;
         btnPDF.Enabled = false;
         btnSaada.Enabled = false;
+        btnKirjaEelvaade.Enabled = btnSaateleht.Enabled = kirjaLiik.Enabled = false;
         txtEmail.Enabled = false;
         lblOlek.Text = "Saadan arvet…";
         try
@@ -406,8 +413,10 @@ public partial class ArveForm : Form
                 return;
             }
 
-            using MailMessage kiri = new MailMessage(seaded.Saatja, saaja.Address, "Arve " + tellimus.Number, "Tere! Õppepoe arve on manuses.");
-            kiri.Attachments.Add(new Attachment(viimanePdf!));
+            var rekvisiidid = DokumendiSeaded.Loe();
+            string? attachment = liik == TellimuseKirjaLiik.Saateleht ? ArvePdf.LooSaateleht(tellimus, rekvisiidid)
+                : liik == TellimuseKirjaLiik.Arve ? viimanePdf : null;
+            using MailMessage kiri = TellimuseKiri.Loo(tellimus, seaded.Saatja, saaja.Address, attachment, rekvisiidid, liik);
             using SmtpClient smtp = new SmtpClient(seaded.Server, seaded.Port)
             {
                 EnableSsl = true,
@@ -415,7 +424,7 @@ public partial class ArveForm : Form
             };
             using CancellationTokenSource ajalopp = new CancellationTokenSource(TimeSpan.FromSeconds(45));
             await smtp.SendMailAsync(kiri, ajalopp.Token);
-            lblOlek.Text = "Arve saadetud.";
+            lblOlek.Text = "Kiri saadetud.";
         }
         catch (Exception ex)
         {
@@ -428,6 +437,31 @@ public partial class ArveForm : Form
             txtEmail.Enabled = true;
             NaitaKorvi();
         }
+    }
+
+    private void AvaKirjaEelvaade()
+    {
+        if (tellimus == null || saatmine) return;
+        try
+        {
+            var settings = DokumendiSeaded.Loe();
+            string contact = settings.Email;
+            if (string.IsNullOrEmpty(contact)) contact = PostiSeaded.Loe().Saatja;
+            if (string.IsNullOrEmpty(contact)) contact = AktiivneKasutaja.Email;
+            string folder = Path.Combine(Kaustad.Juur, "KirjadeEelvaated");
+            Directory.CreateDirectory(folder);
+            string path = Path.Combine(folder, $"kiri-{tellimus.Id}-{Guid.NewGuid():N}.html");
+            File.WriteAllText(path, TellimuseKiri.Eelvaade(tellimus, contact, settings, ValitudKirjaLiik), System.Text.Encoding.UTF8);
+            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+        }
+        catch (Exception ex) { Vead.Naita("Kirja eelvaadet ei saanud avada.", ex); }
+    }
+
+    private void AvaSaateleht()
+    {
+        if (tellimus == null || saatmine) return;
+        try { Process.Start(new ProcessStartInfo(ArvePdf.LooSaateleht(tellimus)) { UseShellExecute = true }); }
+        catch (Exception ex) { Vead.Naita("Saatelehte ei saanud avada.", ex); }
     }
 
     private void btnTyhjenda_Click(object? s, EventArgs e)
@@ -577,11 +611,21 @@ public partial class ArveForm : Form
         Lisa(arvePaneel, success);
         btnPDF.Text = "Salvesta PDF-arve"; btnPDF.Dock = DockStyle.Top; btnPDF.Margin = new Padding(0, 0, 0, 10); btnPDF.Click += SalvestaPdf;
         btnAva.Text = "Ava arve"; btnAva.Dock = DockStyle.Top; btnAva.Margin = new Padding(0, 0, 0, 18); btnAva.Click += (_, _) => AvaPdf();
-        Lisa(arvePaneel, btnPDF); Lisa(arvePaneel, btnAva); Lisa(arvePaneel, Tekst("Arve saaja e-post", 9));
+        btnSaateleht.Text = "Ava PDF-saateleht"; btnSaateleht.Dock = DockStyle.Top; btnSaateleht.Margin = new Padding(0, 0, 0, 18);
+        btnSaateleht.Click += (_, _) => AvaSaateleht();
+        Lisa(arvePaneel, btnPDF); Lisa(arvePaneel, btnAva); Lisa(arvePaneel, btnSaateleht);
+        Lisa(arvePaneel, Tekst("Kirja liik", 9));
+        kirjaLiik.Items.AddRange(["Arve PDF-iga", "Tellimuse kinnitus", "Saateleht PDF-iga"]);
+        kirjaLiik.Font = BarboraTheme.Font(10); kirjaLiik.Dock = DockStyle.Top; kirjaLiik.Margin = new Padding(0, 0, 0, 14);
+        kirjaLiik.AccessibleName = "Kirja liik"; kirjaLiik.SelectedIndex = 0;
+        Lisa(arvePaneel, kirjaLiik); Lisa(arvePaneel, Tekst("Kirja saaja e-post", 9));
         txtEmail.Font = BarboraTheme.Font(10); txtEmail.BorderStyle = BorderStyle.FixedSingle; txtEmail.Text = AktiivneKasutaja.Email;
         txtEmail.PlaceholderText = "nimi@näide.ee"; txtEmail.MaxLength = 254; txtEmail.Dock = DockStyle.Top; txtEmail.Margin = new Padding(0, 0, 0, 12); txtEmail.AccessibleName = "Arve saaja e-post";
         Lisa(arvePaneel, txtEmail);
+        btnKirjaEelvaade.Text = "Vaata kirja eelvaadet"; btnKirjaEelvaade.Dock = DockStyle.Top; btnKirjaEelvaade.Margin = new Padding(0, 0, 0, 10);
+        btnKirjaEelvaade.Click += (_, _) => AvaKirjaEelvaade(); Lisa(arvePaneel, btnKirjaEelvaade);
         btnSaada.Text = "Saada arve e-postiga"; btnSaada.Dock = DockStyle.Top; btnSaada.Click += SaadaEmail; Lisa(arvePaneel, btnSaada);
+        kirjaLiik.SelectedIndexChanged += (_, _) => btnSaada.Text = ValitudKirjaLiik == TellimuseKirjaLiik.Arve ? "Saada arve e-postiga" : "Saada kiri e-postiga";
         Lisa(right, arvePaneel);
         lblOlek.Font = BarboraTheme.Font(9); lblOlek.ForeColor = BarboraTheme.Muted; lblOlek.AutoSize = true; lblOlek.Dock = DockStyle.Top;
         lblOlek.MaximumSize = new Size(340, 0); lblOlek.Margin = new Padding(8, 0, 8, 12); Lisa(right, lblOlek);

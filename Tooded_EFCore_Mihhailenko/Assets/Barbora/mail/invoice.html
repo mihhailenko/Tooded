@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="et">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      @media only screen and (max-width: 640px) {
+        body { padding-top:12px !important; margin:0 !important; }
+        .mail-container { width:100% !important; max-width:100% !important; box-sizing:border-box; padding:0 12px !important; }
+        .mail-container > table { width:100% !important; max-width:100% !important; }
+        .mail-container > table > tbody > tr > td > img[width="600"] { display:block; width:100% !important; height:auto !important; }
+        .mail-star { width:44px !important; height:auto !important; }
+        .mail-contact-row { display:block; padding:0 24px; }
+        .mail-contact-row > td { display:block; width:auto !important; box-sizing:border-box; }
+        .mail-contact-row > td:first-child, .mail-contact-row > td:last-child { display:none; }
+        .mail-contact-row > td:nth-child(3) { height:8px; }
+        .mail-support, .mail-support > tbody, .mail-support > tbody > tr { display:block !important; width:100% !important; box-sizing:border-box; }
+        .mail-support > tbody > tr { padding-left:24px; padding-right:24px; }
+        .mail-support > tbody > tr > td { display:block !important; width:auto !important; }
+        .mail-support > tbody > tr > td[style*="width: 24px"] { display:none !important; }
+      }
+      table {
+        font-size: 16px;
+      }
+  
+      tr {
+        font-family: Arial;
+        color: #171717;
+      }
+  
+      h2 {
+        line-height: 28px;
+        font-weight: 700;
+        margin: 0;
+        font-size: 22px;
+      }
+  
+      a {
+        color: #cc0000;
+      }
+    </style>
+  </head>
+  <body
+    style="background-color: #f5f5f5; padding-top: 24px; width: 100%; margin-left: auto; margin-right: auto"
+  >
+    <h1 style="display: none"></h1>
+    <div class="mail-container" style="max-width:600px;padding-left:16px;padding-right:16px;margin-left:auto;margin-right:auto">
+      <table align="center" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+        
+            <img
+              width="600"
+              style="width: 600px; max-width:100%; height:auto"
+              alt="{{HEADER_ALT}}"
+              src="{{HEADER_SRC}}"
+            />
+                  </td>
+        </tr>
+      </table>
+      
+      <div class="spacer" style="height: 4px"></div>
+
+      <table
+        align="center"
+        cellspacing="0"
+        cellpadding="0"
+        style="width: 600px; background-color: white; border-radius: 16px"
+      >
+        <tr style="height: 24px">
+          <td colspan="4"></td>
+        </tr>
+
+        <tr>
+          <td style="width: 24px"></td>
+          <td colspan="2">
+            <h2 style="font-size: 30px; line-height: 36px"><b>{{GREETING}}</b></h2>
+          </td>
+          <td style="width: 24px"></td>
+        </tr>
+
+        <tr style="height: 16px">
+          <td colspan="4"></td>
+        </tr>
+
+        <tr style="font-size: 18px; line-height: 28px; font-weight: 700">
+          <td></td>
+          <td colspan="2">
+            <span>{{INTRODUCTION}}</span>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr style="height: 16px">
+          <td colspan="4"></td>
+        </tr>
+
+        <tr style="color: #404040; font-size: 16px; line-height: 24px">
+          <td></td>
+          <td colspan="2">
+            {{ORDER_INFORMATION}}<span>{{RATING_QUESTION}}</span>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr style="height: 16px">
+          <td colspan="4"></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <div
+              style="
+                color: #404040;
+                font-size: 16px;
+                padding: 16px;
+                text-align: center;
+                border: 1px solid #e5e5e5;
+                border-radius: 16px;
+                background-color: #fff;
+              "
+            >
+              <div style="padding-bottom: 16px; padding-top: 8px">
+                <a style="text-decoration: none" href="{{RATING_1}}">
+                  <img class="mail-star"
+                    alt="{{RATING_1_ALT}}"
+                    src="cid:barbora-42dc0539-e5e9-4440-b989-d3a1bdecde48"
+                  />
+                </a>
+                <a style="text-decoration: none" href="{{RATING_2}}">
+                  <img class="mail-star"
+                    alt="{{RATING_2_ALT}}"
+                    src="cid:barbora-42dc0539-e5e9-4440-b989-d3a1bdecde48"
+                  />
+                </a>
+                <a style="text-decoration: none" href="{{RATING_3}}">
+                  <img class="mail-star"
+                    alt="{{RATING_3_ALT}}"
+                    src="cid:barbora-42dc0539-e5e9-4440-b989-d3a1bdecde48"
+                  />
+                </a>
+                <a style="text-decoration: none" href="{{RATING_4}}">
+                  <img class="mail-star"
+                    alt="{{RATING_4_ALT}}"
+                    src="cid:barbora-42dc0539-e5e9-4440-b989-d3a1bdecde48"
+                  />
+                </a>
+                <a style="text-decoration: none" href="{{RATING_5}}">
+                  <img class="mail-star"
+                    alt="{{RATING_5_ALT}}"
+                    src="cid:barbora-42dc0539-e5e9-4440-b989-d3a1bdecde48"
+                  />
+                </a>
+              </div>
+              <span style="font-size: 14px; color: #171717"
+                >{{RATING_HINT}}</span
+              >
+            </div>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr style="height: 24px">
+          <td colspan="4"></td>
+        </tr>
+      </table>
+
+      <div class="spacer" style="height: 8px"></div>
+      
+      <table
+        role="presentation"
+        align="center"
+        cellspacing="0"
+        cellpadding="0"
+        class="mail-support" style="width: 600px; border-radius: 16px; background-color: #fff; border-radius: 16px"
+      >
+        <tr style="height: 26px">
+          <td colspan="5"></td>
+        </tr>
+      
+        <tr>
+          <td style="width: 24px"></td>
+          <td colspan="3">
+            <h2>{{SUPPORT_TITLE}}</h2>
+          </td>
+      
+          <td style="width: 24px"></td>
+        </tr>
+      
+        <tr style="height: 14px">
+          <td colspan="5"></td>
+        </tr>
+      
+        <tr class="mail-contact-row" style="background-color: white; color: #171717; font-size: 15px">
+          <td style="width: 24px"></td>
+          <td style="width: 240px; background-color: #fafafa; padding: 10px 12px; border-radius: 8px">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%">
+              <tr>
+                <td style="width: 24px">
+                  <img
+                    width="24"
+                    height="24"
+                    style="vertical-align: middle"
+                    alt="{{PHONE_ALT}}"
+                    src="cid:barbora-3e4370ff-926d-4734-bd84-4bdb5fd1ffa1"
+                  />
+                </td>
+                <td style="width: 8px"></td>
+                <td style="height: 40px">
+                  <a href="{{PHONE_URL}}" style="font-size: 14px; font-weight: 400; line-height: 20px"
+                    >{{PHONE}}</a
+                  ><br />
+                  <span style="font-size: 12px; line-height: 16px"
+                    >{{HOURS}}</span
+                  >
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td style="width: 8px"></td>
+          <td style="width: 240px; background-color: #fafafa; padding: 16px 12px; border-radius: 8px">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%">
+              <tr>
+                <td style="width: 24px">
+                  <img
+                    width="24"
+                    height="24"
+                    style="vertical-align: middle"
+                    alt="{{EMAIL_ALT}}"
+                    src="cid:barbora-17d705dd-b156-4632-99ac-698ff42b5ce6"
+                  />
+                </td>
+                <td style="width: 8px"></td>
+                <td>
+                  <a href="{{EMAIL_URL}}" style="font-size: 14px; line-height: 20px">{{EMAIL}}</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td style="width: 24px"></td>
+        </tr>
+      
+        <tr style="height: 18px">
+          <td colspan="5"></td>
+        </tr>
+      
+        <tr>
+          <td style="width: 24px"></td>
+          <td colspan="3">
+            <span style="font-size: 16px; line-height: 24px"
+              >{{TERMS_TEXT}}
+              <a href="{{SHOP_URL}}" style="font-size: 16px; line-height: 24px"
+                >{{TERMS_LINK}}</a
+              >
+            </span>
+          </td>
+          <td style="width: 24px"></td>
+        </tr>
+      
+        <tr style="height: 22px">
+          <td colspan="5"></td>
+        </tr>
+      </table>
+      
+      <div class="spacer" style="height: 8px"></div>
+      
+      <table role="presentation" align="center" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+         
+            <img
+              width="600"
+              style="width: 600px; max-width:100%; height:auto"
+              alt="{{FOOTER_ALT}}"
+              src="{{FOOTER_SRC}}"
+            />
+               
+          </td>
+        </tr>
+      </table>
+      
+      <table
+        role="presentation"
+        align="center"
+        cellspacing="0"
+        cellpadding="0"
+        style="width: 600px; font-size: 12px; line-height: 16px"
+      >
+        <tr>
+          <td>
+            <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px">
+              <span style="color: #404040"
+                >{{CONFIDENTIALITY}}
+                <a href="{{SHOP_URL}}">{{PRIVACY_LINK}}</a>.</span
+              ><br /><span>{{SHOP_NAME}} · õppeprojekt</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
+

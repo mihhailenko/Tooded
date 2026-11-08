@@ -1,0 +1,65 @@
+{
+  "source": "Barbora eestikeelsete tellimuskirjade originaalgraafika",
+  "files": [
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/17d705dd-b156-4632-99ac-698ff42b5ce6/28x28.png",
+      "file": "17d705dd-b156-4632-99ac-698ff42b5ce6.png",
+      "bytes": 895,
+      "sha256": "6ec8c8313aab4ffa5759efb7cf30a07ede4a67e40024df10aecd4131d661a563"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/2e932df4-c559-457b-8ef1-488fd359154e/28x28.png",
+      "file": "2e932df4-c559-457b-8ef1-488fd359154e.png",
+      "bytes": 847,
+      "sha256": "aa5e1e404c2d1083769ee32c923e16aed9df3e354fc328ce7e875a02f021b095"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/3b9c3e71-75cc-41c0-88c9-5a9cea653fbb/28x28.png",
+      "file": "3b9c3e71-75cc-41c0-88c9-5a9cea653fbb.png",
+      "bytes": 1000,
+      "sha256": "1a436604c1952049b7709cf3018f5156b62259c2dfb73a9a3af187a06c610ff9"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/3e4370ff-926d-4734-bd84-4bdb5fd1ffa1/28x28.png",
+      "file": "3e4370ff-926d-4734-bd84-4bdb5fd1ffa1.png",
+      "bytes": 1153,
+      "sha256": "4ffbb010378d3d6accb9675f12a1c77110b9afd7e9e3be32beec99b7f894b7ea"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/42dc0539-e5e9-4440-b989-d3a1bdecde48/62x58.png",
+      "file": "42dc0539-e5e9-4440-b989-d3a1bdecde48.png",
+      "bytes": 1900,
+      "sha256": "02c483205f673164218550f6101ef1d29b7e57fc6c15152ac9b75f572b9cdeee"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/93f7caa1-972c-4e57-a8ac-37d9845e02b9/32x32.png",
+      "file": "93f7caa1-972c-4e57-a8ac-37d9845e02b9.png",
+      "bytes": 1313,
+      "sha256": "ad46903d9259ab5a42ff84a5f52944e1c186e0271c246ed11a956be64d52b6ab"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/e158ff64-7241-4fbc-b737-d779c740bb6e/32x32.png",
+      "file": "e158ff64-7241-4fbc-b737-d779c740bb6e.png",
+      "bytes": 959,
+      "sha256": "b71dd49f5e5565032ee0a651a3d4e20560bd2423dc5bb425021d243338a6d959"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/f5febd96-9634-490b-83e0-e9d5214994ac/24x25.png",
+      "file": "f5febd96-9634-490b-83e0-e9d5214994ac.png",
+      "bytes": 652,
+      "sha256": "42b3d4c7012c1c886c7c8d2f2413319fb885978835ece408882186d8064b8790"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/eb1e8ea9-e76b-41f3-bca2-afff7ad3138e/1200x456.png",
+      "file": "eb1e8ea9-e76b-41f3-bca2-afff7ad3138e.png",
+      "bytes": 329336,
+      "sha256": "52201523b340d86de751e0242694407629d616a0893bc9a7b1c6ec0c6e367f88"
+    },
+    {
+      "url": "https://cdn.mcauto-images-production.sendgrid.net/933028cfe35a3b4f/befb9417-edfd-489c-9da8-420677dc4a2f/1200x192.png",
+      "file": "befb9417-edfd-489c-9da8-420677dc4a2f.png",
+      "bytes": 12205,
+      "sha256": "1d30ae4f5a3c747682ca26950ef7170a5cbac89b856f3f7b380bbce6687e3551"
+    }
+  ]
+}

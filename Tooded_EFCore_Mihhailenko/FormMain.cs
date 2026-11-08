@@ -74,6 +74,7 @@ public partial class FormMain : Form
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add("Veebikataloogi seaded", null, (_, _) => Ava(new KataloogiSeadedForm()));
             menu.Items.Add("E-posti seaded", null, (_, _) => Ava(new PostiSeadedForm()));
+            menu.Items.Add("Kirja ja arve andmed", null, (_, _) => Ava(new DokumendiSeadedForm()));
             menu.Items.Add("Kontrolli ühendust", null, KontrolliUhendust);
             menu.Items.Add("Salvesta varukoopia", null, Varunda);
             admin.Click += (_, _) => menu.Show(admin, new Point(0, admin.Height));

@@ -42,8 +42,7 @@ public class PostiSeadedForm : Form
         Vaade.Vali(paneel, "Kasutajanimi", kasutaja);
         Vaade.Vali(paneel, "E-posti parool", parool);
         Vaade.Lisa(paneel, Vaade.Tekstirida("Serveri ja pordi leiad oma e-posti teenuse seadistustest. Kui teenus seda nõuab, kasuta rakenduseparooli."));
-        Button salvesta = new Button
-        {
+        Button salvesta = new BarboraActionButton {
             Text = "Salvesta seaded",
             Dock = DockStyle.Top
         };
@@ -72,8 +71,7 @@ public class PostiSeadedForm : Form
                 Vead.Naita("E-posti seadete salvestamine ei õnnestunud.", ex);
             }
         };
-        Button eemalda = new Button
-        {
+        Button eemalda = new BarboraActionButton {
             Text = "Eemalda salvestatud parool",
             Dock = DockStyle.Top
         };
@@ -98,8 +96,7 @@ public class PostiSeadedForm : Form
         };
         Vaade.Lisa(paneel, salvesta);
         Vaade.Lisa(paneel, eemalda);
-        Button loobu = new Button
-        {
+        Button loobu = new BarboraActionButton {
             Text = "Loobu",
             DialogResult = DialogResult.Cancel,
             Dock = DockStyle.Top

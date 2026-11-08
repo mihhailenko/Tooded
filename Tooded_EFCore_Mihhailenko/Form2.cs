@@ -12,16 +12,17 @@ public partial class Form2 : Form
     private readonly TextBox txtOtsing = new TextBox();
     private readonly TextBox txtKirjeldus = new TextBox();
     private readonly ComboBox comboKategooria = new ComboBox();
-    private readonly PictureBox picturePilt = new PictureBox();
+    private readonly TootePilt picturePilt = new();
+    private CancellationTokenSource? pildiLaadimine;
     private readonly CheckBox chkAktiivne = new CheckBox()
     {
         Text = "Müügil",
         Checked = true,
         AutoSize = true
     };
-    private readonly Button btnLisa = new Button();
-    private readonly Button btnUuenda = new Button();
-    private readonly Button btnKustuta = new Button();
+    private readonly Button btnLisa = new BarboraActionButton();
+    private readonly Button btnUuenda = new BarboraActionButton();
+    private readonly Button btnKustuta = new BarboraActionButton();
     private readonly Label lblReziim = new Label();
     private Toode? valitudToode;
     private string? valitudPilt;
@@ -57,7 +58,7 @@ public partial class Form2 : Form
         TableLayoutPanel editor = Vaade.Veerg();
         lblReziim.AutoSize = true;
         lblReziim.Dock = DockStyle.Top;
-        lblReziim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        lblReziim.Font = BarboraTheme.Font(12F, FontStyle.Bold);
         lblReziim.ForeColor = Vaade.Sinine;
         lblReziim.Margin = new Padding(0, 0, 0, 16);
         Vaade.Lisa(editor, lblReziim);
@@ -80,13 +81,11 @@ public partial class Form2 : Form
         picturePilt.SizeMode = PictureBoxSizeMode.Zoom;
         picturePilt.BackColor = Vaade.Taust;
         Vaade.Vali(editor, "Tootepilt", picturePilt);
-        Button vali = new Button
-        {
+        Button vali = new BarboraActionButton {
             Text = "Vali pilt"
         };
         vali.Click += ValiPilt;
-        Button eemalda = new Button
-        {
+        Button eemalda = new BarboraActionButton {
             Text = "Eemalda pilt"
         };
         eemalda.Click += eemalda_Click;
@@ -101,13 +100,11 @@ public partial class Form2 : Form
         btnUuenda.Click += (s, e) => Salvesta(true);
         btnKustuta.Text = "Eemalda toode";
         btnKustuta.Click += Kustuta;
-        Button tyhjenda = new Button
-        {
+        Button tyhjenda = new BarboraActionButton {
             Text = "Alusta uut toodet"
         };
         tyhjenda.Click += (s, e) => TyhjendaVorm();
-        Button kategooriad = new Button
-        {
+        Button kategooriad = new BarboraActionButton {
             Text = "Halda kategooriaid"
         };
         kategooriad.Click += (s, e) =>
@@ -152,8 +149,7 @@ public partial class Form2 : Form
             LaeTooted();
             TyhjendaVorm();
         };
-        Button uuenda = new Button
-        {
+        Button uuenda = new BarboraActionButton {
             Text = "Värskenda"
         };
         Vaade.Nupp(uuenda);
@@ -223,6 +219,8 @@ public partial class Form2 : Form
 
     private void TyhjendaVorm()
     {
+        pildiLaadimine?.Cancel();
+        picturePilt.Nimetus = "";
         valitudToode = null;
         valitudPilt = null;
         eemaldaPilt = false;
@@ -243,7 +241,7 @@ public partial class Form2 : Form
         btnUuenda.Enabled = false;
     }
 
-    private void ValiToode(object? sender, DataGridViewCellEventArgs e)
+    private async void ValiToode(object? sender, DataGridViewCellEventArgs e)
     {
         if (e.RowIndex < 0)
         {
@@ -271,13 +269,23 @@ public partial class Form2 : Form
             valitudPilt = null;
             eemaldaPilt = false;
             picturePilt.Image?.Dispose();
-            picturePilt.Image = Kaustad.LaePilt(valitudToode.Pilt);
-            lblReziim.Text = "Muudan toodet nr " + id;
+            picturePilt.Nimetus = valitudToode.Toodenimetus;
+            picturePilt.Image = null; picturePilt.Invalidate();
+            lblReziim.Text = "Muudan toodet nr " + id + (valitudToode.ValineId == null ? "" : "\nVeebitoote salvestamine loob kohaliku erandi.");
             btnLisa.Visible = false;
             btnUuenda.Visible = true;
             btnLisa.Enabled = false;
             btnKustuta.Enabled = true;
             btnUuenda.Enabled = true;
+            pildiLaadimine?.Cancel();
+            var laadimine = new CancellationTokenSource(); pildiLaadimine = laadimine;
+            try
+            {
+                var image = await PildiVahemalu.LaeAsync(valitudToode, laadimine.Token);
+                if (IsDisposed || laadimine.IsCancellationRequested || valitudToode?.Id != id) image?.Dispose();
+                else { picturePilt.Image?.Dispose(); picturePilt.Image = image; picturePilt.Invalidate(); }
+            }
+            catch (OperationCanceledException) { }
         }
         catch (Exception ex)
         {
@@ -410,12 +418,16 @@ public partial class Form2 : Form
             toode.Toodenimetus = txtNimetus.Text.Trim();
             toode.Kogus = kogus;
             toode.Hind = hind;
+            if (toode.Tavahind <= hind) toode.Tavahind = null;
             toode.KategooriaId = Convert.ToInt32(comboKategooria.SelectedValue);
             toode.Kirjeldus = txtKirjeldus.Text.Trim();
             toode.Aktiivne = chkAktiivne.Checked;
+            // Importtoote käsitsi salvestamine kaitseb selle kõiki välju järgmise impordi eest.
+            if (toode.ValineId != null) toode.KohalikMuudatus = true;
             if (eemaldaPilt)
             {
                 toode.Pilt = null;
+                toode.PildiUrl = null;
             }
 
             if (valitudPilt != null)
@@ -478,8 +490,8 @@ public partial class Form2 : Form
                 return;
             }
 
-            bool kasutatud = db.TellimuseRead.Any(r => r.ToodeId == toode.Id);
-            string teade = kasutatud ? "Seda toodet on juba ostetud. Kas eemaldada see müügist? Varasemad ostud jäävad alles." : "Kas kustutan toote lõplikult?";
+            bool kasutatud = toode.ValineId != null || db.TellimuseRead.Any(r => r.ToodeId == toode.Id);
+            string teade = toode.ValineId != null ? "Kas eemaldan veebitoote müügist? Kohalik erand hoiab selle peidetuna ka järgmisel impordil." : kasutatud ? "Seda toodet on juba ostetud. Kas eemaldada see müügist? Varasemad ostud jäävad alles." : "Kas kustutan toote lõplikult?";
             if (Vaade.Teade(teade, "Kinnitus", MessageBoxButtons.YesNo) != DialogResult.Yes)
             {
                 return;
@@ -490,6 +502,7 @@ public partial class Form2 : Form
             if (kasutatud)
             {
                 toode.Aktiivne = false;
+                if (toode.ValineId != null) toode.KohalikMuudatus = true;
             }
             else
             {
@@ -517,6 +530,7 @@ public partial class Form2 : Form
 
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
+        pildiLaadimine?.Cancel();
         picturePilt.Image?.Dispose();
         base.OnFormClosed(e);
     }

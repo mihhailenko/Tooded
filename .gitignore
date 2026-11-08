@@ -25,3 +25,33 @@ Arved/
 post.json
 *.bak
 KontrolliPDF/
+
+# Demonstratsioonikataloog jääb ainult sellesse arvutisse; avalda oma HTTPS-serveris.
+catalog-demo.local.json
+CatalogChecks/bin/
+CatalogChecks/obj/
+
+catalog-reference.local.json
+ui-output/
+
+# Public catalog scraper output, cache and extracted APK resources stay local.
+catalog-barbora*.local.json
+catalog-barbora*.local.json.gz
+.barbora-cache/
+barbora-extracted.local/
+tools/__pycache__/
+
+# Commit only the C# application, its assets and solution files.
+# Root-level research notes, parsers, checks, exports and helper folders stay local.
+/*
+!/.gitignore
+!/Tooded.sln
+!/Tooded_EFCore_Mihhailenko.slnx
+!/Tooded_EFCore_Mihhailenko/
+
+# Development notes and helper scripts are local even inside the application tree.
+*.md
+*.py
+*.cmd
+*.bat
+*.ps1

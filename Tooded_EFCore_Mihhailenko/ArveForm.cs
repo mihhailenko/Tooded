@@ -7,174 +7,224 @@ namespace Tooded_EFCore;
 
 public partial class ArveForm : Form
 {
-    private readonly DataGridView tabel = new DataGridView();
-    private readonly Label lblKokku = new Label();
-    private readonly Label lblOlek = new Label();
-    private readonly Label juhis = new Label();
-    private readonly TextBox txtEmail = new TextBox();
-    private readonly Button btnKinnita = new Button();
-    private readonly Button btnEemalda = new Button();
-    private readonly Button btnTyhjenda = new Button();
-    private readonly Button btnPDF = new Button();
-    private readonly Button btnAva = new Button();
-    private readonly Button btnSaada = new Button();
+    private readonly FlowLayoutPanel readPaneel = new();
+    private readonly Label lblKokku = new();
+    private readonly Label lblRead = new();
+    private readonly Label lblOlek = new();
+    private readonly Label juhis = new();
+    private readonly Label pealkiri = new();
+    private readonly Label reaSumma = new();
+    private readonly Label soodustus = new();
+    private readonly Label soodustuseSilt = new();
+    private readonly TextBox txtEmail = new();
+    private readonly KorviNupp btnKinnita = new() { Pohiline = true };
+    private readonly KorviNupp btnTyhjenda = new() { Ikoon = "icons/trash_bin_small.svg" };
+    private readonly KorviNupp btnPDF = new() { Ikoon = "icons/ic_download_invoice.svg" };
+    private readonly KorviNupp btnAva = new();
+    private readonly KorviNupp btnSaada = new() { Pohiline = true };
+    private readonly TableLayoutPanel arvePaneel = new();
+    private readonly CancellationTokenSource elu = new();
+    private readonly Dictionary<int, Toode> tooteAndmed = new();
+    private readonly int kasutajaId;
     private Tellimus? tellimus;
     private string? viimanePdf;
     private bool kinnitamine;
     private bool saatmine;
+    private bool koguseMuutmine;
+
     public ArveForm(int? tellimuseId = null)
     {
-        if (AktiivneKasutaja.Id == 0)
-        {
-            throw new UnauthorizedAccessException();
-        }
-
+        if (AktiivneKasutaja.Id == 0) throw new UnauthorizedAccessException();
+        kasutajaId = AktiivneKasutaja.Id;
         InitializeComponent();
-        LooLiides(tellimuseId);
+        LooLiides();
+        if (tellimuseId.HasValue) LaeTellimus(tellimuseId.Value);
+        else NaitaKorvi();
+        Shown += async (_, _) => await LaeTooteAndmedAsync();
     }
 
     private void LaeTellimus(int id)
     {
         try
         {
-            using ToodedContext db = new ToodedContext();
-            tellimus = db.Tellimused.AsNoTracking().Include(t => t.Read).FirstOrDefault(t => t.Id == id && (AktiivneKasutaja.OnAdmin || t.KasutajaId == AktiivneKasutaja.Id));
+            using var db = new ToodedContext();
+            tellimus = db.Tellimused.AsNoTracking().Include(t => t.Read)
+                .FirstOrDefault(t => t.Id == id && (AktiivneKasutaja.OnAdmin || t.KasutajaId == AktiivneKasutaja.Id));
             if (tellimus == null)
             {
                 Vaade.Teade("Tellimust ei leitud või sul puudub ligipääs.");
-                Shown += (s, e) => Close();
+                Shown += (_, _) => Close();
                 return;
             }
-
             txtEmail.Text = tellimus.OstjaEmail;
             NaitaKorvi();
         }
         catch (Exception ex)
         {
             Vead.Naita("Tellimuse laadimine ei õnnestunud.", ex);
-            Shown += (s, e) => Close();
+            Shown += (_, _) => Close();
         }
+    }
+
+    private async Task LaeTooteAndmedAsync()
+    {
+        try
+        {
+            int[] ids = tellimus == null ? Ostukorv.Ridad.Select(r => r.ToodeId).ToArray() : tellimus.Read.Select(r => r.ToodeId).ToArray();
+            using var db = new ToodedContext();
+            var products = await db.Toodetabel.AsNoTracking().Where(t => ids.Contains(t.Id)).ToListAsync(elu.Token);
+            if (IsDisposed) return;
+            foreach (var product in products) tooteAndmed[product.Id] = product;
+            if (!readPaneel.Controls.OfType<KorviTooteRida>().Any(r => r.SisestatudKogus != r.Kogus)) NaitaKorvi();
+        }
+        catch (OperationCanceledException) { }
+        catch { if (!IsDisposed) lblOlek.Text = "Mõne toote pilti või lisateavet ei saanud laadida. Tellimuse saad siiski üle vaadata."; }
     }
 
     private void NaitaKorvi()
     {
-        tabel.Rows.Clear();
+        if (IsDisposed) return;
+        var scroll = new Point(-readPaneel.AutoScrollPosition.X, -readPaneel.AutoScrollPosition.Y);
+        readPaneel.SuspendLayout();
+        while (readPaneel.Controls.Count > 0)
+        {
+            var control = readPaneel.Controls[0]; readPaneel.Controls.Remove(control); control.Dispose();
+        }
+        bool loetav = tellimus != null || Ostukorv.OstuKontrollVajalik;
+        decimal kokku = tellimus?.Summa ?? Ostukorv.Kokku;
+        decimal kokkuSoodustus = 0;
         if (tellimus == null)
         {
-            foreach (OstukorviRida r in Ostukorv.Ridad)
+            foreach (var rida in Ostukorv.Ridad)
             {
-                int i = tabel.Rows.Add(r.Nimetus, r.Kogus, r.Hind.ToString("F2"), r.Summa.ToString("F2"), r.Laos);
-                tabel.Rows[i].Tag = r;
+                tooteAndmed.TryGetValue(rida.ToodeId, out var toode);
+                decimal? tavahind = toode?.Hind == rida.Hind && toode.Tavahind > rida.Hind ? toode.Tavahind : null;
+                if (tavahind.HasValue) kokkuSoodustus += (tavahind.Value - rida.Hind) * rida.Kogus;
+                var row = new KorviTooteRida(rida.Nimetus, rida.Kogus, rida.Hind, tavahind, toode?.Uhik ?? "tk",
+                    toode, rida, loetav, value => SeaKogusAsync(rida, value), () => EemaldaRida(rida));
+                readPaneel.Controls.Add(row);
             }
-
-            lblKokku.Text = $"{Ostukorv.Ridad.Count} erinevat toodet · {Ostukorv.KogusKokku} tk · Kokku {Ostukorv.Kokku:F2} €";
+            if (Ostukorv.Ridad.Count == 0)
+            {
+                readPaneel.Controls.Add(new KorviTyhiVaade(() => Close()));
+            }
+            lblRead.Text = $"{Vaade.Tooteid(Ostukorv.Ridad.Count)} · {Ostukorv.KogusKokku} tk";
+            pealkiri.Text = "Ostukorv";
         }
         else
         {
-            foreach (TellimuseRida r in tellimus.Read.OrderBy(r => r.Id))
+            foreach (var rida in tellimus.Read.OrderBy(r => r.Id))
             {
-                tabel.Rows.Add(r.TooteNimi, r.Kogus, r.Hind.ToString("F2"), r.Summa.ToString("F2"), "—");
+                tooteAndmed.TryGetValue(rida.ToodeId, out var toode);
+                readPaneel.Controls.Add(new KorviTooteRida(rida.TooteNimi, rida.Kogus, rida.Hind, null, "tk",
+                    toode, null, true, _ => Task.FromResult(false), () => { }));
             }
-
-            lblKokku.Text = $"Tellimus {tellimus.Number} · {tellimus.Kuupaev:dd.MM.yyyy HH:mm} · {tellimus.Staatus} · {tellimus.Summa:F2} €";
-            Text = "Tellimus " + tellimus.Number;
+            lblRead.Text = $"{tellimus.Number} · {tellimus.Kuupaev:dd.MM.yyyy HH:mm} · {tellimus.Staatus}";
+            pealkiri.Text = "Tellimus on kinnitatud";
+            Text = "BARBORA · Tellimus " + tellimus.Number;
         }
-
-        if (tellimus != null)
-        {
-            juhis.Text = "Ost on kinnitatud. Arve saad avada või e-postiga saata.";
-        }
-        else if (Ostukorv.OstuKontrollVajalik)
-        {
-            juhis.Text = "Ostu kinnitus jäi saamata. Kontrolli enne jätkamist ostu tulemust.";
-        }
-        else if (Ostukorv.Ridad.Count == 0)
-        {
-            juhis.Text = "Ostukorv on tühi. Lisa poes tooteid.";
-        }
-        else
-        {
-            juhis.Text = "Koguse muutmiseks klõpsa koguse lahtril. Seejärel kinnita ost.";
-        }
-        btnTyhjenda.Visible = tellimus == null;
-        btnEemalda.Visible = tellimus == null;
+        lblKokku.Text = $"{kokku:N2} €";
+        reaSumma.Text = $"{kokku + kokkuSoodustus:N2} €";
+        soodustus.Text = $"−{kokkuSoodustus:N2} €";
+        soodustus.Visible = soodustuseSilt.Visible = kokkuSoodustus > 0;
+        juhis.Text = tellimus != null ? "Aitäh tellimuse eest! Arve saad avada, salvestada või saata e-postiga."
+            : Ostukorv.OstuKontrollVajalik ? "Ostu kinnitus jäi saamata. Kontrolli enne jätkamist ostu tulemust."
+            : Ostukorv.Ridad.Count == 0 ? "Lisa ostukorvi tooteid, et tellimust vormistada."
+            : "Toodete hinnad ja saadavus kontrollitakse enne tellimuse kinnitamist.";
+        btnTyhjenda.Visible = tellimus == null && Ostukorv.Ridad.Count > 0;
+        btnTyhjenda.Enabled = !loetav && !koguseMuutmine && !kinnitamine;
         btnKinnita.Visible = tellimus == null;
+        btnKinnita.Enabled = tellimus == null && Ostukorv.Ridad.Count > 0 && !kinnitamine && !koguseMuutmine;
+        btnKinnita.Text = Ostukorv.OstuKontrollVajalik ? "Kontrolli ostu tulemust" : "Vormista tellimus";
+        readPaneel.Enabled = !kinnitamine && !koguseMuutmine;
+        arvePaneel.Visible = tellimus != null;
         txtEmail.Enabled = tellimus != null && !saatmine;
-        tabel.Columns["Kogus"].DefaultCellStyle.BackColor = tellimus == null ? Color.FromArgb(238, 244, 255) : Color.White;
-        bool muudetav = tellimus == null && !Ostukorv.OstuKontrollVajalik;
-        tabel.ReadOnly = !muudetav;
-        btnTyhjenda.Enabled = muudetav && Ostukorv.Ridad.Count > 0;
-        btnEemalda.Enabled = muudetav && Ostukorv.Ridad.Count > 0;
-        btnKinnita.Enabled = tellimus == null && Ostukorv.Ridad.Count > 0 && !kinnitamine;
-        btnKinnita.Text = Ostukorv.OstuKontrollVajalik ? "Kontrolli ostu tulemust" : "Kinnita ost";
-        btnSaada.Enabled = tellimus != null;
-        btnAva.Enabled = tellimus != null;
-        btnPDF.Enabled = tellimus != null;
+        btnSaada.Enabled = btnAva.Enabled = btnPDF.Enabled = tellimus != null && !saatmine;
+        MahutaRead();
+        readPaneel.ResumeLayout(true);
+        readPaneel.AutoScrollPosition = scroll;
     }
 
-    private void KontrolliKogust(object? sender, DataGridViewCellValidatingEventArgs e)
+    private bool ridadePaigutus;
+    private void MahutaRead()
     {
-        if (tellimus != null || e.RowIndex < 0 || tabel.Columns[e.ColumnIndex].Name != "Kogus" || tabel.ReadOnly)
-        {
-            return;
-        }
-
-        if (tabel.Rows[e.RowIndex].Tag is not OstukorviRida rida)
-        {
-            return;
-        }
-
-        if (!int.TryParse(e.FormattedValue?.ToString(), out int kogus) || kogus < 1)
-        {
-            e.Cancel = true;
-            Vaade.Teade("Sisesta kogus vähemalt 1. Toote eemaldamiseks vajuta Eemalda valitud.");
-            return;
-        }
-
+        if (ridadePaigutus) return;
+        ridadePaigutus = true;
         try
         {
-            using ToodedContext db = new ToodedContext();
-            Toode? toode = db.Toodetabel.AsNoTracking().FirstOrDefault(t => t.Id == rida.ToodeId);
+            readPaneel.SuspendLayout();
+            int width = Math.Max(100, readPaneel.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - readPaneel.Padding.Horizontal);
+            foreach (Control row in readPaneel.Controls)
+                if (row is KorviTooteRida or KorviTyhiVaade) row.Width = width;
+            readPaneel.ResumeLayout(true);
+            readPaneel.PerformLayout();
+        }
+        finally { ridadePaigutus = false; }
+    }
+
+    private void EemaldaRida(OstukorviRida rida)
+    {
+        if (tellimus != null || Ostukorv.OstuKontrollVajalik || koguseMuutmine || kinnitamine) return;
+        Ostukorv.Ridad.Remove(rida); lblOlek.Text = "Toode eemaldatud."; NaitaKorvi();
+    }
+
+    private Task<bool> MuudaKogustAsync(OstukorviRida rida, int vahe)
+    {
+        long uus = (long)rida.Kogus + vahe;
+        if (uus is < 0 or > int.MaxValue)
+        {
+            lblOlek.Text = "Sisesta väiksem kogus.";
+            return Task.FromResult(false);
+        }
+        return SeaKogusAsync(rida, (int)uus);
+    }
+
+    private async Task<bool> SeaKogusAsync(OstukorviRida rida, int kogus)
+    {
+        if (tellimus != null || Ostukorv.OstuKontrollVajalik || koguseMuutmine || kinnitamine || !Ostukorv.Ridad.Contains(rida)) return false;
+        if (kogus == 0) { EemaldaRida(rida); return true; }
+        if (kogus < 1) { lblOlek.Text = "Kogus peab olema vähemalt 1."; return false; }
+        koguseMuutmine = true; btnKinnita.Enabled = btnTyhjenda.Enabled = readPaneel.Enabled = false;
+        try
+        {
+            using var db = new ToodedContext();
+            var toode = await db.Toodetabel.AsNoTracking().FirstOrDefaultAsync(t => t.Id == rida.ToodeId, elu.Token);
+            elu.Token.ThrowIfCancellationRequested();
+            if (IsDisposed || AktiivneKasutaja.Id != kasutajaId) return false;
             if (toode == null || !toode.Aktiivne || kogus > toode.Kogus)
             {
-                e.Cancel = true;
-                Vaade.Teade("Toode ei ole müügil või soovitud kogust ei ole laos. Vajadusel vajuta Esc ja eemalda rida.");
-                return;
+                lblOlek.Text = "Soovitud kogust pole enam saadaval. Vähenda kogust või eemalda toode."; return false;
             }
-
-            rida.Kogus = kogus;
-            rida.Uuenda(toode);
+            rida.Kogus = kogus; rida.Uuenda(toode); tooteAndmed[toode.Id] = toode;
+            lblOlek.Text = "Ostukorv on uuendatud."; return true;
         }
-        catch (Exception ex)
-        {
-            e.Cancel = true;
-            Vead.Naita("Laokoguse kontroll ei õnnestunud.", ex);
-        }
+        catch (OperationCanceledException) { return false; }
+        catch { if (!IsDisposed) lblOlek.Text = "Kogust ei saanud muuta. Proovi uuesti."; return false; }
+        finally { koguseMuutmine = false; if (!IsDisposed) NaitaKorvi(); }
     }
 
-    private void Eemalda(object? sender, EventArgs e)
+    private async Task<bool> ViiKogusedLopuniAsync()
     {
-        if (tellimus != null || Ostukorv.OstuKontrollVajalik)
+        var muudatused = readPaneel.Controls.OfType<KorviTooteRida>()
+            .Where(r => r.KorviRida != null && r.SisestatudKogus != r.Kogus)
+            .Select(r => (Rida: r.KorviRida!, Kogus: r.SisestatudKogus)).ToList();
+        if (muudatused.Count == 0) return true;
+        if (muudatused.Any(m => !m.Kogus.HasValue)) { lblOlek.Text = "Sisesta korrektne kogus vähemalt 1."; return false; }
+        foreach (var m in muudatused) if (!await SeaKogusAsync(m.Rida, m.Kogus!.Value)) return false;
+        lblOlek.Text = "Kogused on uuendatud. Vaata uus summa üle ja kinnita tellimus.";
+        return false;
+    }
+
+    private async void KinnitaOst(object? sender, EventArgs e)
+    {
+        if (kinnitamine || koguseMuutmine || tellimus != null || Ostukorv.Ridad.Count == 0)
         {
             return;
         }
 
-        tabel.CancelEdit();
-        if (tabel.CurrentRow?.Tag is OstukorviRida rida)
-        {
-            Ostukorv.Ridad.Remove(rida);
-            NaitaKorvi();
-        }
-    }
-
-    private void KinnitaOst(object? sender, EventArgs e)
-    {
-        if (kinnitamine || tellimus != null || !tabel.EndEdit() || Ostukorv.Ridad.Count == 0)
-        {
-            return;
-        }
-
+        if (!await ViiKogusedLopuniAsync()) return;
         kinnitamine = true;
+        readPaneel.Enabled = false;
         btnKinnita.Enabled = false;
         bool ostSalvestatud = false;
         try
@@ -382,7 +432,7 @@ public partial class ArveForm : Form
 
     private void btnTyhjenda_Click(object? s, EventArgs e)
     {
-        if (tellimus != null || Ostukorv.OstuKontrollVajalik)
+        if (tellimus != null || Ostukorv.OstuKontrollVajalik || koguseMuutmine || kinnitamine)
         {
             return;
         }
@@ -392,168 +442,160 @@ public partial class ArveForm : Form
             return;
         }
 
-        tabel.CancelEdit();
         Ostukorv.Tyhjenda();
         NaitaKorvi();
     }
 
-    private void tabel_CellEndEdit(object? s, DataGridViewCellEventArgs e)
-    {
-        if (e.RowIndex < 0 || tabel.Rows[e.RowIndex].Tag is not OstukorviRida r)
-        {
-            return;
-        }
 
-        DataGridViewRow rida = tabel.Rows[e.RowIndex];
-        rida.Cells["Kogus"].Value = r.Kogus;
-        rida.Cells["Hind"].Value = r.Hind.ToString("F2");
-        rida.Cells["Summa"].Value = r.Summa.ToString("F2");
-        rida.Cells["Laos"].Value = r.Laos;
-        lblKokku.Text = $"{Ostukorv.Ridad.Count} erinevat toodet · {Ostukorv.KogusKokku} tk · Kokku {Ostukorv.Kokku:F2} €";
+    private static Label Tekst(string text, float size = 10, bool bold = false)
+        => new()
+        {
+            Text = text,
+            AutoSize = true,
+            Dock = DockStyle.Top,
+            UseMnemonic = false,
+            Font = BarboraTheme.Font(size, bold ? FontStyle.Bold : FontStyle.Regular),
+            ForeColor = BarboraTheme.Text,
+            Margin = new Padding(0, 0, 0, 12)
+        };
+
+    private static void Lisa(TableLayoutPanel panel, Control child)
+    {
+        int row = panel.RowCount++; panel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); panel.Controls.Add(child, 0, row);
     }
 
-    private void LooLiides(int? tellimuseId = null)
+    private static TableLayoutPanel Veerg(int padding = 0)
     {
-        Vaade.Vorm(this, "Ostukorv ja arve", 1200, 780);
-        MinimumSize = new Size(1000, 620);
-        TableLayoutPanel raam = Vaade.Raam(this, "Ostukorv ja arve", "Vaata tooted üle, kinnita ost ning salvesta või saada arve.");
-        TableLayoutPanel sisu = new TableLayoutPanel
+        var result = new TableLayoutPanel
+        {
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            ColumnCount = 1,
+            RowCount = 0,
+            BackColor = Color.White,
+            Padding = new Padding(padding),
+            Margin = Padding.Empty
+        };
+        result.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100)); return result;
+    }
+
+    private void LooLiides()
+    {
+        Vaade.Vorm(this, "BARBORA · Ostukorv", 1320, 880);
+        Font = BarboraTheme.Font(10); BackColor = BarboraTheme.Background;
+        MinimumSize = new Size(1000, 680);
+        var root = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 3, Margin = Padding.Empty };
+        root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 94));
+        root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 34));
+        var header = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 3,
+            RowCount = 1,
+            BackColor = Color.White,
+            Padding = new Padding(30, 20, 30, 18),
+            Margin = Padding.Empty
+        };
+        header.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 192));
+        header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        header.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 190));
+        var logo = new PictureBox
+        {
+            Dock = DockStyle.Fill,
+            SizeMode = PictureBoxSizeMode.Zoom,
+            Image = BarboraTheme.Asset("logo/barbora_next_app_bar_logo.svg"),
+            Margin = new Padding(0, 7, 20, 7),
+            AccessibleName = "BARBORA"
+        };
+        pealkiri.Font = BarboraTheme.Font(23, FontStyle.Bold); pealkiri.Dock = DockStyle.Fill;
+        pealkiri.TextAlign = ContentAlignment.MiddleLeft; pealkiri.Margin = new Padding(20, 0, 0, 0);
+        var close = new KorviNupp { Text = "Jätka ostlemist", Ikoon = "icons/ic_arrow_back.svg", Dock = DockStyle.Fill };
+        close.Click += (_, _) => Close();
+        header.Controls.Add(logo, 0, 0); header.Controls.Add(pealkiri, 1, 0); header.Controls.Add(close, 2, 0);
+        root.Controls.Add(header, 0, 0);
+        var content = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
             ColumnCount = 2,
-            RowCount = 1
+            RowCount = 1,
+            Padding = new Padding(28, 24, 28, 12),
+            Margin = Padding.Empty
         };
-        sisu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-        sisu.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 350));
-        raam.Controls.Add(sisu, 0, 1);
-        TableLayoutPanel vasak = new TableLayoutPanel
+        content.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        content.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 366));
+        var left = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
             ColumnCount = 1,
             RowCount = 2,
-            Margin = new Padding(0, 0, 16, 0)
+            BackColor = Color.White,
+            Margin = new Padding(0, 0, 22, 0),
+            Padding = new Padding(8, 0, 8, 0)
         };
-        vasak.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-        vasak.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        vasak.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        FlowLayoutPanel korvinupud = Vaade.Nupuriba();
-        btnKinnita.Text = "Kinnita ost";
-        btnKinnita.Click += KinnitaOst;
-        btnEemalda.CausesValidation = false;
-        btnTyhjenda.CausesValidation = false;
-        btnEemalda.Text = "Eemalda valitud";
-        btnEemalda.Click += Eemalda;
-        btnTyhjenda.Text = "Tühjenda ostukorv";
-        btnTyhjenda.Click += btnTyhjenda_Click;
-        Vaade.Nupp(btnEemalda, false, true);
-        Vaade.Nupp(btnTyhjenda, false, true);
-        korvinupud.Controls.AddRange(new Control[] { btnEemalda, btnTyhjenda });
-        vasak.Controls.Add(tabel, 0, 0);
-        vasak.Controls.Add(korvinupud, 0, 1);
-        sisu.Controls.Add(vasak, 0, 0);
-        TableLayoutPanel parem = Vaade.Veerg();
-        TableLayoutPanel ost = Vaade.Veerg();
-        Vaade.Lisa(ost, Vaade.Tekstirida("Ostu kokkuvõte", true));
-        lblKokku.AutoSize = true;
-        lblKokku.Dock = DockStyle.Top;
-        lblKokku.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-        lblKokku.Margin = new Padding(0, 0, 0, 16);
-        Vaade.Lisa(ost, lblKokku);
-        juhis.AutoSize = true;
-        juhis.Dock = DockStyle.Top;
-        juhis.ForeColor = Vaade.Vaikne;
-        juhis.Margin = new Padding(0, 0, 0, 12);
-        Vaade.Lisa(ost, juhis);
-        Vaade.Nupp(btnKinnita, true);
-        btnKinnita.Dock = DockStyle.Top;
-        Vaade.Lisa(ost, btnKinnita);
-        Vaade.Lisa(parem, Vaade.Kaart(ost));
-        TableLayoutPanel arve = Vaade.Veerg();
-        Vaade.Lisa(arve, Vaade.Tekstirida("PDF-arve", true));
-        Vaade.Lisa(arve, Vaade.Tekstirida("Arve loomine ja saatmine on saadaval pärast ostu kinnitamist."));
-        btnPDF.Text = "Salvesta arve";
-        btnPDF.Click += SalvestaPdf;
-        btnAva.Text = "Ava PDF";
-        btnAva.Click += (s, e) => AvaPdf();
-        FlowLayoutPanel pdfnupud = Vaade.Nupuriba();
-        Vaade.Nupp(btnPDF);
-        Vaade.Nupp(btnAva);
-        pdfnupud.Controls.AddRange(new Control[] { btnPDF, btnAva });
-        Vaade.Lisa(arve, pdfnupud);
-        txtEmail.PlaceholderText = "nimi@näide.ee";
-        txtEmail.Text = AktiivneKasutaja.Email;
-        Vaade.Vali(arve, "Arve saaja e-post", txtEmail);
-        btnSaada.Text = "Saada arve e-postiga";
-        btnSaada.Click += SaadaEmail;
-        Vaade.Nupp(btnSaada);
-        btnSaada.Dock = DockStyle.Top;
-        Vaade.Lisa(arve, btnSaada);
-        lblOlek.AutoSize = true;
-        lblOlek.Dock = DockStyle.Top;
-        lblOlek.ForeColor = Vaade.Vaikne;
-        lblOlek.Margin = new Padding(0, 8, 0, 4);
-        Vaade.Lisa(arve, lblOlek);
-        Vaade.Lisa(parem, Vaade.Kaart(arve));
-        sisu.Controls.Add(Vaade.Kerimine(parem), 1, 0);
-        tabel.Dock = DockStyle.Fill;
-        tabel.AllowUserToAddRows = false;
-        tabel.AllowUserToDeleteRows = false;
-        tabel.MultiSelect = false;
-        tabel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        tabel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        tabel.Columns.Add("Nimetus", "Toode");
-        tabel.Columns.Add("Kogus", "Kogus (muudetav)");
-        tabel.Columns.Add("Hind", "Ühiku hind €");
-        tabel.Columns.Add("Summa", "Summa €");
-        tabel.Columns.Add("Laos", "Saadaval");
-        foreach (DataGridViewColumn veerg in tabel.Columns)
-        {
-            veerg.ReadOnly = veerg.Name != "Kogus";
-        }
-
-        tabel.Columns["Nimetus"].FillWeight = 220;
-        tabel.CellValidating += KontrolliKogust;
-        tabel.CellEndEdit += tabel_CellEndEdit;
-        tabel.DataError += (s, e) =>
-        {
-            e.ThrowException = false;
-            Vaade.Teade("Sisesta korrektne täisarv.");
-        };
-        Vaade.Tabel(tabel);
-        Vaade.VeeruNimi(tabel, "Nimetus", "Toode", 220);
-        Vaade.VeeruNimi(tabel, "Kogus", "Kogus (tk)", 75);
-        Vaade.VeeruNimi(tabel, "Hind", "Hind (€)", 75);
-        Vaade.VeeruNimi(tabel, "Summa", "Summa (€)", 80);
-        Vaade.VeeruNimi(tabel, "Laos", "Saadaval (tk)", 75);
-        tabel.Columns["Kogus"].DefaultCellStyle.BackColor = Color.FromArgb(238, 244, 255);
-        foreach (string nimi in new[]
-        {
-            "Kogus",
-            "Hind",
-            "Summa",
-            "Laos"
-        })
-        {
-            tabel.Columns[nimi].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-        }
-
-        FormClosing += (s, e) =>
-        {
-            if (saatmine || kinnitamine)
-            {
-                e.Cancel = true;
-                Vaade.Teade("Oota toimingu lõppu.");
-            }
-        };
-        if (tellimuseId != null)
-        {
-            LaeTellimus(tellimuseId.Value);
-        }
-        else
-        {
-            NaitaKorvi();
-        }
-
+        left.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        left.RowStyles.Add(new RowStyle(SizeType.Absolute, 72)); left.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        var listHeader = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1, Padding = new Padding(18, 15, 12, 12) };
+        listHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100)); listHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 206));
+        lblRead.Font = BarboraTheme.Font(11, FontStyle.Bold); lblRead.Dock = DockStyle.Fill; lblRead.TextAlign = ContentAlignment.MiddleLeft;
+        lblRead.UseMnemonic = false; lblRead.AutoEllipsis = true;
+        btnTyhjenda.Text = "Tühjenda ostukorv"; btnTyhjenda.Dock = DockStyle.Fill; btnTyhjenda.Click += btnTyhjenda_Click;
+        listHeader.Controls.Add(lblRead, 0, 0); listHeader.Controls.Add(btnTyhjenda, 1, 0);
+        readPaneel.Dock = DockStyle.Fill; readPaneel.AutoScroll = true; readPaneel.WrapContents = false;
+        readPaneel.FlowDirection = FlowDirection.TopDown; readPaneel.Margin = Padding.Empty; readPaneel.Padding = Padding.Empty;
+        readPaneel.Resize += (_, _) => MahutaRead();
+        left.Controls.Add(listHeader, 0, 0); left.Controls.Add(readPaneel, 0, 1); content.Controls.Add(left, 0, 0);
+        var rightScroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Margin = Padding.Empty };
+        var right = Veerg(); right.BackColor = BarboraTheme.Background;
+        var summary = Veerg(24); summary.Margin = new Padding(0, 0, 0, 16);
+        Lisa(summary, Tekst("Tellimuse kokkuvõte", 15, true));
+        var sums = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 2, RowCount = 3, Margin = new Padding(0, 7, 0, 18) };
+        sums.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); sums.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40));
+        for (int i = 0; i < 3; i++) sums.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        var priceCaption = Tekst("Toodete summa");
+        reaSumma.Font = BarboraTheme.Font(10); reaSumma.AutoSize = true; reaSumma.Dock = DockStyle.Top; reaSumma.TextAlign = ContentAlignment.TopRight;
+        soodustuseSilt.Text = "Allahindlus"; soodustuseSilt.Font = BarboraTheme.Font(10); soodustuseSilt.ForeColor = BarboraTheme.Red;
+        soodustuseSilt.AutoSize = true; soodustuseSilt.Dock = DockStyle.Top; soodustuseSilt.Margin = new Padding(0, 0, 0, 14);
+        soodustus.Font = BarboraTheme.Font(10); soodustus.ForeColor = BarboraTheme.Red; soodustus.AutoSize = true; soodustus.Dock = DockStyle.Top; soodustus.TextAlign = ContentAlignment.TopRight;
+        sums.Controls.Add(priceCaption, 0, 0); sums.Controls.Add(reaSumma, 1, 0); sums.Controls.Add(soodustuseSilt, 0, 1); sums.Controls.Add(soodustus, 1, 1);
+        var totalTitle = Tekst("Kokku", 13, true); totalTitle.Margin = new Padding(0, 12, 0, 0);
+        lblKokku.Font = BarboraTheme.Font(23, FontStyle.Bold); lblKokku.AutoSize = true; lblKokku.Dock = DockStyle.Top; lblKokku.TextAlign = ContentAlignment.TopRight;
+        lblKokku.Margin = new Padding(0, 6, 0, 0);
+        sums.Controls.Add(totalTitle, 0, 2); sums.Controls.Add(lblKokku, 1, 2); Lisa(summary, sums);
+        btnKinnita.Text = "Vormista tellimus"; btnKinnita.Height = 50; btnKinnita.Dock = DockStyle.Top; btnKinnita.Margin = new Padding(0, 0, 0, 16); btnKinnita.Click += KinnitaOst;
+        Lisa(summary, btnKinnita);
+        juhis.Font = BarboraTheme.Font(9); juhis.ForeColor = BarboraTheme.Muted; juhis.AutoSize = true; juhis.Dock = DockStyle.Top;
+        juhis.MaximumSize = new Size(310, 0); juhis.Margin = Padding.Empty; Lisa(summary, juhis);
+        Lisa(right, summary);
+        arvePaneel.Dock = DockStyle.Top; arvePaneel.AutoSize = true; arvePaneel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        arvePaneel.BackColor = Color.White; arvePaneel.Padding = new Padding(24); arvePaneel.ColumnCount = 1; arvePaneel.RowCount = 0;
+        arvePaneel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100)); arvePaneel.Margin = new Padding(0, 0, 0, 16);
+        Lisa(arvePaneel, Tekst("Sinu tellimuse arve", 14, true));
+        var success = new PictureBox { Image = BarboraTheme.Asset("order_summary/order_success.svg"), SizeMode = PictureBoxSizeMode.Zoom, Dock = DockStyle.Top, Height = 64, Margin = new Padding(0, 0, 0, 16) };
+        Lisa(arvePaneel, success);
+        btnPDF.Text = "Salvesta PDF-arve"; btnPDF.Dock = DockStyle.Top; btnPDF.Margin = new Padding(0, 0, 0, 10); btnPDF.Click += SalvestaPdf;
+        btnAva.Text = "Ava arve"; btnAva.Dock = DockStyle.Top; btnAva.Margin = new Padding(0, 0, 0, 18); btnAva.Click += (_, _) => AvaPdf();
+        Lisa(arvePaneel, btnPDF); Lisa(arvePaneel, btnAva); Lisa(arvePaneel, Tekst("Arve saaja e-post", 9));
+        txtEmail.Font = BarboraTheme.Font(10); txtEmail.BorderStyle = BorderStyle.FixedSingle; txtEmail.Text = AktiivneKasutaja.Email;
+        txtEmail.PlaceholderText = "nimi@näide.ee"; txtEmail.MaxLength = 254; txtEmail.Dock = DockStyle.Top; txtEmail.Margin = new Padding(0, 0, 0, 12); txtEmail.AccessibleName = "Arve saaja e-post";
+        Lisa(arvePaneel, txtEmail);
+        btnSaada.Text = "Saada arve e-postiga"; btnSaada.Dock = DockStyle.Top; btnSaada.Click += SaadaEmail; Lisa(arvePaneel, btnSaada);
+        Lisa(right, arvePaneel);
+        lblOlek.Font = BarboraTheme.Font(9); lblOlek.ForeColor = BarboraTheme.Muted; lblOlek.AutoSize = true; lblOlek.Dock = DockStyle.Top;
+        lblOlek.MaximumSize = new Size(340, 0); lblOlek.Margin = new Padding(8, 0, 8, 12); Lisa(right, lblOlek);
+        rightScroll.Controls.Add(right); content.Controls.Add(rightScroll, 1, 0); root.Controls.Add(content, 0, 1);
+        var footer = Tekst("BARBORA · Kohalik õppeprototüüp", 8); footer.ForeColor = BarboraTheme.Muted;
+        footer.Dock = DockStyle.Fill; footer.TextAlign = ContentAlignment.MiddleCenter; root.Controls.Add(footer, 0, 2);
+        Controls.Add(root);
+        FormClosing += (_, e) => { if (saatmine || kinnitamine) { e.Cancel = true; Vaade.Teade("Oota toimingu lõppu."); } };
         ResumeLayout(true);
+    }
+
+    protected override void OnFormClosed(FormClosedEventArgs e)
+    {
+        elu.Cancel();
+        base.OnFormClosed(e);
     }
 }

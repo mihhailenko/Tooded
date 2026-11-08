@@ -9,9 +9,9 @@ public class KategooriateHaldusForm : Form
     private readonly TextBox kirjeldus = new TextBox();
     private int? valitudId;
     private readonly Label olek = new Label();
-    private readonly Button lisa = new Button();
-    private readonly Button muuda = new Button();
-    private readonly Button kustuta = new Button();
+    private readonly Button lisa = new BarboraActionButton();
+    private readonly Button muuda = new BarboraActionButton();
+    private readonly Button kustuta = new BarboraActionButton();
     public KategooriateHaldusForm()
     {
         if (!AktiivneKasutaja.OnAdmin)
@@ -27,8 +27,9 @@ public class KategooriateHaldusForm : Form
         try
         {
             using ToodedContext db = new ToodedContext();
-            tabel.DataSource = db.Kategooriatabel.AsNoTracking().OrderBy(k => k.Kategooria_nimetus).Select(k => new { k.Id, k.Kategooria_nimetus, k.Kirjeldus, Tooteid = k.Tooded.Count }).ToList();
+            tabel.DataSource = db.Kategooriatabel.AsNoTracking().OrderBy(k => k.Kategooria_nimetus).Select(k => new { k.Id, k.Kategooria_nimetus, k.Kirjeldus, Veebist = k.ValineId != null, Tooteid = k.Tooded.Count }).ToList();
             tabel.Columns["Id"].Visible = false;
+            tabel.Columns["Veebist"].Visible = false;
             Vaade.VeeruNimi(tabel, "Kategooria_nimetus", "Kategooria", 150);
             Vaade.VeeruNimi(tabel, "Kirjeldus", "Kirjeldus", 180);
             Vaade.VeeruNimi(tabel, "Tooteid", "Tooteid", 65);
@@ -37,6 +38,8 @@ public class KategooriateHaldusForm : Form
             valitudId = null;
             nimi.Clear();
             kirjeldus.Clear();
+            nimi.ReadOnly = kirjeldus.ReadOnly = false;
+            muuda.Enabled = true;
             olek.Text = "Uus kategooria";
             lisa.Visible = true;
             muuda.Visible = false;
@@ -81,6 +84,12 @@ public class KategooriateHaldusForm : Form
                 return;
             }
 
+            if (k.ValineId != null)
+            {
+                Vaade.Teade("Veebikataloogi kategooriat muuda serveri JSON-failis. Kohalikke kategooriaid saad siin muuta.");
+                return;
+            }
+
             k.Kategooria_nimetus = nimi.Text.Trim();
             k.Kirjeldus = kirjeldus.Text.Trim();
             if (!muutmine)
@@ -107,6 +116,11 @@ public class KategooriateHaldusForm : Form
         try
         {
             using ToodedContext db = new ToodedContext();
+            if (db.Kategooriatabel.Any(k => k.Id == valitudId && (k.ValineId != null || db.Kategooriatabel.Any(l => l.YlemId == k.Id))))
+            {
+                Vaade.Teade("Veebikataloogi või alamkategooriatega kategooriat ei saa siin kustutada.");
+                return;
+            }
             if (db.Toodetabel.Any(t => t.KategooriaId == valitudId))
             {
                 Vaade.Teade("Kategoorias on tooteid (ka peidetud). Vii need enne teise kategooriasse.");
@@ -150,7 +164,7 @@ public class KategooriateHaldusForm : Form
         TableLayoutPanel editor = Vaade.Veerg();
         olek.AutoSize = true;
         olek.Dock = DockStyle.Top;
-        olek.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        olek.Font = BarboraTheme.Font(12F, FontStyle.Bold);
         olek.ForeColor = Vaade.Sinine;
         Vaade.Lisa(editor, olek);
         nimi.PlaceholderText = "Näiteks joogid";
@@ -168,8 +182,7 @@ public class KategooriateHaldusForm : Form
         muuda.Click += (s, e) => Salvesta(true);
         kustuta.Text = "Kustuta kategooria";
         kustuta.Click += Kustuta;
-        Button uus = new Button
-        {
+        Button uus = new BarboraActionButton {
             Text = "Tühjenda / värskenda"
         };
         uus.Click += (s, e) => Lae();
@@ -206,10 +219,13 @@ public class KategooriateHaldusForm : Form
             valitudId = (int)r.Cells["Id"].Value;
             nimi.Text = r.Cells["Kategooria_nimetus"].Value?.ToString();
             kirjeldus.Text = r.Cells["Kirjeldus"].Value?.ToString();
-            olek.Text = "Kategooria nr " + valitudId;
+            bool veebist = (bool)r.Cells["Veebist"].Value;
+            nimi.ReadOnly = kirjeldus.ReadOnly = veebist;
+            muuda.Enabled = !veebist;
+            olek.Text = veebist ? "Veebikataloogi kategooria" : "Kategooria nr " + valitudId;
             lisa.Visible = false;
             muuda.Visible = true;
-            kustuta.Enabled = true;
+            kustuta.Enabled = !veebist;
         };
         Vaade.Tabel(tabel);
         Lae();

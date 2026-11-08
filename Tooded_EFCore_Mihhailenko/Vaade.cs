@@ -2,12 +2,16 @@ namespace Tooded_EFCore;
 // Ühised värvid ja mõned tavaliste WinFormsi elementide seadistused.
 internal static class Vaade
 {
-    public static readonly Color Taust = Color.FromArgb(244, 246, 250);
-    public static readonly Color Tekst = Color.FromArgb(31, 42, 58);
-    public static readonly Color Vaikne = Color.FromArgb(95, 108, 127);
-    public static readonly Color Sinine = Color.FromArgb(40, 94, 190);
-    public static readonly Color Punane = Color.FromArgb(174, 47, 57);
-    public static readonly Color Piir = Color.FromArgb(216, 223, 233);
+    public static string Tooteid(int kogus) => kogus == 1 ? "1 toode" : $"{kogus} toodet";
+    public static readonly Color Taust = BarboraTheme.Background;
+    public static readonly Color Tekst = BarboraTheme.Text;
+    public static readonly Color Vaikne = BarboraTheme.Muted;
+    // Nimi säilib olemasolevate vormide ühilduvuseks; poe põhivärv on nüüd punane.
+    public static readonly Color Sinine = BarboraTheme.Red;
+    public static readonly Color Punane = Color.FromArgb(173, 34, 45);
+    public static readonly Color Piir = BarboraTheme.Border;
+    public static readonly Color Roheline = Color.FromArgb(39, 109, 71);
+    public static readonly Color HeleRoheline = Color.FromArgb(233, 243, 234);
 
     public static DialogResult Teade(string tekst, string pealkiri = "Teade",
         MessageBoxButtons nupud = MessageBoxButtons.OK, MessageBoxIcon ikoon = MessageBoxIcon.None)
@@ -65,7 +69,7 @@ internal static class Vaade
         vorm.SuspendLayout();
         vorm.AutoScaleDimensions = new SizeF(96, 96);
         vorm.AutoScaleMode = AutoScaleMode.Dpi;
-        vorm.Font = new Font("Segoe UI", 10F);
+        vorm.Font = BarboraTheme.Font(10F);
         vorm.Text = nimi;
         vorm.BackColor = Taust;
         vorm.ForeColor = Tekst;
@@ -95,7 +99,7 @@ internal static class Vaade
             Text = tekst,
             AutoSize = true,
             Dock = DockStyle.Top,
-            Font = new Font("Segoe UI", pealkiri ? 14F : 10F, pealkiri ? FontStyle.Bold : FontStyle.Regular),
+            Font = BarboraTheme.Font(pealkiri ? 14F : 10F, pealkiri ? FontStyle.Bold : FontStyle.Regular),
             ForeColor = pealkiri ? Tekst : Vaikne,
             Margin = new Padding(0, 0, 0, 10),
             UseMnemonic = false
@@ -133,7 +137,13 @@ internal static class Vaade
         kast.Dock = DockStyle.Top;
         kast.Margin = new Padding(0, 0, 0, 10);
         kast.AccessibleName = silt;
-        Lisa(paneel, kast);
+        if (kast is TextBox tekstikast) tekstikast.BorderStyle = BorderStyle.FixedSingle;
+        if (kast is TextBox input)
+        {
+            var frame = new BarboraInput(input) { Dock = DockStyle.Top, Margin = kast.Margin };
+            Lisa(paneel, frame);
+        }
+        else Lisa(paneel, kast);
     }
 
     public static FlowLayoutPanel Nupuriba()
@@ -151,12 +161,15 @@ internal static class Vaade
 
     public static void Nupp(Button nupp, bool pohiline = false, bool ohtlik = false)
     {
+        if (nupp is BarboraActionButton custom) { custom.Primary = pohiline; custom.ForeColor = ohtlik ? Punane : Tekst; }
+        nupp.Font = BarboraTheme.Font(10);
         nupp.AutoSize = true;
         nupp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         nupp.MinimumSize = new Size(100, 36);
         nupp.Padding = new Padding(12, 6, 12, 6);
         nupp.Margin = new Padding(0, 0, 8, 8);
         nupp.FlatStyle = FlatStyle.Flat;
+        nupp.Cursor = Cursors.Hand;
         nupp.UseVisualStyleBackColor = false;
         nupp.BackColor = Color.White;
         nupp.ForeColor = Tekst;
@@ -168,8 +181,8 @@ internal static class Vaade
             nupp.BackColor = Sinine;
             nupp.ForeColor = Color.White;
             nupp.FlatAppearance.BorderColor = Sinine;
-            nupp.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 76, 158);
-            nupp.FlatAppearance.MouseDownBackColor = Color.FromArgb(24, 62, 130);
+            nupp.FlatAppearance.MouseOverBackColor = Color.FromArgb(191, 36, 47);
+            nupp.FlatAppearance.MouseDownBackColor = Color.FromArgb(162, 26, 37);
         }
         if (ohtlik)
         {
@@ -180,7 +193,7 @@ internal static class Vaade
 
     public static Panel Kaart(Control sisu)
     {
-        Panel kaart = new Panel
+        Panel kaart = new PoePaneel
         {
             AutoSize = true,
             AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -218,7 +231,9 @@ internal static class Vaade
         raam.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         raam.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         TableLayoutPanel pais = Veerg();
-        Lisa(pais, Tekstirida(pealkiri, true));
+        Label pealkirjaRida = Tekstirida(pealkiri, true);
+        pealkirjaRida.Font = BarboraTheme.Font(22F, FontStyle.Bold);
+        Lisa(pais, pealkirjaRida);
         Lisa(pais, Tekstirida(selgitus));
         raam.Controls.Add(pais, 0, 0);
         vorm.Controls.Add(raam);
@@ -234,19 +249,19 @@ internal static class Vaade
         tabel.RowHeadersVisible = false;
         tabel.EnableHeadersVisualStyles = false;
         tabel.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-        tabel.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(232, 237, 245);
+        tabel.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
         tabel.ColumnHeadersDefaultCellStyle.ForeColor = Tekst;
-        tabel.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        tabel.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(232, 237, 245);
+        tabel.ColumnHeadersDefaultCellStyle.Font = BarboraTheme.Font(10F, FontStyle.Bold);
+        tabel.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245);
         tabel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         tabel.ColumnHeadersDefaultCellStyle.Padding = new Padding(6, 10, 6, 10);
-        tabel.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+        tabel.DefaultCellStyle.Font = BarboraTheme.Font(10F);
         tabel.DefaultCellStyle.ForeColor = Tekst;
         tabel.DefaultCellStyle.BackColor = Color.White;
-        tabel.DefaultCellStyle.SelectionBackColor = Color.FromArgb(219, 232, 253);
+        tabel.DefaultCellStyle.SelectionBackColor = Color.FromArgb(249, 228, 229);
         tabel.DefaultCellStyle.SelectionForeColor = Tekst;
         tabel.DefaultCellStyle.Padding = new Padding(6, 4, 6, 4);
-        tabel.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 253);
+        tabel.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(249, 250, 249);
         tabel.RowTemplate.Height = 36;
         tabel.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
         tabel.AllowUserToResizeRows = false;

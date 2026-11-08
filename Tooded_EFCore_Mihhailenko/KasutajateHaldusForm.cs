@@ -262,8 +262,7 @@ public class KasutajateHaldusForm : Form
         uusPeabParooliMuutma.MaximumSize = new Size(290, 0);
         uusPeabParooliMuutma.Margin = new Padding(0, 4, 0, 14);
         Vaade.Lisa(paneel, uusPeabParooliMuutma);
-        Button lisa = new Button
-        {
+        Button lisa = new BarboraActionButton {
             Text = esmane ? "Loo administraator" : "Lisa kasutaja",
             Dock = DockStyle.Top
         };
@@ -289,8 +288,7 @@ public class KasutajateHaldusForm : Form
         {
             Vaade.Vali(paneel, "Valitud kasutaja roll", valitudRoll);
         }
-        Button muuda = new Button
-        {
+        Button muuda = new BarboraActionButton {
             Text = "Salvesta valitud konto roll",
             Visible = !esmane,
             Dock = DockStyle.Top
@@ -300,8 +298,7 @@ public class KasutajateHaldusForm : Form
         Vaade.Lisa(paneel, muuda);
         if (!esmane)
         {
-            Button varskenda = new Button
-            {
+            Button varskenda = new BarboraActionButton {
                 Text = "Värskenda kasutajate loendit",
                 Dock = DockStyle.Top
             };

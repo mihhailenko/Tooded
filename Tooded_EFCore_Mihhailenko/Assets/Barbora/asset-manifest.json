@@ -1,0 +1,3201 @@
+{
+  "source": "User-supplied Barbora.EE 5.1.1 base APK",
+  "package": "ee.barbora",
+  "version": "5.1.1",
+  "apkSha256": "8be942f077a5eb6d2c04218494275a73a2fc49fd61b30ca7acc9c7e00cdea2c8",
+  "reaInventoryEvidence": "ev_feb6a8053365b56950b67dea1543f5c75be7003265959e49e4b9835e55ec67f2",
+  "files": [
+    {
+      "path": "badges/additive_free.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/additive_free.svg",
+      "bytes": 821,
+      "sha256": "81e6d3bc17c1331fa7973893e6fae8da27939a510e9e145b2f8ed8dac3e41e76"
+    },
+    {
+      "path": "badges/eko.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/eko.svg",
+      "bytes": 2730,
+      "sha256": "905d1b1e981f44b6be621ba73e8335599069aaa8bfc935fb8320291b78fd95f6"
+    },
+    {
+      "path": "badges/frozen.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/frozen.svg",
+      "bytes": 5463,
+      "sha256": "f14d07adfbaa3fbf286cd6a8b95c65a576caab38f7e3d8e527244cdf21cfb5d1"
+    },
+    {
+      "path": "badges/gluten_free.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/gluten_free.svg",
+      "bytes": 1430,
+      "sha256": "5e144fe92565a2b749e768616db37d6197b4181982d3ef0eda72ad00c1ae5f79"
+    },
+    {
+      "path": "badges/lactose_free.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/lactose_free.svg",
+      "bytes": 1888,
+      "sha256": "60ebea67f463fa93731b4e8a3801d310175330b29c73239ccf418b8ab5399e7b"
+    },
+    {
+      "path": "badges/mince.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/mince.svg",
+      "bytes": 2434,
+      "sha256": "fc4dab4fc2ca5173bf6d2f73b067f04eccb7df19134615a7071cafbfe96dc4eb"
+    },
+    {
+      "path": "badges/new_product.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/new_product.svg",
+      "bytes": 406,
+      "sha256": "a60e8516c7079afa657c44b9377d7eca010949baa0fa66711416a85c9d48091e"
+    },
+    {
+      "path": "badges/plus_one.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/plus_one.svg",
+      "bytes": 468,
+      "sha256": "da174f0c7c5d9898ac1889025a446fe92b2579cd4a7bd695abf944fcab7fe638"
+    },
+    {
+      "path": "badges/plus_three.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/plus_three.svg",
+      "bytes": 1325,
+      "sha256": "472fc411410e896a6a3bc8c68e372d3488b07015c78bb939d3606824b34a4bad"
+    },
+    {
+      "path": "badges/plus_two.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/plus_two.svg",
+      "bytes": 938,
+      "sha256": "2f7a1f451a53b86e04466048d97a3bb20fdf1c87329a5c923049cd25fb1ae249"
+    },
+    {
+      "path": "badges/promo.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/promo.svg",
+      "bytes": 2219,
+      "sha256": "f6b670b65de95130bbdd111ca031b07395bd55ecbc0c2545a00620ad5f57c573"
+    },
+    {
+      "path": "badges/sugar_free.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/sugar_free.svg",
+      "bytes": 1981,
+      "sha256": "5afe314269d5e92442707e714c89a55ec92f7898f3d3362b560d2d786fc33eda"
+    },
+    {
+      "path": "badges/thin-slices.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/thin-slices.svg",
+      "bytes": 411,
+      "sha256": "c3d65f78b5f3150318865ca09dc6c071a9f616a163d861395bbebf2209d84bb3"
+    },
+    {
+      "path": "badges/today.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/today.svg",
+      "bytes": 2179,
+      "sha256": "0ac082f3a509d34ab45052c9b59b517f72b6230ac112533f4950f70dd9aabf44"
+    },
+    {
+      "path": "badges/vegetarian.svg",
+      "apkEntry": "assets/flutter_assets/assets/badges/vegetarian.svg",
+      "bytes": 267,
+      "sha256": "b796368aa2b153f4d97f49616bd3b2db8b69d98c96760019f4a51e21d2275c3d"
+    },
+    {
+      "path": "bento_banners/ee/mobile/father.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/mobile/father.jpg",
+      "bytes": 113719,
+      "sha256": "9ba9db7339ec2465ada329d36481280b85454a977ace74b55c6f9c030c729dfa"
+    },
+    {
+      "path": "bento_banners/ee/mobile/mother.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/mobile/mother.jpg",
+      "bytes": 127774,
+      "sha256": "4b8bf1958a6020938b53afad0b80aee0015bf711ee7acba9ecf372d87a251d33"
+    },
+    {
+      "path": "bento_banners/ee/mobile/twin_1.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/mobile/twin_1.jpg",
+      "bytes": 57095,
+      "sha256": "39a159e97bbd34b368207317ba7c58cee0bdcec9f466bf2e930ac6d75ddc8b68"
+    },
+    {
+      "path": "bento_banners/ee/mobile/twin_2.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/mobile/twin_2.jpg",
+      "bytes": 65098,
+      "sha256": "b6cc35044dde098a3c49a6b8a6f55df9e4370dcd628ff63c9bc72a67d70f93a6"
+    },
+    {
+      "path": "bento_banners/ee/mobile/uncle.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/mobile/uncle.jpg",
+      "bytes": 115754,
+      "sha256": "6ba33503a4abdaf906c7d57ae2daa1a69864738516ebc667507b806aad3e75b2"
+    },
+    {
+      "path": "bento_banners/ee/tablet/father.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/tablet/father.jpg",
+      "bytes": 124570,
+      "sha256": "d4e469396b101870170f1da81d243031421a288f862e9bd8cc94a1744ad09480"
+    },
+    {
+      "path": "bento_banners/ee/tablet/mother.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/tablet/mother.jpg",
+      "bytes": 151233,
+      "sha256": "237c51b4ebb7f568fd26cd45717d4651d1d67dfdff4519c7b5f66be3be47e72e"
+    },
+    {
+      "path": "bento_banners/ee/tablet/twin_1.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/tablet/twin_1.jpg",
+      "bytes": 43027,
+      "sha256": "2b05acedaaa08f826b675efbb5754c46a1b7b4b18114065156ffecf97d423fad"
+    },
+    {
+      "path": "bento_banners/ee/tablet/twin_2.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/tablet/twin_2.jpg",
+      "bytes": 46028,
+      "sha256": "d426acd45745f2e543f40331b47eb00c4aa59128edb031c10b37e8373563fac7"
+    },
+    {
+      "path": "bento_banners/ee/tablet/uncle.jpg",
+      "apkEntry": "assets/flutter_assets/assets/bento_banners/ee/tablet/uncle.jpg",
+      "bytes": 137501,
+      "sha256": "ffba56231cd481180cb501ded72284e904a143094971a07eb10c4c2cd320b552"
+    },
+    {
+      "path": "bottom_bar/calendar.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/calendar.svg",
+      "bytes": 657,
+      "sha256": "08cd82fa2bcc6ce21ff51aaf70976b2517e308d090b8e818985ccc9face1ec8b"
+    },
+    {
+      "path": "bottom_bar/calendar_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/calendar_filled.svg",
+      "bytes": 586,
+      "sha256": "f177a187e1bc99db5ec1595ec9e32b87bfa51fc54561e21b932245c3fc261bfa"
+    },
+    {
+      "path": "bottom_bar/cart.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/cart.svg",
+      "bytes": 1029,
+      "sha256": "39867ca18a29c76817c82230928f615d540b1ad1c1a14c5b6d158887a08fdd65"
+    },
+    {
+      "path": "bottom_bar/cart_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/cart_filled.svg",
+      "bytes": 986,
+      "sha256": "77d0f17988cfa2ebbb5235993a83b8215be5c15624b5817a71f25b9bb866fdf2"
+    },
+    {
+      "path": "bottom_bar/home.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/home.svg",
+      "bytes": 655,
+      "sha256": "bc78ee1f31fa3c34efb7d491c816721d5dd4858dabe8322eb35d4aedede62dfa"
+    },
+    {
+      "path": "bottom_bar/home_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/home_filled.svg",
+      "bytes": 411,
+      "sha256": "6b1b7d52c916a122223212b0408951476b5f8fe9b2fd408a528eb8ff02202c0b"
+    },
+    {
+      "path": "bottom_bar/products.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/products.svg",
+      "bytes": 1573,
+      "sha256": "70a5fdd3fa43094648a8ca9d18d46cd817c67c11ac2cc8e4b124cf23b9b662ae"
+    },
+    {
+      "path": "bottom_bar/products_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/products_filled.svg",
+      "bytes": 1445,
+      "sha256": "c72ae91e26163a2feb47b3cf81eadda149022cc2914bb33f9e4e6db0dbe6c509"
+    },
+    {
+      "path": "bottom_bar/profile.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/profile.svg",
+      "bytes": 679,
+      "sha256": "45f740413dbfa8b8bc23d797ec683d076ba0874c66f3d55ca2ec55b9b5a014a9"
+    },
+    {
+      "path": "bottom_bar/profile_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/bottom_bar/profile_filled.svg",
+      "bytes": 595,
+      "sha256": "4b8ce380a39d54e053ebd52ee17c8d830d78f236d70b170e9d4695c2cef2c10f"
+    },
+    {
+      "path": "cart/cart_arrow.svg",
+      "apkEntry": "assets/flutter_assets/assets/cart/cart_arrow.svg",
+      "bytes": 17581,
+      "sha256": "cdc0e69bcf9f4253786f0593fc69dbf96c968fa900a7d11b21f853519dab6bae"
+    },
+    {
+      "path": "cart/cart_logged_in.png",
+      "apkEntry": "assets/flutter_assets/assets/cart/cart_logged_in.png",
+      "bytes": 56983,
+      "sha256": "be7f5549874582399b21ea70fa1561f509d14a0a208ae09c188af08ce0c75463"
+    },
+    {
+      "path": "cart/cart_not_logged_in.png",
+      "apkEntry": "assets/flutter_assets/assets/cart/cart_not_logged_in.png",
+      "bytes": 111777,
+      "sha256": "3d387777ea4ee67002d12ee47be468d2ff1c463d88af34b2c1f8f8dddadcad9e"
+    },
+    {
+      "path": "cart/empty_cart_arrow.png",
+      "apkEntry": "assets/flutter_assets/assets/cart/empty_cart_arrow.png",
+      "bytes": 3583,
+      "sha256": "6a447c92da34753d527aef0faa277e0f97a7869fc8a171610f83fc297f3f740c"
+    },
+    {
+      "path": "icons/aukojimas.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/aukojimas.svg",
+      "bytes": 5155,
+      "sha256": "2508d1da218a7fd5b0cb667ca5a885b0278391ffa24b64bbec36dada5b7143fd"
+    },
+    {
+      "path": "icons/calendar.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/calendar.svg",
+      "bytes": 669,
+      "sha256": "a8bf9477f483392b0c1c590e9fbf57e9164ed89f36b1b64cc1dd7dd4e65b27b0"
+    },
+    {
+      "path": "icons/coupon-cumulative-icon.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/coupon-cumulative-icon.svg",
+      "bytes": 972,
+      "sha256": "4526ece44dcdd3a6eb71db6cd51385097af658dadfa05ed5d6b4ff10ab0e940d"
+    },
+    {
+      "path": "icons/destination_button.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/destination_button.svg",
+      "bytes": 1798,
+      "sha256": "629c5cf5caf6df5f32b2b80abf538f01eda91dd6cdbdc95939d1aeca2f3b8a51"
+    },
+    {
+      "path": "icons/discount.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/discount.svg",
+      "bytes": 2650,
+      "sha256": "6bb9a76d3ade859f8f06164a0113d3b53a49ce4e52abaf3ce5e145e334d603b8"
+    },
+    {
+      "path": "icons/error-filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/error-filled.svg",
+      "bytes": 843,
+      "sha256": "ab60b8bfd6e3480964555e3920367322981f154eda59a7a25cc30511e7cd657d"
+    },
+    {
+      "path": "icons/error_outlined.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/error_outlined.svg",
+      "bytes": 993,
+      "sha256": "088d4c3e4f5d205a10e5373b9a9cc658eaedea08de974f7cb3dff41c54e09e0b"
+    },
+    {
+      "path": "icons/good_offer_tag.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/good_offer_tag.svg",
+      "bytes": 997,
+      "sha256": "8365929e290ad3a244f48266399661cd190fbdc46e7761b133928cec190910fe"
+    },
+    {
+      "path": "icons/hammer_tag.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/hammer_tag.svg",
+      "bytes": 1587,
+      "sha256": "86aae919144bb54a51f4fc0bd010efb703a49e6f0af4527e68b6a6ab6c13cb8b"
+    },
+    {
+      "path": "icons/heart_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/heart_filled.svg",
+      "bytes": 1150,
+      "sha256": "975c46c7ec9d1d71ec35878ad963348fffdee9c14f06368f0b00cec778854bbd"
+    },
+    {
+      "path": "icons/heart_outline.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/heart_outline.svg",
+      "bytes": 2532,
+      "sha256": "2ccf61237d9ae0a0fdff75c8b4a82994ec80833d224ea2c31fd9710a76cbafb4"
+    },
+    {
+      "path": "icons/icCityMarker.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/icCityMarker.svg",
+      "bytes": 629,
+      "sha256": "1244d30988eee3687a4b209b336b634098ae123f58c728113037887f6d361e97"
+    },
+    {
+      "path": "icons/ic_add_new.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_add_new.svg",
+      "bytes": 419,
+      "sha256": "47679cbc0d25edbce5b36f09c250004fc3109f45ba45f618da6f186becccf598"
+    },
+    {
+      "path": "icons/ic_alco_banned.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_alco_banned.svg",
+      "bytes": 1856,
+      "sha256": "a5069b44f8c8b5bc3ffcf9dc5a02c96281034326a806b4aa02efe90f7a9c1349"
+    },
+    {
+      "path": "icons/ic_apple.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_apple.svg",
+      "bytes": 1021,
+      "sha256": "430764dea200642a358a007db923e5490e99b75130dd4f30dee2a5b85441995c"
+    },
+    {
+      "path": "icons/ic_apple_pay.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_apple_pay.svg",
+      "bytes": 6342,
+      "sha256": "57f3b8d1fa6927a0ee8d06d6479a768531c865dfc7409b93acfc3d53c98be915"
+    },
+    {
+      "path": "icons/ic_arrow_back.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_arrow_back.svg",
+      "bytes": 605,
+      "sha256": "7d4f33e1120e56e4ddc876f2fb16a74bb3e53f712afcaa6f780384df1810144e"
+    },
+    {
+      "path": "icons/ic_arrow_forward.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_arrow_forward.svg",
+      "bytes": 586,
+      "sha256": "348e8e8c293085e23b55b537947549ba454931c0053fcfad4c19c220f8360ae2"
+    },
+    {
+      "path": "icons/ic_arrows_downward.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_arrows_downward.svg",
+      "bytes": 944,
+      "sha256": "c01e3a2ca5dbc84af7a2ef1add5eeaaa13b9ee9ec576a2309a22358d30d781b0"
+    },
+    {
+      "path": "icons/ic_badge.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_badge.svg",
+      "bytes": 514,
+      "sha256": "02d5d450d5c37e31d883c81203f2e88134a93a78c5de14baf58d47499517a609"
+    },
+    {
+      "path": "icons/ic_banklink.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_banklink.svg",
+      "bytes": 829,
+      "sha256": "1c5c1b796646edb43a6687d0822eb7d3e677db64c3f6d335f78050d6a047f517"
+    },
+    {
+      "path": "icons/ic_barcode_scanner.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_barcode_scanner.svg",
+      "bytes": 1754,
+      "sha256": "03038bdca67f611c071cc79984724d591b321a7b834a4536c4aacb437923cf79"
+    },
+    {
+      "path": "icons/ic_bell.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_bell.svg",
+      "bytes": 832,
+      "sha256": "79935b5cd0789e38cc69dc906b0fd4e2fcc19713ab8f52680671284a1a0ec801"
+    },
+    {
+      "path": "icons/ic_briefcase.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_briefcase.svg",
+      "bytes": 869,
+      "sha256": "8ce9ba05de2c9a8eb6433660400bf8ddc83b911d0859146fa29a43dee5c99951"
+    },
+    {
+      "path": "icons/ic_buy_with_google.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_buy_with_google.svg",
+      "bytes": 2789,
+      "sha256": "5c04295263ec398c14b7df81a1632df979d7bccfde74df490a57151aec768836"
+    },
+    {
+      "path": "icons/ic_by_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_by_card.svg",
+      "bytes": 4313,
+      "sha256": "94a3314a457b2d6d2d5deaef5b94321b1f2bb61acffa7bd16ca37a79f68842a1"
+    },
+    {
+      "path": "icons/ic_by_cash.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_by_cash.svg",
+      "bytes": 1385,
+      "sha256": "1acf8caa3110e802c76ff57c23b01ce8e281bc9b78271b54007e157101a1a7d1"
+    },
+    {
+      "path": "icons/ic_calendar.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_calendar.svg",
+      "bytes": 449,
+      "sha256": "53a96d2193325cca4e8d23335b7554e1bf07607c59771b0591f3a701f6d2e6cc"
+    },
+    {
+      "path": "icons/ic_cancel.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_cancel.svg",
+      "bytes": 2798,
+      "sha256": "4e2bdb2c3ab6986798b1959ece19915137a66953eabd45e65fc943ded2897adc"
+    },
+    {
+      "path": "icons/ic_cart.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_cart.svg",
+      "bytes": 1123,
+      "sha256": "95a45424d2221bfd92edeff01ed6d9b1a0b2c4f2128cc30e50fd87315bb585ea"
+    },
+    {
+      "path": "icons/ic_cart_add.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_cart_add.svg",
+      "bytes": 1543,
+      "sha256": "6e3bf93fa916b39706861c57ad5a3833f6c35377999ee5a2e588588ed0769687"
+    },
+    {
+      "path": "icons/ic_chat.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chat.svg",
+      "bytes": 1975,
+      "sha256": "701155b2d6ed815dff0fc149d7c8cbb3f33b428f7b41a4e5f04733c1ce91b6b6"
+    },
+    {
+      "path": "icons/ic_check.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_check.svg",
+      "bytes": 544,
+      "sha256": "af0a3395484a70ae26d29a571beccd9e2abadf3c0ebce5f5daaabf1cfdadf880"
+    },
+    {
+      "path": "icons/ic_check_circle.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_check_circle.svg",
+      "bytes": 750,
+      "sha256": "8f010bf8b55fba75dec22682b1012a3f5e1527106ece3ebbee0c61fa4f134aee"
+    },
+    {
+      "path": "icons/ic_check_circle_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_check_circle_filled.svg",
+      "bytes": 659,
+      "sha256": "282696baaaf456674a34c3298799f4ae7bb76a7d70b6c374b8ed2acc39b64408"
+    },
+    {
+      "path": "icons/ic_check_circle_green.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_check_circle_green.svg",
+      "bytes": 329,
+      "sha256": "e8af3339b825201059502d22251ddddce6967f644df66d40ba3a47ebbb0bd848"
+    },
+    {
+      "path": "icons/ic_checkbox_off.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_checkbox_off.svg",
+      "bytes": 252,
+      "sha256": "c1d5d63884d5655f19d75a2ad0e2ecd3d6d8554982a8953149776d88d50242be"
+    },
+    {
+      "path": "icons/ic_checkbox_on.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_checkbox_on.svg",
+      "bytes": 221,
+      "sha256": "9d3c70af9ca5d45c5b13385527b73a1b91ef7749920a5e78cd95d485b916a365"
+    },
+    {
+      "path": "icons/ic_checkbox_on_disabled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_checkbox_on_disabled.svg",
+      "bytes": 221,
+      "sha256": "7a397e0d3cea042a8700a8301b20901ddfc31efac422001399f8952b079b6cb7"
+    },
+    {
+      "path": "icons/ic_checkbox_validation.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_checkbox_validation.svg",
+      "bytes": 176,
+      "sha256": "0d4b03211b3fd869518e4860528d3e14d5c39b809adfbbe23882a997189ed562"
+    },
+    {
+      "path": "icons/ic_checked.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_checked.svg",
+      "bytes": 215,
+      "sha256": "4994d9652ede1934fcc63aee81f4ee79bf6c1020c7744073d4d0aa2fe5edf276"
+    },
+    {
+      "path": "icons/ic_checkout_coupon.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_checkout_coupon.svg",
+      "bytes": 694,
+      "sha256": "fa12f9206be65ef50ac1fee4b0ca3db686ef4ee40d0fe9c7594a70806e3faffa"
+    },
+    {
+      "path": "icons/ic_chef_hat.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chef_hat.svg",
+      "bytes": 1341,
+      "sha256": "76bac840762d42eeef0c14a57b86509fd71a8f91b2756502702bbf7ac569f651"
+    },
+    {
+      "path": "icons/ic_chevron_down.png",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chevron_down.png",
+      "bytes": 596,
+      "sha256": "1df1171e1ffa9b541bbda3ed2b4af884b2f8f226ef1ee23c7e734d5db42f4d6c"
+    },
+    {
+      "path": "icons/ic_chevron_down_svg.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chevron_down_svg.svg",
+      "bytes": 476,
+      "sha256": "9ff46f6f757e2a245e93eb5d9d7e61ab380571b73f7dd452986b50a1e8586b57"
+    },
+    {
+      "path": "icons/ic_chevron_left.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chevron_left.svg",
+      "bytes": 494,
+      "sha256": "3ea7cce53cf6d5736c87862f79a21c8a8769553446f0171f031450b274553d93"
+    },
+    {
+      "path": "icons/ic_chevron_right.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chevron_right.svg",
+      "bytes": 505,
+      "sha256": "c5d1782dcd8c022a704332ef3c173e4119b60436b590ee4e7b6bc32928c1e430"
+    },
+    {
+      "path": "icons/ic_chevron_up_svg.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chevron_up_svg.svg",
+      "bytes": 410,
+      "sha256": "799d7d928f32d670e655a7bd3483b4fc5760a40a0e56ea830eb087e0ff182769"
+    },
+    {
+      "path": "icons/ic_chip.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_chip.svg",
+      "bytes": 1062,
+      "sha256": "25458ad6c94f3a847ecc229856edf5f148e00e06eddf40ebd7b521fe5b8798cb"
+    },
+    {
+      "path": "icons/ic_circle_checkbox_on.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_circle_checkbox_on.svg",
+      "bytes": 676,
+      "sha256": "2527a6bce52ed0d034cc232a5447a0bee8c3b1379683c6147adcd9853ef614d9"
+    },
+    {
+      "path": "icons/ic_circle_crossed.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_circle_crossed.svg",
+      "bytes": 623,
+      "sha256": "cd3bfb78eb2647c24346cc1d0b592d642f3121e7a67675606309ce3d66d73592"
+    },
+    {
+      "path": "icons/ic_clear.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_clear.svg",
+      "bytes": 2653,
+      "sha256": "4a1337d46dab9cf98a233bdda9df6c85eff080b7ca70c055d33550a9a77fd564"
+    },
+    {
+      "path": "icons/ic_clock.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_clock.svg",
+      "bytes": 710,
+      "sha256": "12bcdb73465f84c3d9e4482f67ad482363042574e30f5809c7a74e93f3a61165"
+    },
+    {
+      "path": "icons/ic_clock1.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_clock1.svg",
+      "bytes": 698,
+      "sha256": "f8fceeffbd448b8d54aa4bb40e37647c0c8b7db8d86d6bf6bbb8cd72389f9019"
+    },
+    {
+      "path": "icons/ic_close.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_close.svg",
+      "bytes": 732,
+      "sha256": "ffce9fd18474233d72d37a7e6029b3af4d952fe30e9de85304ca4841923183fd"
+    },
+    {
+      "path": "icons/ic_coupon.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_coupon.svg",
+      "bytes": 2209,
+      "sha256": "83572c011e5df0d91a68c3d7cb4db7bfa90965582ed3ba59666e723b9772b1a0"
+    },
+    {
+      "path": "icons/ic_coupon_gift.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_coupon_gift.svg",
+      "bytes": 729,
+      "sha256": "d4135dd0ccd1e75805aecdd0aaf068b6f303e5b3854ff3623d3b950497f466dc"
+    },
+    {
+      "path": "icons/ic_coupon_info.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_coupon_info.svg",
+      "bytes": 486,
+      "sha256": "aebf9580a9fc880070d4ec3ea814db691d33a2eec75c09339558ca434f65b7dc"
+    },
+    {
+      "path": "icons/ic_credit_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_credit_card.svg",
+      "bytes": 529,
+      "sha256": "a779a2509ff31a6b00ecfb6fade7e251520c8ffaa065c239f2a05bd7cf990388"
+    },
+    {
+      "path": "icons/ic_currency_zlot.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_currency_zlot.svg",
+      "bytes": 349,
+      "sha256": "248e68d3451321cf557209af6f0af3568681cd70478f1ca0d850b2df99850cc1"
+    },
+    {
+      "path": "icons/ic_cvc.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_cvc.svg",
+      "bytes": 930,
+      "sha256": "5d94916c47b1390ca562e0c448d7941e4b1b69d72592f9d323b99f3d1e3e0132"
+    },
+    {
+      "path": "icons/ic_delivery_location.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_delivery_location.svg",
+      "bytes": 802,
+      "sha256": "e2bb623a5f86d888ef2d5b188cad29346280dead762bc4e90650f9dfc3e2dbe8"
+    },
+    {
+      "path": "icons/ic_delivery_type_express.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_delivery_type_express.svg",
+      "bytes": 4677,
+      "sha256": "83276742642e0a931e2623883625c0f9b6a9b78e637fdde2b2ba9e606b327fd1"
+    },
+    {
+      "path": "icons/ic_delivery_type_home.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_delivery_type_home.svg",
+      "bytes": 3262,
+      "sha256": "9a1ee36c9650f6f78bab4b474483a291fcf445b2dbf34792b3a0ddc79aadfd99"
+    },
+    {
+      "path": "icons/ic_delivery_type_pickup.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_delivery_type_pickup.svg",
+      "bytes": 1802,
+      "sha256": "fc8af39a5737e9ac45ef5155d603d35c703de316fb722c8871d1aa32700ee1a6"
+    },
+    {
+      "path": "icons/ic_delivery_type_priority.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_delivery_type_priority.svg",
+      "bytes": 939,
+      "sha256": "4d3887564049cfd55b55b011847bd398a98bf6d8b8fc2bc449d799f88d2d55ad"
+    },
+    {
+      "path": "icons/ic_discount.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_discount.svg",
+      "bytes": 1424,
+      "sha256": "dd81ea66ebf5c2906ee32aa3e1c0194b5711ab33092b5016420acf850fe4ad54"
+    },
+    {
+      "path": "icons/ic_discount_percentage.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_discount_percentage.svg",
+      "bytes": 5766,
+      "sha256": "352a1a0cf0cdeecd6921a0b06271d732b05ec80bfb31524c088811dea365e028"
+    },
+    {
+      "path": "icons/ic_discount_percentage2.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_discount_percentage2.svg",
+      "bytes": 5772,
+      "sha256": "867a1db9bd5bfdd3fc59b6ea65a3ea45c8446db72a7101470c876699feca0f91"
+    },
+    {
+      "path": "icons/ic_donation.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_donation.svg",
+      "bytes": 3669,
+      "sha256": "68580a28847a087b491ab9b63eae35927fc08f3caaee0b2be5d1259e20aa908c"
+    },
+    {
+      "path": "icons/ic_download_invoice.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_download_invoice.svg",
+      "bytes": 782,
+      "sha256": "29ee3e80a7b53e5165245a0be3b30ce022ece9818b5f5972f350985389fb9e0e"
+    },
+    {
+      "path": "icons/ic_ellipse.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_ellipse.svg",
+      "bytes": 164,
+      "sha256": "bd29bd3b0d68112e441d57c42af9533d80524b40de72831eb1f7a0e8da07f384"
+    },
+    {
+      "path": "icons/ic_email.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_email.svg",
+      "bytes": 525,
+      "sha256": "2b66c3d89335fd007ced20c3bf3a1cbca46263753411d188ce4c2b5336a215b6"
+    },
+    {
+      "path": "icons/ic_eur.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_eur.svg",
+      "bytes": 2663,
+      "sha256": "f33fb7da042d6947b429ca8f3a06421024f8d3b0412b03ff15eb48b5533e4de5"
+    },
+    {
+      "path": "icons/ic_eur1.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_eur1.svg",
+      "bytes": 1183,
+      "sha256": "bc6576c9f1b98c4b9935c57265d4e88af8ca51ae6c307d72f867515be0dc8796"
+    },
+    {
+      "path": "icons/ic_euro.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_euro.svg",
+      "bytes": 1370,
+      "sha256": "a23cca815f80acdeae939cbaef28b569a60f8a36f04a822fa01e829c71d47d47"
+    },
+    {
+      "path": "icons/ic_express_drive.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_express_drive.svg",
+      "bytes": 1153,
+      "sha256": "5fe5314bdba6b9c5da8e76db8bddefaaeb0a2cb3761dfccded3dee80e5d47120"
+    },
+    {
+      "path": "icons/ic_facebook.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_facebook.svg",
+      "bytes": 617,
+      "sha256": "92479a4f72e3bc9e2e59bd1eef1c88059c738ac4d416b9e3e7d53b6efca4489f"
+    },
+    {
+      "path": "icons/ic_fast_pickup.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_fast_pickup.svg",
+      "bytes": 2874,
+      "sha256": "e95b1d24a2f30b701b5d1311a52596fb0d4126ac698766f0b3c4fd0f72821ab9"
+    },
+    {
+      "path": "icons/ic_favorite.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_favorite.svg",
+      "bytes": 1176,
+      "sha256": "ec2027127c3958d03cdb1ba3577a521f6388dbc35ea8af5859d066adfd48d60a"
+    },
+    {
+      "path": "icons/ic_favorite_1.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_favorite_1.svg",
+      "bytes": 1161,
+      "sha256": "d9ba4c3895675e34f01a5841109866584884ae5fcbece4e81e7a1b20a7582819"
+    },
+    {
+      "path": "icons/ic_filter.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_filter.svg",
+      "bytes": 674,
+      "sha256": "973390f2e2338759eb43619b5fff28e4baea34a0b12d52c304bc30df0de1f31d"
+    },
+    {
+      "path": "icons/ic_flag_lt.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_flag_lt.svg",
+      "bytes": 310,
+      "sha256": "63190bfac21e50618b8e3cc762319537554d40c49b74a0da32ee371fe8e64a0b"
+    },
+    {
+      "path": "icons/ic_gift.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_gift.svg",
+      "bytes": 911,
+      "sha256": "c7dd42aa6da673532abca8b951d307a517515e03e2cb652b6e1ed4019f42aea4"
+    },
+    {
+      "path": "icons/ic_gift1.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_gift1.svg",
+      "bytes": 718,
+      "sha256": "cf86e9f741ff4de79ebb801f854dff3d2984b60b3cea2c89d54c979589ee6fbe"
+    },
+    {
+      "path": "icons/ic_globe.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_globe.svg",
+      "bytes": 969,
+      "sha256": "f6f1bdfbb7d8cfb85d8ca5e203b29b885f56354d96a92635f28df812af73adf2"
+    },
+    {
+      "path": "icons/ic_google.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_google.svg",
+      "bytes": 1106,
+      "sha256": "309afa5f565661af0554b337cd9b7fc0c232eb2020a1d7d81eb0600663762f68"
+    },
+    {
+      "path": "icons/ic_google_pay.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_google_pay.svg",
+      "bytes": 3748,
+      "sha256": "ac1a8be437c0423a042102cdbb7489f9b1631b3e763693044df6c18bea78fe99"
+    },
+    {
+      "path": "icons/ic_grill.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_grill.svg",
+      "bytes": 1429,
+      "sha256": "c1b228e68708fde2b95de6ad932c81d852bf1f52ccb30646b247fd0b7190d70b"
+    },
+    {
+      "path": "icons/ic_help.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_help.svg",
+      "bytes": 1456,
+      "sha256": "a6f5a6c80d1f90044949bb3e88f890c5e677dbfbce5c7adb1373b61989574884"
+    },
+    {
+      "path": "icons/ic_house.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_house.svg",
+      "bytes": 706,
+      "sha256": "a00add1dbec8bd97c690602bfa31ecc6e71d65ab64853c6052f60575cbc9abbd"
+    },
+    {
+      "path": "icons/ic_identification_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_identification_card.svg",
+      "bytes": 6999,
+      "sha256": "da01632e3c806c1acc2bac69891f760e5887818bfb0fb60f4b9749eb624bc6da"
+    },
+    {
+      "path": "icons/ic_information.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_information.svg",
+      "bytes": 486,
+      "sha256": "aebf9580a9fc880070d4ec3ea814db691d33a2eec75c09339558ca434f65b7dc"
+    },
+    {
+      "path": "icons/ic_invoice.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_invoice.svg",
+      "bytes": 810,
+      "sha256": "58818411360b4ca5bb434cff12812f5e239410bfeacbfdc9062e224acf5b5f95"
+    },
+    {
+      "path": "icons/ic_invoice_pay.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_invoice_pay.svg",
+      "bytes": 1069,
+      "sha256": "8a2c1c79f4bd6e781fc9ff66bba2d8196cb98916ce8220bfdab954d98d7282aa"
+    },
+    {
+      "path": "icons/ic_label_top.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_label_top.svg",
+      "bytes": 2714,
+      "sha256": "134a42043dcb85f13b2b74018db0063ea08f6fa6fefedd2fa2dc2a2ce90154e1"
+    },
+    {
+      "path": "icons/ic_legal_entity.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_legal_entity.svg",
+      "bytes": 1063,
+      "sha256": "c898080f0e7f16613cf5903c7b9b5138868fdeaa627e3c13b49c7d2513304449"
+    },
+    {
+      "path": "icons/ic_lipstic.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_lipstic.svg",
+      "bytes": 680,
+      "sha256": "109970afbf6a363ab117bceee3c08af0408dfab1f0d843eb63b771fac1e2409e"
+    },
+    {
+      "path": "icons/ic_location_drive_in.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_location_drive_in.svg",
+      "bytes": 1380,
+      "sha256": "1b2da8747f078da2d10ac6f9cc49b6c4aa39b27f2cf0c00c980b9487c9a3b788"
+    },
+    {
+      "path": "icons/ic_location_station.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_location_station.svg",
+      "bytes": 857,
+      "sha256": "5dfdf2fb4d97ef675b405aaa1528607a8c70002bf76d7466693cc7bb9c3ba7f5"
+    },
+    {
+      "path": "icons/ic_logout.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_logout.svg",
+      "bytes": 971,
+      "sha256": "a2a18483b1c01ecdae018dbc050e1e18c997252cd4e843480f4cab9db9b27fcc"
+    },
+    {
+      "path": "icons/ic_mastercard.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_mastercard.svg",
+      "bytes": 1000,
+      "sha256": "244f2fe248a384299e8afbd185df6df44ef875f12140c30bfbaa6fdb0a904caa"
+    },
+    {
+      "path": "icons/ic_mastercard_logo.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_mastercard_logo.svg",
+      "bytes": 791,
+      "sha256": "d36a78f428fba59d246c62e374c7913036bd6504b65e91a05e5ce840ed62a532"
+    },
+    {
+      "path": "icons/ic_me.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_me.svg",
+      "bytes": 656,
+      "sha256": "43ae3a6263e41a72d508b36c365092ee516690f61873b2afd469360d9cc12b4a"
+    },
+    {
+      "path": "icons/ic_mobile_phone.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_mobile_phone.svg",
+      "bytes": 358,
+      "sha256": "f1da1920607f27251fb97721ec832f434479890bfad7027e50c2fb95a02846fd"
+    },
+    {
+      "path": "icons/ic_natural_person.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_natural_person.svg",
+      "bytes": 824,
+      "sha256": "454cde411711d8f4e489a5c565a511a24a128c0a784795f822c1928bd066023c"
+    },
+    {
+      "path": "icons/ic_no_alco_product.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_no_alco_product.svg",
+      "bytes": 1937,
+      "sha256": "e1edcf2420ad4a69eb748a2bdc9b7e21e3c8f9a693c590bc399accb3b013ba00"
+    },
+    {
+      "path": "icons/ic_no_orders.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_no_orders.svg",
+      "bytes": 576,
+      "sha256": "2064beeea9b9398d146c0360b378eb788c550903a9df084452ec990d2575a7af"
+    },
+    {
+      "path": "icons/ic_no_product.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_no_product.svg",
+      "bytes": 637,
+      "sha256": "ad3e94dd641d69d89422fd8be2f91201b706cf738293c0198dced3710ef60a25"
+    },
+    {
+      "path": "icons/ic_no_reservations.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_no_reservations.svg",
+      "bytes": 1765,
+      "sha256": "d0bb13ba43de93cbb36d016abae7d891d04a964ad9f2425601525143809a3ae7"
+    },
+    {
+      "path": "icons/ic_not_favorite.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_not_favorite.svg",
+      "bytes": 1161,
+      "sha256": "7903bf95d93769802c0227b3c700178237fa4ba482bf96ab22c88bde258410da"
+    },
+    {
+      "path": "icons/ic_notifications.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_notifications.svg",
+      "bytes": 630,
+      "sha256": "d694648407d5a24c9dd2da5e8bef055055e01ea51739057bf933f111986e09b0"
+    },
+    {
+      "path": "icons/ic_office.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_office.svg",
+      "bytes": 688,
+      "sha256": "809ac2a7706a8926ff53e57599f69ae259ffc5c77632c883be3d513b7b8f1dbc"
+    },
+    {
+      "path": "icons/ic_orders_history.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_orders_history.svg",
+      "bytes": 646,
+      "sha256": "b76343f559f82601c9661dcdfb66f9e70341eca1451eebe9fc002ece189f233f"
+    },
+    {
+      "path": "icons/ic_pause.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_pause.svg",
+      "bytes": 890,
+      "sha256": "af7c5eaab7f9ee36f475f8e8b0c345880afd1b5ec55342f1e193903cd8a8d31c"
+    },
+    {
+      "path": "icons/ic_pay_with_apple.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_pay_with_apple.svg",
+      "bytes": 2337,
+      "sha256": "7a38116f779e23c134263a0a077477dd3d7b34710096add37ecc9d6028876271"
+    },
+    {
+      "path": "icons/ic_pencil.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_pencil.svg",
+      "bytes": 824,
+      "sha256": "5be1270dfe3752e542ac9ae7fe6913ddea1cc05a5bea1b0a221cd88244efc424"
+    },
+    {
+      "path": "icons/ic_percentage.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_percentage.svg",
+      "bytes": 1752,
+      "sha256": "ca637aa79c88fd9c51ecc2969d906732603389708ef7ef11c6cc291d434516a7"
+    },
+    {
+      "path": "icons/ic_person.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_person.svg",
+      "bytes": 635,
+      "sha256": "987ff345114bd980da430344ebc6fb88830a8455c5ab9f7b04c412b441e8152c"
+    },
+    {
+      "path": "icons/ic_phone.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_phone.svg",
+      "bytes": 3427,
+      "sha256": "f6f89dc56a423fdee148433ee70ae4707ab0fdee2c27ce62d41f9d60599b1e2e"
+    },
+    {
+      "path": "icons/ic_play.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_play.svg",
+      "bytes": 340,
+      "sha256": "22522da8ee390bde3daf2312bca21885b06693580a5cd0a3dc379046f284460d"
+    },
+    {
+      "path": "icons/ic_plus1.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_plus1.svg",
+      "bytes": 521,
+      "sha256": "7d7c992f31ba79035bf6423f1ae42c58ee5f10e67d8227a43fd0abf286b6bb3e"
+    },
+    {
+      "path": "icons/ic_plus2.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_plus2.svg",
+      "bytes": 997,
+      "sha256": "5b2e126585a3913e39d59e14b58d9575e01ba3f3d557620141b3294d9f253588"
+    },
+    {
+      "path": "icons/ic_priority_delivery_available.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_priority_delivery_available.svg",
+      "bytes": 939,
+      "sha256": "4d3887564049cfd55b55b011847bd398a98bf6d8b8fc2bc449d799f88d2d55ad"
+    },
+    {
+      "path": "icons/ic_radio_disabled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_radio_disabled.svg",
+      "bytes": 287,
+      "sha256": "a748910762f4572685c4458257a21219a141fadc1ddf6af1e0e353c22f138906"
+    },
+    {
+      "path": "icons/ic_red_clock.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_red_clock.svg",
+      "bytes": 638,
+      "sha256": "b2bf3f5308635d7edbb85343142e309dba21aecb723c260946afc6374d37c502"
+    },
+    {
+      "path": "icons/ic_red_currency.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_red_currency.svg",
+      "bytes": 1043,
+      "sha256": "e27da03db11626048186fe275f72f58f9eae37ffdc6e471c70279f5c9fe937bf"
+    },
+    {
+      "path": "icons/ic_red_dot.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_red_dot.svg",
+      "bytes": 144,
+      "sha256": "1cb096b931953d04d829a40599cfb1063f5bbf7ec4a58b7780497dc79796b260"
+    },
+    {
+      "path": "icons/ic_red_home.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_red_home.svg",
+      "bytes": 1867,
+      "sha256": "cf5454fd126315cdb12c3d1c68511c0e04e19bd6957b8df36a9cfea2b8ce1ba6"
+    },
+    {
+      "path": "icons/ic_red_union.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_red_union.svg",
+      "bytes": 659,
+      "sha256": "7ef7f67cdd9dcc47101c1d67b1cca471cb122cf66f462c4bd3e59e4af6b0f682"
+    },
+    {
+      "path": "icons/ic_refresh.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_refresh.svg",
+      "bytes": 796,
+      "sha256": "ffd731db6946133494ba0ad43feef058245a8ed0ca3343ebcd9c0b4ea90a0fbc"
+    },
+    {
+      "path": "icons/ic_region.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_region.svg",
+      "bytes": 1813,
+      "sha256": "b5719ef5549227812631680d920017f225a42d42407b6e0af2af1a341d09a443"
+    },
+    {
+      "path": "icons/ic_replacement.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_replacement.svg",
+      "bytes": 951,
+      "sha256": "78beff338e1e89d2c4a49e8eee99c616eb4eed8326820c04d803a9fba0656c1a"
+    },
+    {
+      "path": "icons/ic_saved_baskets.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_saved_baskets.svg",
+      "bytes": 2524,
+      "sha256": "f76735daddede3b15efb9629458dcc84c1ad81c2829dc3d35fca06e3bc6d6a7c"
+    },
+    {
+      "path": "icons/ic_selected.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_selected.svg",
+      "bytes": 224,
+      "sha256": "6b7f10c520a56a2a8e79cf7aec0a9f145850abd6913834c777681eca07e9b16c"
+    },
+    {
+      "path": "icons/ic_share.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_share.svg",
+      "bytes": 1007,
+      "sha256": "16666475b270a7fa2005d43d171055f9cc9ed5752c645e9abaad6395a551963c"
+    },
+    {
+      "path": "icons/ic_shipping.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_shipping.svg",
+      "bytes": 3262,
+      "sha256": "9a1ee36c9650f6f78bab4b474483a291fcf445b2dbf34792b3a0ddc79aadfd99"
+    },
+    {
+      "path": "icons/ic_shopping_cart.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_shopping_cart.svg",
+      "bytes": 730,
+      "sha256": "64cba2730656cf90e797518b4f4194494569d60aa0578ad443ebbbe9c030c90f"
+    },
+    {
+      "path": "icons/ic_sort.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_sort.svg",
+      "bytes": 796,
+      "sha256": "e5fff23f00fcaf3ae37c46f1e6ca98a71c066071e05da3104aec3a3ead17f0aa"
+    },
+    {
+      "path": "icons/ic_sort_2.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_sort_2.svg",
+      "bytes": 239,
+      "sha256": "668c4a8b66696d07477f0adab2ab03ae95721a61639d425eb423c14737e5598d"
+    },
+    {
+      "path": "icons/ic_star.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_star.svg",
+      "bytes": 1275,
+      "sha256": "fbc478a127a8cc0fe168a49d04342ee7e88f045999b46fe0ed0c8b0cb99cad46"
+    },
+    {
+      "path": "icons/ic_star_filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_star_filled.svg",
+      "bytes": 785,
+      "sha256": "f3a505667ce1531c901c461b5e66854af34dae318c6c967d29dd2866b818777d"
+    },
+    {
+      "path": "icons/ic_star_outline.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_star_outline.svg",
+      "bytes": 1219,
+      "sha256": "21fccff21fd087c1bb19bdd019ddefafbedf483eb5be31af9e8ccc7dd336f46c"
+    },
+    {
+      "path": "icons/ic_success.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_success.svg",
+      "bytes": 432,
+      "sha256": "7e097f471518b20a4c798f79f9edb73c4ea069cc31d60bd40a65c0f54c378b13"
+    },
+    {
+      "path": "icons/ic_switch_off.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_switch_off.svg",
+      "bytes": 276,
+      "sha256": "a5fa608b76b6bd72f42012f2df5ad73bc1a02e20a7123f92d803807a3a4ce47b"
+    },
+    {
+      "path": "icons/ic_switch_on.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_switch_on.svg",
+      "bytes": 241,
+      "sha256": "5222a3590427b69deba1d0523489d7485f2f132a6cd7e87b5cf50d21dbd2c239"
+    },
+    {
+      "path": "icons/ic_thanks_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_thanks_card.svg",
+      "bytes": 346,
+      "sha256": "5796b788f7d99da82efec3d6d1db426bbbab43597f1b587e9049e7465df8e36f"
+    },
+    {
+      "path": "icons/ic_today_baked.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_today_baked.svg",
+      "bytes": 2292,
+      "sha256": "6bc07f3821bb1ecb2dfc729db1067d084e90c90effc8e1e1846916d149536b41"
+    },
+    {
+      "path": "icons/ic_trash_bin.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_trash_bin.svg",
+      "bytes": 940,
+      "sha256": "54874fc2694701ebc002ae72b0e354c81a109258b16b2d6d79c810577f749f9c"
+    },
+    {
+      "path": "icons/ic_unknown_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_unknown_card.svg",
+      "bytes": 626,
+      "sha256": "440990bfb551217a90dae467d2ad1b70a5de5bfb07e4c1425ca7da00184f04ef"
+    },
+    {
+      "path": "icons/ic_update_app.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_update_app.svg",
+      "bytes": 949,
+      "sha256": "e7690d80988c5580d8be2637c0448ea3c7da3fda65944c665762031bf6ba3066"
+    },
+    {
+      "path": "icons/ic_update_phone.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_update_phone.svg",
+      "bytes": 1288,
+      "sha256": "346217e997aabe02965db999e7e147513f02c8b0486a9d8396cddc0aba1f1a5b"
+    },
+    {
+      "path": "icons/ic_visa.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_visa.svg",
+      "bytes": 1342,
+      "sha256": "bf36148b6bcd74d2a6389ce046ea3c66ac6158b387766800b5b059f1fb18c35d"
+    },
+    {
+      "path": "icons/ic_visa_logo.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_visa_logo.svg",
+      "bytes": 1216,
+      "sha256": "de006e8253e95a9ed588be866d2ddc4e119decc424de4264572de89416107570"
+    },
+    {
+      "path": "icons/ic_waiting.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_waiting.svg",
+      "bytes": 1630,
+      "sha256": "ea3b5467b102a02cdcf254a3228a5e14fcd42b685346e4c120e0f72e3ae0fd6c"
+    },
+    {
+      "path": "icons/ic_warning.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_warning.svg",
+      "bytes": 1691,
+      "sha256": "5d3ed8ccf4ca86c5dd43aebbe1f6045d9be2ae53f1fb1479dc63dce8ad73e028"
+    },
+    {
+      "path": "icons/ic_warning_app.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_warning_app.svg",
+      "bytes": 721,
+      "sha256": "e99ba0a57bb06112444c5424b9c93af1d3987949fcdb5424f61c772f124fac85"
+    },
+    {
+      "path": "icons/ic_zloty.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/ic_zloty.svg",
+      "bytes": 649,
+      "sha256": "963605d28b3cc8c183a6e2dc31a0b70a1de209dcac892ea5705c1ab0262d795e"
+    },
+    {
+      "path": "icons/icon_search.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/icon_search.svg",
+      "bytes": 589,
+      "sha256": "653692a4c8444e716d0b2b374dbadc8db6a8a0e5a8322700e0f4e39034b65ca8"
+    },
+    {
+      "path": "icons/lowest_price_tag.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/lowest_price_tag.svg",
+      "bytes": 975,
+      "sha256": "0f283633ee36f685d689ca134b84b444f66368a02fb5f82f251774681c2b1153"
+    },
+    {
+      "path": "icons/minus%20light.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/minus%20light.svg",
+      "bytes": 316,
+      "sha256": "259e7068426655debdc972a07a3e86eeb45b12002e81ecf76175403f4d6042e1"
+    },
+    {
+      "path": "icons/no_internet_icon.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/no_internet_icon.svg",
+      "bytes": 1372,
+      "sha256": "f71f0c637e93c904eec4d50cad846669f844ac9b0c7b3488f909102232ad770b"
+    },
+    {
+      "path": "icons/orders.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/orders.svg",
+      "bytes": 2827,
+      "sha256": "4f50703314ad6a87afbdd2c5d7d5353757258f257394833a9671e45eb9d1e007"
+    },
+    {
+      "path": "icons/pick_up_shop.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/pick_up_shop.svg",
+      "bytes": 2185,
+      "sha256": "ede3264de752d9c070a354da3e6c6b29c1db08fcf476165181b7446b6b4bc6f6"
+    },
+    {
+      "path": "icons/plus%20light.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/plus%20light.svg",
+      "bytes": 558,
+      "sha256": "555ea3c418ac6d8b48fad88d0e33c0a946d3b6ce0ac7828ac4fbdb7126a8e923"
+    },
+    {
+      "path": "icons/trash_bin.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/trash_bin.svg",
+      "bytes": 956,
+      "sha256": "c5aeec8cf6b67a00d69dca9d5edf051d0285a6703c674a359cb5260bf94ffbf9"
+    },
+    {
+      "path": "icons/trash_bin_small.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/trash_bin_small.svg",
+      "bytes": 1192,
+      "sha256": "d1affa1bf53869a24db80830db9dd70443dac8e1b1a7e43780062c51c50d8b4f"
+    },
+    {
+      "path": "icons/unreachable_icon.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/unreachable_icon.svg",
+      "bytes": 987,
+      "sha256": "905acfe3fcdcab9bcf2e65d36f877657a3d2441efcfe0c8d5e05be72f0074e4f"
+    },
+    {
+      "path": "icons/visibility_off.png",
+      "apkEntry": "assets/flutter_assets/assets/icons/visibility_off.png",
+      "bytes": 1950,
+      "sha256": "dbd981527addca0ed0e8217f3e5fcb3cbd78d55b2d35d3fefc209037bc26676f"
+    },
+    {
+      "path": "icons/visibility_on.png",
+      "apkEntry": "assets/flutter_assets/assets/icons/visibility_on.png",
+      "bytes": 2012,
+      "sha256": "fe51b198877495f226ab39527bb0da06bd33c6824d072e3c67ea04bbd56575f7"
+    },
+    {
+      "path": "icons/warning-filled.svg",
+      "apkEntry": "assets/flutter_assets/assets/icons/warning-filled.svg",
+      "bytes": 513,
+      "sha256": "bd0087679cf22e79fde8aafb0cfb692057189791716b66f4ee3aad7795fe12da"
+    },
+    {
+      "path": "images/barbora_404.png",
+      "apkEntry": "assets/flutter_assets/assets/images/barbora_404.png",
+      "bytes": 41151,
+      "sha256": "7f64351cebd2def32b52d0b774eb434653797f36fb5aa39501b2a940563af7dc"
+    },
+    {
+      "path": "images/barbora_express_logo.png",
+      "apkEntry": "assets/flutter_assets/assets/images/barbora_express_logo.png",
+      "bytes": 45687,
+      "sha256": "eb6cda93a0b4178b9ae916a6a63f428a274563aafbfcdb12a1461a96329c4a0d"
+    },
+    {
+      "path": "images/barbora_main_logo.png",
+      "apkEntry": "assets/flutter_assets/assets/images/barbora_main_logo.png",
+      "bytes": 70338,
+      "sha256": "f24fb7bc96e954b246e5c9dc3ffb82429bf37ad57b025a6beb53c3bf2d880b81"
+    },
+    {
+      "path": "images/ic_donate_maistobankas_logo.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/ic_donate_maistobankas_logo.svg",
+      "bytes": 10866,
+      "sha256": "aa1d3fc0a96d81432974772f9ce842d0e1c35c674d642584bbe22b6d19a3040e"
+    },
+    {
+      "path": "images/ic_donate_maltieciai_logo.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/ic_donate_maltieciai_logo.svg",
+      "bytes": 25898,
+      "sha256": "0457717b53f1bc325da9dedf5bb7266d7ae43f46b2737e858fca1f3275e0fc76"
+    },
+    {
+      "path": "images/ic_donate_paedusai.png",
+      "apkEntry": "assets/flutter_assets/assets/images/ic_donate_paedusai.png",
+      "bytes": 421755,
+      "sha256": "a09aceffef00f7eb76c5b75a8494bb8baebc1ebdf76b4e567833caa435c2f58a"
+    },
+    {
+      "path": "images/ic_donate_toidupank_ee.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/ic_donate_toidupank_ee.svg",
+      "bytes": 5168,
+      "sha256": "63bd4369372a718e75c20c75f87451dd6a4e713a5683e7c60a9bf49566703766"
+    },
+    {
+      "path": "images/ic_donation_palidzesim_lv.png",
+      "apkEntry": "assets/flutter_assets/assets/images/ic_donation_palidzesim_lv.png",
+      "bytes": 52592,
+      "sha256": "bb316fcc2859067c7f87a263039030c4cb37afef4917a638be39fbf0717eda72"
+    },
+    {
+      "path": "images/ic_donation_ziedot_lv.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/ic_donation_ziedot_lv.svg",
+      "bytes": 5371,
+      "sha256": "47fc6e05e52a8b46133d389288782c1c79976163543d554fd4c5edad62d3f000"
+    },
+    {
+      "path": "images/img_groceries_bag.png",
+      "apkEntry": "assets/flutter_assets/assets/images/img_groceries_bag.png",
+      "bytes": 864442,
+      "sha256": "a98b695b5a3c9a8706f2f195f0b52aff8fdd4dbe9f95030f8b67d260e6e0c3f5"
+    },
+    {
+      "path": "images/logo_barbora_bonus.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/logo_barbora_bonus.svg",
+      "bytes": 8702,
+      "sha256": "43c0ca7f020ae040a0f9ccb6d9d174aa27d2d6942a11cd491fec8be05c5fa59b"
+    },
+    {
+      "path": "images/made_in_eu_eco.png",
+      "apkEntry": "assets/flutter_assets/assets/images/made_in_eu_eco.png",
+      "bytes": 11877,
+      "sha256": "f7888077022a6a6f37fe8990ff97dda2cc9a6ebb9d922b8ee8ba3503195934da"
+    },
+    {
+      "path": "images/made_in_lt_eco.jpeg",
+      "apkEntry": "assets/flutter_assets/assets/images/made_in_lt_eco.jpeg",
+      "bytes": 40921,
+      "sha256": "cab77561641bef45753ac2c4c1715d559869077a36633d041ff355fb1bbd4107"
+    },
+    {
+      "path": "images/no_internet.png",
+      "apkEntry": "assets/flutter_assets/assets/images/no_internet.png",
+      "bytes": 42054,
+      "sha256": "96a1bd28581ee24977a3c46f63c88cea80e1a6e2e9639d66adb7536d222cda82"
+    },
+    {
+      "path": "images/onboarding.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/onboarding.svg",
+      "bytes": 14893,
+      "sha256": "61f4e909450d0969c040f4729068a1b1859b087b333a3b40b99111aaf42d6f65"
+    },
+    {
+      "path": "images/paper_pic.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/paper_pic.svg",
+      "bytes": 63360,
+      "sha256": "ecec5399ec9f71c0c389c494de47ff7a7b54f936bb74c245941cc3b473ea6085"
+    },
+    {
+      "path": "images/plastic_pic.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/plastic_pic.svg",
+      "bytes": 29927,
+      "sha256": "a65b2b3ae3fb49190fe4e285ac28364ef758e47ae12337f52dae00f25da15f69"
+    },
+    {
+      "path": "images/server_down.png",
+      "apkEntry": "assets/flutter_assets/assets/images/server_down.png",
+      "bytes": 46621,
+      "sha256": "428dd53d1247cbdaaa074c9c8caa53994cb0924e9b2c2ed791c50b7eb70bb960"
+    },
+    {
+      "path": "images/substitutes_logo.svg",
+      "apkEntry": "assets/flutter_assets/assets/images/substitutes_logo.svg",
+      "bytes": 919693,
+      "sha256": "b8a1b6f35502a3e8374cb8d5d22a53dd06844479b65b26c990a7a70781fada48"
+    },
+    {
+      "path": "logo/barbora.svg",
+      "apkEntry": "assets/flutter_assets/assets/logo/barbora.svg",
+      "bytes": 3745,
+      "sha256": "2d0e6c936748acafd4149762b48aa903539f963e526232097a12f74626c279e6"
+    },
+    {
+      "path": "logo/barbora_express.svg",
+      "apkEntry": "assets/flutter_assets/assets/logo/barbora_express.svg",
+      "bytes": 6190,
+      "sha256": "50278e58b41e9c4306fc6937736df3dae11743cfe3f4b923ffe1304e3b8e6437"
+    },
+    {
+      "path": "logo/barbora_next_app_bar_logo.svg",
+      "apkEntry": "assets/flutter_assets/assets/logo/barbora_next_app_bar_logo.svg",
+      "bytes": 3822,
+      "sha256": "6702431bf58bcd7996c0afe4db048e9af974dab88b7b6a16f19bb0826f6d35f2"
+    },
+    {
+      "path": "logo/barbora_white.svg",
+      "apkEntry": "assets/flutter_assets/assets/logo/barbora_white.svg",
+      "bytes": 3659,
+      "sha256": "6760c494e3a30ae51447485066d519c31a6ac3816c705958860e554e836148de"
+    },
+    {
+      "path": "logo/logo_large_barbora.svg",
+      "apkEntry": "assets/flutter_assets/assets/logo/logo_large_barbora.svg",
+      "bytes": 3726,
+      "sha256": "12df98be0dadfcbdb595203a8d6ec996bf5594220b967c1a254b32f2bf2f337c"
+    },
+    {
+      "path": "order_summary/download_invoice.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/download_invoice.svg",
+      "bytes": 755,
+      "sha256": "d7363fa1683ae94d7b2116e67b7c411db7292419b20b96fcf241933071a7bf16"
+    },
+    {
+      "path": "order_summary/image_not_found.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/image_not_found.svg",
+      "bytes": 606,
+      "sha256": "d5783f980d9a19cb7c7ec256238dd0a4770093d0f58b764cab63d26c210e23b9"
+    },
+    {
+      "path": "order_summary/order_error.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/order_error.svg",
+      "bytes": 766,
+      "sha256": "17769b78a9f0fb4b6dbaf93a7c36c8097f075d96fad281928508c74a7feb95be"
+    },
+    {
+      "path": "order_summary/order_pending.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/order_pending.svg",
+      "bytes": 544,
+      "sha256": "1e42a04afb2d57a17f1f7bb592200798d0ff0535f88ed549b456d2f9795c4ed9"
+    },
+    {
+      "path": "order_summary/order_proforma.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/order_proforma.svg",
+      "bytes": 1038,
+      "sha256": "88bcfa2da821b650ef81499295508221fc113924902862666689d9b1eb58331b"
+    },
+    {
+      "path": "order_summary/order_success.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/order_success.svg",
+      "bytes": 329,
+      "sha256": "bc3964320eb73adf117eb45a3bc0f8d0672362a0f283d5c89be387bc41791514"
+    },
+    {
+      "path": "order_summary/subscribe_offers.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/subscribe_offers.svg",
+      "bytes": 3020,
+      "sha256": "a8b6df382cb5605ce12fbef6fcd0a46f951f12532ec294d5a956883741994a95"
+    },
+    {
+      "path": "order_summary/subscription_confirmed.svg",
+      "apkEntry": "assets/flutter_assets/assets/order_summary/subscription_confirmed.svg",
+      "bytes": 553,
+      "sha256": "d8cd120f49b7c154a6fc1351d9ffc6d3bdd9206f6d8ea4c702c0e5cb305c2353"
+    },
+    {
+      "path": "popular_categories/ic_aciu_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_aciu_card.svg",
+      "bytes": 20421,
+      "sha256": "461d18710ed77187d937adace861f415a3bbbb9452f316fded52d19a30d422b4"
+    },
+    {
+      "path": "popular_categories/ic_aitah_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_aitah_card.svg",
+      "bytes": 7773,
+      "sha256": "6f4b37362a13cc5e851268c65a80ad702d378b346e72c110688357b6743e15ef"
+    },
+    {
+      "path": "popular_categories/ic_gift.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_gift.svg",
+      "bytes": 729,
+      "sha256": "d4135dd0ccd1e75805aecdd0aaf068b6f303e5b3854ff3623d3b950497f466dc"
+    },
+    {
+      "path": "popular_categories/ic_glass.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_glass.svg",
+      "bytes": 1618,
+      "sha256": "0f143cfe899bd4221ecbe9b2f6dd3324b4a640b2aa1ddc2937155323de5ed8aa"
+    },
+    {
+      "path": "popular_categories/ic_glassware.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_glassware.svg",
+      "bytes": 430,
+      "sha256": "ac4d5dbce1c5d9e25e38130f6e754503217e5c34b33e6ef6184c970a27a6e3f8"
+    },
+    {
+      "path": "popular_categories/ic_my_items.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_my_items.svg",
+      "bytes": 1191,
+      "sha256": "b0101b7e082bd7a54af7a40d17b52d7c696443e97d6d827f687d1101c0c22eac"
+    },
+    {
+      "path": "popular_categories/ic_new.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_new.svg",
+      "bytes": 419,
+      "sha256": "3548da84d1b099800b564d8903a826e948b96187d0b4315b4e8e45bd8b734466"
+    },
+    {
+      "path": "popular_categories/ic_organic_products.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_organic_products.svg",
+      "bytes": 2730,
+      "sha256": "a550210d1ecf53537fbcadb323a77bb7c848a4270a7c8248c7a9c46d95a10980"
+    },
+    {
+      "path": "popular_categories/ic_our_recommendations.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_our_recommendations.svg",
+      "bytes": 403,
+      "sha256": "1d027b730bc00091a4dd0ef027656a6f2e0499848da9c9e405a8e009d7f73d78"
+    },
+    {
+      "path": "popular_categories/ic_paldies_card.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_paldies_card.svg",
+      "bytes": 10547,
+      "sha256": "ce1040c6d6b748b58c539bffb0cd74e60a7e125e8dd1816d9a0b39652211158a"
+    },
+    {
+      "path": "popular_categories/ic_special_offers.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_special_offers.svg",
+      "bytes": 2686,
+      "sha256": "08eafd6c80df16b232db73b2cbcf768195a0adfac0fd3bd5b8ee57ad5c7b1e76"
+    },
+    {
+      "path": "popular_categories/ic_well_done.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_well_done.svg",
+      "bytes": 13162,
+      "sha256": "3e38167d154ce9e889d3850160c722e7351a7c0cfc577fa4bcb9498fb13c6085"
+    },
+    {
+      "path": "popular_categories/ic_well_done_premium.svg",
+      "apkEntry": "assets/flutter_assets/assets/popular_categories/ic_well_done_premium.svg",
+      "bytes": 21401,
+      "sha256": "60eae4140eb4fad2024d2ef7dee8730cb3bdd8c5288ebff6c60565c6138b49ec"
+    },
+    {
+      "path": "promotion_beads/aciu-1.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/aciu-1.svg",
+      "bytes": 6865,
+      "sha256": "fd859632a29c9148418b546e09624e06209b9033cbe12e2a50e934fa35c4abad"
+    },
+    {
+      "path": "promotion_beads/aciu-2.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/aciu-2.svg",
+      "bytes": 6864,
+      "sha256": "7234c9da275b694663dea94cbbc70dd0d83df8a0064fed9402823a83aaec1651"
+    },
+    {
+      "path": "promotion_beads/aciu.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/aciu.svg",
+      "bytes": 6870,
+      "sha256": "27777e31184bd4cc9817c74f2a7ce924761b54d43ba90d28b8eb8ff1c088c763"
+    },
+    {
+      "path": "promotion_beads/aitah-1.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/aitah-1.svg",
+      "bytes": 7448,
+      "sha256": "bce569ba7ffd4ef452dfe39f8711757c3c19d12682914bac1c3917acf6ce6ddc"
+    },
+    {
+      "path": "promotion_beads/aitah-2.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/aitah-2.svg",
+      "bytes": 7448,
+      "sha256": "4ec147fe581910fca1288983832482cfd3a6cec6653ad0f3a9bd7206e1a8047a"
+    },
+    {
+      "path": "promotion_beads/aitah.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/aitah.svg",
+      "bytes": 7443,
+      "sha256": "fec52a4f894a841d1baf68ae84c993ec725dae47af4996cec38a6de09fec26a6"
+    },
+    {
+      "path": "promotion_beads/hamilton_quality.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/hamilton_quality.svg",
+      "bytes": 65400,
+      "sha256": "c9f90c0aa18c6b51038cb9d58b4db9fc2fc23822ebc50121b35e76a59b152096"
+    },
+    {
+      "path": "promotion_beads/paldies-1.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/paldies-1.svg",
+      "bytes": 10280,
+      "sha256": "97e6b05e2833104e9d3658b3843ddbc4412ec0a6188e0ae3a9eed3978aeac2f5"
+    },
+    {
+      "path": "promotion_beads/paldies-2.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/paldies-2.svg",
+      "bytes": 10280,
+      "sha256": "9e44a7ae9c82f406d62774dad81a8aa4c456f4255bbd5af794a9f846b0897b14"
+    },
+    {
+      "path": "promotion_beads/paldies.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/paldies.svg",
+      "bytes": 10274,
+      "sha256": "71d52b166801d639dd489e1699646aa36a192fd95b4d614227014e36aa6adfb1"
+    },
+    {
+      "path": "promotion_beads/tail_large.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/tail_large.svg",
+      "bytes": 2136,
+      "sha256": "e7191ca47493ea90f5ab9c6105b15e6c9363d3298c5753d294da38149908cd56"
+    },
+    {
+      "path": "promotion_beads/tail_medium.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/tail_medium.svg",
+      "bytes": 1058,
+      "sha256": "b3aad28a1ffa05fceb88bc136c6bdc07ad1df7416f1f20c605253d12b2839fee"
+    },
+    {
+      "path": "promotion_beads/tail_small.svg",
+      "apkEntry": "assets/flutter_assets/assets/promotion_beads/tail_small.svg",
+      "bytes": 1031,
+      "sha256": "213df6bb152512d49b6aab49cbedd4b02dc9134e44f106a81f3e730666f7d5eb"
+    },
+    {
+      "path": "fonts/MaterialIcons-Regular.otf",
+      "apkEntry": "assets/flutter_assets/fonts/MaterialIcons-Regular.otf",
+      "bytes": 4408,
+      "sha256": "342c55d28e5c8924399b491844e9c01b5ccde26d8279ad411bd1101e19fd3ba2"
+    },
+    {
+      "path": "fonts/OpenSans-Bold.ttf",
+      "apkEntry": "assets/flutter_assets/fonts/OpenSans-Bold.ttf",
+      "bytes": 104120,
+      "sha256": "f7916a37377e38527d4306303cfe89b653b49b0a6b0b05c6b7593f7ab0248da8"
+    },
+    {
+      "path": "fonts/OpenSans-Regular.ttf",
+      "apkEntry": "assets/flutter_assets/fonts/OpenSans-Regular.ttf",
+      "bytes": 96932,
+      "sha256": "037236ed4bf58a85f67074c165d308260fd6be01c86d7df4e79ea16eb273f8c5"
+    },
+    {
+      "path": "fonts/OpenSans-SemiBold.ttf",
+      "apkEntry": "assets/flutter_assets/fonts/OpenSans-SemiBold.ttf",
+      "bytes": 100820,
+      "sha256": "5e8d9e1a89083cd1b0849993fe2f3acc9aa33b7f439f7e8616872f6897f30684"
+    },
+    {
+      "path": "fonts/RobotoMono-Medium.ttf",
+      "apkEntry": "assets/flutter_assets/fonts/RobotoMono-Medium.ttf",
+      "bytes": 109292,
+      "sha256": "8e3fc643b30cff29c10e5f57534d2ffcf791f1319dff30c3e37c2b6b5e3d679f"
+    },
+    {
+      "path": "fonts/Verdana-Bold.ttf",
+      "apkEntry": "assets/flutter_assets/fonts/Verdana-Bold.ttf",
+      "bytes": 124872,
+      "sha256": "4b0e22422bdcb925bce4516991474cb0575e4b301304618eade3be4868566524"
+    },
+    {
+      "path": "fonts/Verdana.ttf",
+      "apkEntry": "assets/flutter_assets/fonts/Verdana.ttf",
+      "bytes": 153096,
+      "sha256": "50d20e0413026bb12d794659ee7834375cd99c45603775f1e05b25204980ccc8"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-Bold.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-Bold.ttf",
+      "bytes": 130860,
+      "sha256": "5f4c6f0c6beae94863a099a7a538059c480f91587f1abffc06552e9fa3a44f40"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-BoldItalic.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-BoldItalic.ttf",
+      "bytes": 136360,
+      "sha256": "c7e0a936ff0f08b6726cf205126a5e6dd6ae1340111325f7e86cbba1408e82d7"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-ExtraBold.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-ExtraBold.ttf",
+      "bytes": 131244,
+      "sha256": "1c5a37e45cdeb42a94314e7beb51d8027edca0bc7e2b42f218e34475df974aa3"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-ExtraBoldItalic.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-ExtraBoldItalic.ttf",
+      "bytes": 136928,
+      "sha256": "5beb62f58f3498e15301f0dc9258b551bf7c7f1011c63e8b927c1dd97b2669d4"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-Italic.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-Italic.ttf",
+      "bytes": 136604,
+      "sha256": "dd74eb2d271b57ef5c382a97403818715bfb6b1d53d7fa6da9c88336763651fb"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-Light.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-Light.ttf",
+      "bytes": 130804,
+      "sha256": "0ceb0091b5426ef576c9e8f9f17fb010c3bddbb405250742887eeba92b382b4d"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-LightItalic.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-LightItalic.ttf",
+      "bytes": 136896,
+      "sha256": "a76fba7c9af22f79197d92933a062ce686ef691d26b075880041a69c8c510268"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-Medium.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-Medium.ttf",
+      "bytes": 130976,
+      "sha256": "23e3e3945f88eaeb3152fc70eab7377e0c76f3a3c28f2f24b041f87fb8b001a3"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-MediumItalic.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-MediumItalic.ttf",
+      "bytes": 136796,
+      "sha256": "4033e6aa44ec9e7555707b1db0fda677aaef877522e3888a9d4b998e1827172a"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-Regular.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-Regular.ttf",
+      "bytes": 130832,
+      "sha256": "33e93bec67d91c396876db50694213802a39e43a911bb5c22322f0dbdf4d5e43"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-SemiBold.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-SemiBold.ttf",
+      "bytes": 130760,
+      "sha256": "126a7c4db92d11e83360fb8cb120b880a5a619845fd545a7556d41e96d1aa9e7"
+    },
+    {
+      "path": "barbora_ui/fonts/OpenSans-SemiBoldItalic.ttf",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/fonts/OpenSans-SemiBoldItalic.ttf",
+      "bytes": 136724,
+      "sha256": "c8835e06674734947f3efed7550096ed07f84789d97e5c20db86b761de81c262"
+    },
+    {
+      "path": "barbora_ui/icons/action/barcode-scanner.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/barcode-scanner.svg",
+      "bytes": 1990,
+      "sha256": "cd58f1992671b99cd72623432c366b377c69731c888eabbf883a46ac904ede07"
+    },
+    {
+      "path": "barbora_ui/icons/action/circled-checkmark.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/circled-checkmark.svg",
+      "bytes": 553,
+      "sha256": "04d57730d2ab0abfca80cce584c329dfe1ff469ebece6a6cd8bcadf8d965ef38"
+    },
+    {
+      "path": "barbora_ui/icons/action/cross-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/cross-filled.svg",
+      "bytes": 793,
+      "sha256": "d8a0a081f23dfc240d6109c18c661092ad454c205ec84e5d80d980182d91d64f"
+    },
+    {
+      "path": "barbora_ui/icons/action/cross.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/cross.svg",
+      "bytes": 623,
+      "sha256": "cd3bfb78eb2647c24346cc1d0b592d642f3121e7a67675606309ce3d66d73592"
+    },
+    {
+      "path": "barbora_ui/icons/action/download.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/download.svg",
+      "bytes": 702,
+      "sha256": "93bcbaa09e8cf099672a3aebca7c36a9068870e4fdb061afeb5ab8c48a9b3cc3"
+    },
+    {
+      "path": "barbora_ui/icons/action/external-link.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/external-link.svg",
+      "bytes": 1252,
+      "sha256": "a75cd28bb732bd29b9c92a17124dad28686b683b61078b4e2a5464143efc67be"
+    },
+    {
+      "path": "barbora_ui/icons/action/eye-off.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/eye-off.svg",
+      "bytes": 1549,
+      "sha256": "153e2ad1666f4b6dd0f19f8ad644ff1e619ad2b4585f802a0670861d669b73c6"
+    },
+    {
+      "path": "barbora_ui/icons/action/eye.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/eye.svg",
+      "bytes": 927,
+      "sha256": "74cd555c18ad8c0d9dfa69332fd4cc4b5691a16d5bba7111fc75ffb2b65deba9"
+    },
+    {
+      "path": "barbora_ui/icons/action/faq.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/faq.svg",
+      "bytes": 1448,
+      "sha256": "1744eb236011eac87207665c856712be9d340fe2ec1f70742a7e432392b319cf"
+    },
+    {
+      "path": "barbora_ui/icons/action/filter.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/filter.svg",
+      "bytes": 752,
+      "sha256": "3d427ce44cdafee723347640d21a3e8dee428a468512792445e939275ec16723"
+    },
+    {
+      "path": "barbora_ui/icons/action/globe.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/globe.svg",
+      "bytes": 1410,
+      "sha256": "94b22c30db8ded0befc535530ff2fd872069121179ef0d0421aeba3981b54883"
+    },
+    {
+      "path": "barbora_ui/icons/action/help.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/help.svg",
+      "bytes": 1685,
+      "sha256": "3f44d182b7917839069603ea2102c410259b739b96d77d5bd670392c5218699e"
+    },
+    {
+      "path": "barbora_ui/icons/action/info-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/info-filled.svg",
+      "bytes": 1600,
+      "sha256": "af8a921195757ce49308d5c50b73d9b8371f5a7581996c17d91521432a8a4315"
+    },
+    {
+      "path": "barbora_ui/icons/action/info.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/info.svg",
+      "bytes": 910,
+      "sha256": "33be56fda176c75965330dd80ec9dd80ad700f6f49e0510c5c027bcd06b7dfce"
+    },
+    {
+      "path": "barbora_ui/icons/action/link.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/link.svg",
+      "bytes": 394,
+      "sha256": "ec425304b1a312d2f0f80573fc04429cc5e94826d48a76be4aad4e496e77a5d5"
+    },
+    {
+      "path": "barbora_ui/icons/action/link_off.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/link_off.svg",
+      "bytes": 495,
+      "sha256": "6ab0671a4b2562b91508b8c9cfb536ef65f2395cda61fe7e948144c24ccb9b28"
+    },
+    {
+      "path": "barbora_ui/icons/action/list.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/list.svg",
+      "bytes": 646,
+      "sha256": "11c6da297b7c45d3df70e4145ea90ad06370f536670a213e8266e3f8f20c2eb6"
+    },
+    {
+      "path": "barbora_ui/icons/action/loader.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/loader.svg",
+      "bytes": 550,
+      "sha256": "0713c54be60058c2f819bc443da8d60d734011687e9f6c1af7bd475a065382d3"
+    },
+    {
+      "path": "barbora_ui/icons/action/logout.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/logout.svg",
+      "bytes": 971,
+      "sha256": "0f8d35fe0a704531d7a2e609ed928c0412049ca9e54ef9b337e5e85ef2140906"
+    },
+    {
+      "path": "barbora_ui/icons/action/microphone.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/microphone.svg",
+      "bytes": 768,
+      "sha256": "01060e26e975a235c2ced099fe555546c6a56ca12a8c0a0a4ba137ae0f3344dd"
+    },
+    {
+      "path": "barbora_ui/icons/action/minus-bold.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/minus-bold.svg",
+      "bytes": 285,
+      "sha256": "356e69660d182236d20144c903280f21cd0365424686d0ef72b672dfba8aeb53"
+    },
+    {
+      "path": "barbora_ui/icons/action/minus-circle.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/minus-circle.svg",
+      "bytes": 448,
+      "sha256": "1c21fbacd747de8980fa0d09295af1f644fb321a3443feb7976ba3a2e17a3eab"
+    },
+    {
+      "path": "barbora_ui/icons/action/minus-thin.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/minus-thin.svg",
+      "bytes": 316,
+      "sha256": "259e7068426655debdc972a07a3e86eeb45b12002e81ecf76175403f4d6042e1"
+    },
+    {
+      "path": "barbora_ui/icons/action/paperclip.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/paperclip.svg",
+      "bytes": 1066,
+      "sha256": "d841993f0e448d5054e1cf62d7ed3f839bfda782813c5f3aa4e3790a7385e931"
+    },
+    {
+      "path": "barbora_ui/icons/action/pencil.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/pencil.svg",
+      "bytes": 826,
+      "sha256": "c7146fea2989e173ed3c55acf66e8ec3ccc39df51b6070dfca3a796ed9772f30"
+    },
+    {
+      "path": "barbora_ui/icons/action/plus-bold.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/plus-bold.svg",
+      "bytes": 423,
+      "sha256": "cd70d1043f9073e26bf1f0f31c2b360f61aa2fd9020272d0e998f4a9b06561c9"
+    },
+    {
+      "path": "barbora_ui/icons/action/plus-circle-large.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/plus-circle-large.svg",
+      "bytes": 470,
+      "sha256": "656a408bc3c6aac4e4e237243ee26b4abedbfa8a6a153ca37b9e79b99f6dcc7a"
+    },
+    {
+      "path": "barbora_ui/icons/action/plus-circle-small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/plus-circle-small.svg",
+      "bytes": 505,
+      "sha256": "89f38a241e091686c63a79f2322b5e7499d24480b09d798747b19ca3a1f57a58"
+    },
+    {
+      "path": "barbora_ui/icons/action/plus-thin.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/plus-thin.svg",
+      "bytes": 558,
+      "sha256": "555ea3c418ac6d8b48fad88d0e33c0a946d3b6ce0ac7828ac4fbdb7126a8e923"
+    },
+    {
+      "path": "barbora_ui/icons/action/product-properties.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/product-properties.svg",
+      "bytes": 1209,
+      "sha256": "e22601d9869aff6bc9e7b85961f83b19fb9e51c2bc29c1dcb0c11a02b92c1af6"
+    },
+    {
+      "path": "barbora_ui/icons/action/search-large.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/search-large.svg",
+      "bytes": 691,
+      "sha256": "2c4e3100800a68b3a98d1f87b3f1d5ed6e91ade157d345f916cc6a4b56463f4c"
+    },
+    {
+      "path": "barbora_ui/icons/action/search-list-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/search-list-filled.svg",
+      "bytes": 1445,
+      "sha256": "26bd37aace4be87cb48f544380f722a7e0a9c11c1cb49d51f2152af32e778f20"
+    },
+    {
+      "path": "barbora_ui/icons/action/search-list.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/search-list.svg",
+      "bytes": 1573,
+      "sha256": "8eb8d6339736efed392471d60c5c360bc590ca3d56a86d611565c3d2a27afdc1"
+    },
+    {
+      "path": "barbora_ui/icons/action/search-small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/search-small.svg",
+      "bytes": 727,
+      "sha256": "0f474cadca81bc66d4cf7837a7171c05bf620e073c7ded291d837094fb3ca41a"
+    },
+    {
+      "path": "barbora_ui/icons/action/share.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/share.svg",
+      "bytes": 1007,
+      "sha256": "22d45b1da98ffd6d9396da52fca9c897f491e9adb92314fd5e3067b3b981249c"
+    },
+    {
+      "path": "barbora_ui/icons/action/sort-new.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/sort-new.svg",
+      "bytes": 239,
+      "sha256": "668c4a8b66696d07477f0adab2ab03ae95721a61639d425eb423c14737e5598d"
+    },
+    {
+      "path": "barbora_ui/icons/action/sort-old.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/sort-old.svg",
+      "bytes": 788,
+      "sha256": "a203a57592ae31c9ba515c6ea3ce57edcf745ee320b235d3c2fc63f3e91d3372"
+    },
+    {
+      "path": "barbora_ui/icons/action/star-estonian-marketing.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/star-estonian-marketing.svg",
+      "bytes": 806,
+      "sha256": "8170f7b3d6e4beb620e8032a412276b4bd5fe2d10bff7274d40e8f1c15b84439"
+    },
+    {
+      "path": "barbora_ui/icons/action/star-filled-smaller.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/star-filled-smaller.svg",
+      "bytes": 757,
+      "sha256": "16c3c36945fc48c4ecf7c755a1b608c4713cf5a430741784575f7ec33f7e559f"
+    },
+    {
+      "path": "barbora_ui/icons/action/star-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/star-filled.svg",
+      "bytes": 760,
+      "sha256": "d6c453f2538b23d6933ae1480037c90b09abe456b951ef9c3340b908864c006b"
+    },
+    {
+      "path": "barbora_ui/icons/action/star-outline-smaller.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/star-outline-smaller.svg",
+      "bytes": 1179,
+      "sha256": "23103622dbdb368c6e1c6642993be963717c86c36b85dd6232d175e6722108a2"
+    },
+    {
+      "path": "barbora_ui/icons/action/star-outline.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/star-outline.svg",
+      "bytes": 1258,
+      "sha256": "45f65fc7a01ff52324a1e38a8880b6a3768e29790a8db8f63ab6482c7e0d1712"
+    },
+    {
+      "path": "barbora_ui/icons/action/unordered-list.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/unordered-list.svg",
+      "bytes": 1305,
+      "sha256": "8bc1ef021fa05ff55cdb1bcab00248edf667537056fc71ae15d919165bee4fe5"
+    },
+    {
+      "path": "barbora_ui/icons/action/warning-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/warning-filled.svg",
+      "bytes": 1632,
+      "sha256": "3ea0d8a86eef377c1578919022714c67db1ea853c332b61ce9a3fd0c520fa894"
+    },
+    {
+      "path": "barbora_ui/icons/action/warning.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/action/warning.svg",
+      "bytes": 1691,
+      "sha256": "5d3ed8ccf4ca86c5dd43aebbe1f6045d9be2ae53f1fb1479dc63dce8ad73e028"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/calendar.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/calendar.svg",
+      "bytes": 657,
+      "sha256": "08cd82fa2bcc6ce21ff51aaf70976b2517e308d090b8e818985ccc9face1ec8b"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/calendar_filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/calendar_filled.svg",
+      "bytes": 586,
+      "sha256": "f177a187e1bc99db5ec1595ec9e32b87bfa51fc54561e21b932245c3fc261bfa"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/cart.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/cart.svg",
+      "bytes": 1029,
+      "sha256": "39867ca18a29c76817c82230928f615d540b1ad1c1a14c5b6d158887a08fdd65"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/cart_filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/cart_filled.svg",
+      "bytes": 986,
+      "sha256": "77d0f17988cfa2ebbb5235993a83b8215be5c15624b5817a71f25b9bb866fdf2"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/home.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/home.svg",
+      "bytes": 655,
+      "sha256": "bc78ee1f31fa3c34efb7d491c816721d5dd4858dabe8322eb35d4aedede62dfa"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/home_filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/home_filled.svg",
+      "bytes": 411,
+      "sha256": "6b1b7d52c916a122223212b0408951476b5f8fe9b2fd408a528eb8ff02202c0b"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/products.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/products.svg",
+      "bytes": 1573,
+      "sha256": "70a5fdd3fa43094648a8ca9d18d46cd817c67c11ac2cc8e4b124cf23b9b662ae"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/products_filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/products_filled.svg",
+      "bytes": 1445,
+      "sha256": "c72ae91e26163a2feb47b3cf81eadda149022cc2914bb33f9e4e6db0dbe6c509"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/profile.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/profile.svg",
+      "bytes": 679,
+      "sha256": "45f740413dbfa8b8bc23d797ec683d076ba0874c66f3d55ca2ec55b9b5a014a9"
+    },
+    {
+      "path": "barbora_ui/icons/bottom_tab_navigation/profile_filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/bottom_tab_navigation/profile_filled.svg",
+      "bytes": 595,
+      "sha256": "4b8ce380a39d54e053ebd52ee17c8d830d78f236d70b170e9d4695c2cef2c10f"
+    },
+    {
+      "path": "barbora_ui/icons/category/all-products.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/category/all-products.svg",
+      "bytes": 459,
+      "sha256": "c21fe0f8818af8446aeef42fd96f9da4f53a878c0c64f4a7dae4a71345ba38ce"
+    },
+    {
+      "path": "barbora_ui/icons/category/leaf-placeholder.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/category/leaf-placeholder.svg",
+      "bytes": 250,
+      "sha256": "2e3a6ef9c3b6d52ea3f0dced15b9a67931636f32698fa5305b28d5a763e6abd0"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/add-to-cart-arrow.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/add-to-cart-arrow.svg",
+      "bytes": 1630,
+      "sha256": "dbc36b13a4ef54add39497a6e32af54e087b9c929793bbec09c738356835c365"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/add-to-cart.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/add-to-cart.svg",
+      "bytes": 1615,
+      "sha256": "435efe025eee6c91a37ca49438343fc1c496f6ba6dc74b212e453f7a2db89161"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/apple-pay.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/apple-pay.svg",
+      "bytes": 6249,
+      "sha256": "ad1c7b46b130db5f6a370864a6eb30cf0fab15ca5496eb9042e8683faf167112"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/banklink-m.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/banklink-m.svg",
+      "bytes": 1673,
+      "sha256": "230f51e3f6a07be3f9e6a909a6715e609ca97349d5a9c82158e0958e52affef3"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/banklink-s.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/banklink-s.svg",
+      "bytes": 853,
+      "sha256": "39e561e8bcc46337c0660c7f9b39a5ea5fa7c0343db381899a6daf60ed462a04"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/calendar-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/calendar-filled.svg",
+      "bytes": 586,
+      "sha256": "9db280fa4b0d50a29e108b141faee4f603c644d0938039235630e8566d990e1c"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/calendar.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/calendar.svg",
+      "bytes": 657,
+      "sha256": "ff6f2c521f1b1b86104c9bdcc678ab3274889ed5a5a94f8fa6c6442d1d1990ba"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/card-on-delivery-m.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/card-on-delivery-m.svg",
+      "bytes": 4486,
+      "sha256": "d6033b02a819612a56e2d74a5b64f7775e4618c3a82847a605452673222f4e1e"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/card-on-delivery-s.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/card-on-delivery-s.svg",
+      "bytes": 4257,
+      "sha256": "97764de8600cae4f49c058e24fc0f38b4d693d2ed8b4c74ea0713b357cd3f94e"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/card-pay-m.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/card-pay-m.svg",
+      "bytes": 2712,
+      "sha256": "6f0b9abaf6ac91eb23bf34db22c1d562be93606107020b5abb4ebb0e6554961f"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/cash-on-delivery-s.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/cash-on-delivery-s.svg",
+      "bytes": 588,
+      "sha256": "0f91cc7adcae843834aaa8b0b9619c096af3f8c96ca3e832b06aca556c21784a"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/coupon.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/coupon.svg",
+      "bytes": 694,
+      "sha256": "fa12f9206be65ef50ac1fee4b0ca3db686ef4ee40d0fe9c7594a70806e3faffa"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/credit-card-m.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/credit-card-m.svg",
+      "bytes": 619,
+      "sha256": "b59df4820c1257b99d9bf52abd8ef2f0f3b103d70393d417340eedfeb69f57f6"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/credit-card-s.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/credit-card-s.svg",
+      "bytes": 470,
+      "sha256": "8cd9430e3333c7f42c8d01049637ece674b07c42b81ff284171b27044d382f3c"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/euro-sign.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/euro-sign.svg",
+      "bytes": 1183,
+      "sha256": "15d0e1fc268aa7abb26db32a91bafb3da8923aabc1b7fe0ef98a9b47ff0ee754"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/euro.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/euro.svg",
+      "bytes": 1370,
+      "sha256": "a23cca815f80acdeae939cbaef28b569a60f8a36f04a822fa01e829c71d47d47"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/google-pay.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/google-pay.svg",
+      "bytes": 3833,
+      "sha256": "251c8baaeda5f00d16875e8f397d95933cdca451ef8a94109d92d454ddf4ffbc"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/invoice-m.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/invoice-m.svg",
+      "bytes": 4205,
+      "sha256": "c6dc7d49333e1ee43e6c1b609692091b422dda157afffbc012d013679ad97d47"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/invoice-s.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/invoice-s.svg",
+      "bytes": 754,
+      "sha256": "d5f1b14c1a503ef23e988acfc8a83e6e68644a492591cb5470b69185c65f250b"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/mastercard.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/mastercard.svg",
+      "bytes": 1018,
+      "sha256": "b84907656b9997e0c1504056d8fd0289f1691cc36b0df9a63f31d96ba40a7a86"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/mobile-phone-m.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/mobile-phone-m.svg",
+      "bytes": 573,
+      "sha256": "2a7cb885437912dcb6e43258260c443ca44ac40c3e73e108f7bbfde34514cd8c"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/mobile-phone-s.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/mobile-phone-s.svg",
+      "bytes": 307,
+      "sha256": "7e60cf3d7afde30bf10f8323aebdf7468ee1d9973b1ab12c7c2b1e75e079ca27"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/percentage.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/percentage.svg",
+      "bytes": 2995,
+      "sha256": "347208d03a7fff61b305ed538fb2458f3e71902cc35496199aab40e8fbb1a94b"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/pre-invoice.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/pre-invoice.svg",
+      "bytes": 869,
+      "sha256": "8ce9ba05de2c9a8eb6433660400bf8ddc83b911d0859146fa29a43dee5c99951"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/smartphone.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/smartphone.svg",
+      "bytes": 597,
+      "sha256": "8721bf79c413e3c9fdf9d10019dc99f0cf82e4bd676525cac790d4f5ccc90212"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/thanks-card-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/thanks-card-filled.svg",
+      "bytes": 320,
+      "sha256": "4326eaa7fc4d8fefefe8297ba9dc00d44c977f91d8edc1de291a788694570d7d"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/thanks-card-outline.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/thanks-card-outline.svg",
+      "bytes": 364,
+      "sha256": "5cca32151962e8c594c9ada8cad7397cbcd8af35ab16461daa93dfc98b33a3c7"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/trash-bin%20small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/trash-bin%20small.svg",
+      "bytes": 1192,
+      "sha256": "d1affa1bf53869a24db80830db9dd70443dac8e1b1a7e43780062c51c50d8b4f"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/trash-bin.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/trash-bin.svg",
+      "bytes": 956,
+      "sha256": "c5aeec8cf6b67a00d69dca9d5edf051d0285a6703c674a359cb5260bf94ffbf9"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/visa.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/visa.svg",
+      "bytes": 1342,
+      "sha256": "b2de3c94d3247dcaf523204fd0bbdd40142080ed8df8d9976ab81a2ca074a457"
+    },
+    {
+      "path": "barbora_ui/icons/checkout/zloty.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/checkout/zloty.svg",
+      "bytes": 649,
+      "sha256": "963605d28b3cc8c183a6e2dc31a0b70a1de209dcac892ea5705c1ab0262d795e"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/delivery-apartment-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/delivery-apartment-filled.svg",
+      "bytes": 1500,
+      "sha256": "d1b160e9c369ce6b2aaa287e94d0550200022c8b5ddda8014c1e9430e7a8b774"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/delivery-office-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/delivery-office-filled.svg",
+      "bytes": 569,
+      "sha256": "31c11ce75d72a9f9848cbfb944ea23b82257edfa682faa0ab7ee1963ef154d8b"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/delivery-office.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/delivery-office.svg",
+      "bytes": 635,
+      "sha256": "0b89e1d45bc77efa72bba0f0e81e4d247022f75c34d91a717dd33ef1b901f2f6"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/express-drive-in-car-and-clock.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/express-drive-in-car-and-clock.svg",
+      "bytes": 2797,
+      "sha256": "ef0804320f47bfa99710730eacfa6e1cca4e768e46d038a40961d73dd6ffee42"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/express-drive-in.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/express-drive-in.svg",
+      "bytes": 1153,
+      "sha256": "5fe5314bdba6b9c5da8e76db8bddefaaeb0a2cb3761dfccded3dee80e5d47120"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/fast-delivery.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/fast-delivery.svg",
+      "bytes": 922,
+      "sha256": "cd2f67c1597f6f509236a9b9bab4009646b8a752be282845712cf0a77f1a3bdc"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/fast-truck.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/fast-truck.svg",
+      "bytes": 3262,
+      "sha256": "9b965224f1b21cc77a148ec2ca11a8823ad8c8dedb7d8ca715349602579eb16d"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/individual-home-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/individual-home-filled.svg",
+      "bytes": 830,
+      "sha256": "830347cdc7319f0a474388c3fef1432ee9cacf57c38699eed8a7daac8c41c812"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/map-cross.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/map-cross.svg",
+      "bytes": 1798,
+      "sha256": "757e88af66da9a810168e0cc02f428493e6f8f1ae76e92f37358a8b58cd31ed6"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/map-marker-area.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/map-marker-area.svg",
+      "bytes": 1267,
+      "sha256": "f444f02a9f5144c288e12aff121f50c81a70c1121a8f1a75de797ad10ae54cd7"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/map-marker.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/map-marker.svg",
+      "bytes": 621,
+      "sha256": "25d4994e453bfaa54a8c37a7db9f473c1652f052c6e43f3deed574fd5cd18192"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/pick-up-car.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/pick-up-car.svg",
+      "bytes": 1331,
+      "sha256": "75aed7e5c1c01eea88953fe4a229158103ddc8fd997e38dbece7f0923d63ddc3"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/pick-up-express.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/pick-up-express.svg",
+      "bytes": 804,
+      "sha256": "ea804452b055a31c6f3b7b05de83f87a28856ab13ef796226cdd3dfee29cdf5a"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/pick-up-locker-not-available.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/pick-up-locker-not-available.svg",
+      "bytes": 1156,
+      "sha256": "d94fd17388dfd72b6751e3549f654b48189870e1b98f2e15cee058bd92ea06e6"
+    },
+    {
+      "path": "barbora_ui/icons/delivery/pick-up-locker.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/delivery/pick-up-locker.svg",
+      "bytes": 509,
+      "sha256": "e122a49c80bf893bfe4df70e9a7560b96b044689dd4d4bd70d3d0884e9c48d15"
+    },
+    {
+      "path": "barbora_ui/icons/flags/AT%20-%20Austria.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/AT%20-%20Austria.svg",
+      "bytes": 713,
+      "sha256": "d1adad1d62ee1d4640daaad64fed63a9dfddaa3670f3abc668456c854391d4a0"
+    },
+    {
+      "path": "barbora_ui/icons/flags/BE%20-%20Belgium.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/BE%20-%20Belgium.svg",
+      "bytes": 477,
+      "sha256": "92db68c294f1f5c54f0c1bc841aacc607ad1fffdd704c722438ac70d7a436905"
+    },
+    {
+      "path": "barbora_ui/icons/flags/CH%20-%20Switzerland.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/CH%20-%20Switzerland.svg",
+      "bytes": 653,
+      "sha256": "fee376b951576e4b44d0fe47fffb301ea102b360541ad8a649f9ea6a3206ff25"
+    },
+    {
+      "path": "barbora_ui/icons/flags/CY%20-%20Cyprus.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/CY%20-%20Cyprus.svg",
+      "bytes": 3805,
+      "sha256": "08236f01e162ac369a62be5411426bf861b226eed00708684cd9ef7f6d465856"
+    },
+    {
+      "path": "barbora_ui/icons/flags/CZ%20-%20Czech-Republic.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/CZ%20-%20Czech-Republic.svg",
+      "bytes": 1075,
+      "sha256": "bdb9d494c3489dc46837b402b732676e44cc2c3e79f29cc7ba36f22a8ceb325b"
+    },
+    {
+      "path": "barbora_ui/icons/flags/DE%20-%20Germany.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/DE%20-%20Germany.svg",
+      "bytes": 472,
+      "sha256": "311b20c3f22605b3207136520dca7b76e50733a15e7a90fd775edb2bb6bcde41"
+    },
+    {
+      "path": "barbora_ui/icons/flags/DK%20-%20Denmark.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/DK%20-%20Denmark.svg",
+      "bytes": 650,
+      "sha256": "e5c6d6c993e8977493360fade9514cc9fdfd7597c58220a13a10d8ed5a393476"
+    },
+    {
+      "path": "barbora_ui/icons/flags/EE%20-%20Estonia.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/EE%20-%20Estonia.svg",
+      "bytes": 713,
+      "sha256": "7341f38d78981979d8305a4616deb48b798ff7fa27fcd57a667a2c8dd2b75ae7"
+    },
+    {
+      "path": "barbora_ui/icons/flags/ES%20-%20Spain.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/ES%20-%20Spain.svg",
+      "bytes": 11258,
+      "sha256": "d51d71e18605e9ef437d92a014c57f9602cf7dbb161b6c2d34dd9c1e5256fa99"
+    },
+    {
+      "path": "barbora_ui/icons/flags/FI%20-%20Finland.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/FI%20-%20Finland.svg",
+      "bytes": 650,
+      "sha256": "60e724dc6a399e78fde8ab6445c0c1cf366d0cf5fff0c5cf698e4610f24018f2"
+    },
+    {
+      "path": "barbora_ui/icons/flags/FR%20-%20France.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/FR%20-%20France.svg",
+      "bytes": 470,
+      "sha256": "d815ede49557bc9c808ae0aa56be500fe5d9e3483d3a9826bf6cde81127384bc"
+    },
+    {
+      "path": "barbora_ui/icons/flags/GB%20-%20United-Kingdom.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/GB%20-%20United-Kingdom.svg",
+      "bytes": 2315,
+      "sha256": "5dded451119184946bfae17d9813bb520cfa7968fb35bb7347946d276ac88e8f"
+    },
+    {
+      "path": "barbora_ui/icons/flags/GR%20-%20Greece.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/GR%20-%20Greece.svg",
+      "bytes": 1036,
+      "sha256": "59156fe1cdf99835a956cd83e186209a062c7354101d5fa0a07da45b68e6773d"
+    },
+    {
+      "path": "barbora_ui/icons/flags/HU%20-%20Hungary.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/HU%20-%20Hungary.svg",
+      "bytes": 713,
+      "sha256": "de63ee194c8ff0b3bb1d27206a84669e8b5d405d2f1953d39c7b359a8a8a4977"
+    },
+    {
+      "path": "barbora_ui/icons/flags/IE%20-%20Ireland.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/IE%20-%20Ireland.svg",
+      "bytes": 470,
+      "sha256": "f179873d050fb7aeee9c546b9ef371d06a9e6e5671f09b30964000552983d555"
+    },
+    {
+      "path": "barbora_ui/icons/flags/IT%20-%20Italy.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/IT%20-%20Italy.svg",
+      "bytes": 468,
+      "sha256": "42a2624975fe505800372e60646cdb817e5114b9e925e18ad6f43d865660e1cf"
+    },
+    {
+      "path": "barbora_ui/icons/flags/LT%20-%20Lithuania.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/LT%20-%20Lithuania.svg",
+      "bytes": 713,
+      "sha256": "62735b3c58619effdc747572f9d23c851c32711c41003af4ec67728537828738"
+    },
+    {
+      "path": "barbora_ui/icons/flags/LU%20-%20Luxembourg.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/LU%20-%20Luxembourg.svg",
+      "bytes": 713,
+      "sha256": "b74efa1a57b4a2ada34ff0ee689f7231bb0797bef90edcb06e161c86974479bd"
+    },
+    {
+      "path": "barbora_ui/icons/flags/LV%20-%20Latvia.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/LV%20-%20Latvia.svg",
+      "bytes": 472,
+      "sha256": "578f05b00f8f8d051cc3f5e8a7829781c29c8818e2ee873177ef3c97b1af863d"
+    },
+    {
+      "path": "barbora_ui/icons/flags/MT%20-%20Malta.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/MT%20-%20Malta.svg",
+      "bytes": 3510,
+      "sha256": "c29b86dbefba5e531adad6eb053e609ea7af9b0e7ab3d54da8ada216853d3af9"
+    },
+    {
+      "path": "barbora_ui/icons/flags/NL%20-%20Netherlands.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/NL%20-%20Netherlands.svg",
+      "bytes": 728,
+      "sha256": "ae8e389e5021d4f775ad6f6a14d467123450721bc76ca9fcc4786e4e89abdb0c"
+    },
+    {
+      "path": "barbora_ui/icons/flags/NO%20-%20Norway.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/NO%20-%20Norway.svg",
+      "bytes": 656,
+      "sha256": "fd00c6e8fea163a915e620392d2bf0f9553e6e049c6111bceb9a248b126e2416"
+    },
+    {
+      "path": "barbora_ui/icons/flags/PL%20-%20Poland.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/PL%20-%20Poland.svg",
+      "bytes": 630,
+      "sha256": "dda69bcd8f3cbbe125beaba20c50536a6c348130a8dc379cbae9272f6526d33d"
+    },
+    {
+      "path": "barbora_ui/icons/flags/PT%20-%20Portugal.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/PT%20-%20Portugal.svg",
+      "bytes": 5417,
+      "sha256": "b1144e794a15201170713b8a7e050941689e41da2144f4be582c5c00861432d9"
+    },
+    {
+      "path": "barbora_ui/icons/flags/SE%20-%20Sweden.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/SE%20-%20Sweden.svg",
+      "bytes": 650,
+      "sha256": "d71b0d5beb3c8ad950ae09a2327204e669c6bedcf85784bcf8356df1fc863164"
+    },
+    {
+      "path": "barbora_ui/icons/flags/SI%20-%20Slovenia.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/SI%20-%20Slovenia.svg",
+      "bytes": 3032,
+      "sha256": "5169db004234a4c56d09f9a5619b2b983404d995e1fabdcf0a8a36d49c074455"
+    },
+    {
+      "path": "barbora_ui/icons/flags/SK%20-%20Slovakia.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/SK%20-%20Slovakia.svg",
+      "bytes": 3903,
+      "sha256": "f081321d36104063e7aa38b16cab6e622b32f01e56bd2b9ed25997b65b3968bb"
+    },
+    {
+      "path": "barbora_ui/icons/flags/globe.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/flags/globe.svg",
+      "bytes": 1016,
+      "sha256": "948653842d8144760116b64d88516a9185d05382b1f1dd3e011d961be17c9440"
+    },
+    {
+      "path": "barbora_ui/icons/menu/aciu-card.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/aciu-card.svg",
+      "bytes": 7188,
+      "sha256": "ccf8793ef8b4d99949c474240c03537fb66bc06be51d9795271a94a7fd41045b"
+    },
+    {
+      "path": "barbora_ui/icons/menu/bowl.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/bowl.svg",
+      "bytes": 2790,
+      "sha256": "004dd68383536bd53301a4312621036e8b9f6dcc222b715cfb943bd1f4f4b087"
+    },
+    {
+      "path": "barbora_ui/icons/menu/discount-outline.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/discount-outline.svg",
+      "bytes": 3966,
+      "sha256": "03329be1c4c3680eb8be5dd461dd1dd5ccaa3668136005e3f163f4c0e00506b4"
+    },
+    {
+      "path": "barbora_ui/icons/menu/discount.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/discount.svg",
+      "bytes": 2648,
+      "sha256": "712ab9348ea4bdd7a712460d74b2532c1681e4f9ba7659163661944cd8141ca8"
+    },
+    {
+      "path": "barbora_ui/icons/menu/eco.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/eco.svg",
+      "bytes": 883,
+      "sha256": "a1975f44395c1c345c95dcd28646fd66b348ca50882db0d8a4c4870eace70c49"
+    },
+    {
+      "path": "barbora_ui/icons/menu/glass.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/glass.svg",
+      "bytes": 1618,
+      "sha256": "2045c3e7bc974dbbb86c44ae1a18c6cabdc48f9a6a1cbe56677eb2f7b2e0a8af"
+    },
+    {
+      "path": "barbora_ui/icons/menu/more.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/more.svg",
+      "bytes": 366,
+      "sha256": "b63c6a7140c21bb650361d4955b54385a34ddb1ef00aa585222c43a229f190d1"
+    },
+    {
+      "path": "barbora_ui/icons/menu/notepad.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/notepad.svg",
+      "bytes": 2033,
+      "sha256": "909226a1a5e920ffa48e5f34ab1e4d44a15d0ce71cb35576d897434246f4fe70"
+    },
+    {
+      "path": "barbora_ui/icons/menu/orders.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/orders.svg",
+      "bytes": 2827,
+      "sha256": "4f50703314ad6a87afbdd2c5d7d5353757258f257394833a9671e45eb9d1e007"
+    },
+    {
+      "path": "barbora_ui/icons/menu/receipt.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/receipt.svg",
+      "bytes": 2075,
+      "sha256": "b80bfad932bc162534b53238de08ade0781a41db0b1013a85cb50520e569f351"
+    },
+    {
+      "path": "barbora_ui/icons/menu/star.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/star.svg",
+      "bytes": 1460,
+      "sha256": "8300f7559f35ac6a6aa322a568bdbb5ecdc2a7f9ed737569cc5fbd16530ae5ab"
+    },
+    {
+      "path": "barbora_ui/icons/menu/thanks.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/thanks.svg",
+      "bytes": 2650,
+      "sha256": "78247e3dab1a1ec2018e850ffe0f133b8e2479356242281e4404fab448fee730"
+    },
+    {
+      "path": "barbora_ui/icons/menu/thumbs-up.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/thumbs-up.svg",
+      "bytes": 1838,
+      "sha256": "c3109c31e9d659f400f6077c808a5e349189d32cdee14e0afedc3b67755137c8"
+    },
+    {
+      "path": "barbora_ui/icons/menu/trophy.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/trophy.svg",
+      "bytes": 1404,
+      "sha256": "73fb51f35fad92ed9ff552a4fa284ab7d8328e8c94cb2eb0645aeba69a68f338"
+    },
+    {
+      "path": "barbora_ui/icons/menu/welldone.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/menu/welldone.svg",
+      "bytes": 695,
+      "sha256": "580a1640ee3f1e80dab80d6fe14e3b2b84db4107a3997747213e744124bec3d0"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/apps-grid.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/apps-grid.svg",
+      "bytes": 1446,
+      "sha256": "49e131107c885ee6f459c87c87efa1cc63d43dea09ee510d9a9e1be87a493522"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-back-ios.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-back-ios.svg",
+      "bytes": 452,
+      "sha256": "9744fbf69c8a1f04d97579ebc1ff6f7b143361eea9f4f2b5daec76c52a5db46c"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-back.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-back.svg",
+      "bytes": 607,
+      "sha256": "ea69698232205fc18406b97414c2bb478855b337fe5023e16e12fd2c12783315"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-downward.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-downward.svg",
+      "bytes": 594,
+      "sha256": "7409d78aedaa7e32298c029ed02fe1d503e4546ad1caccc6c3553a6c53769eb9"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-drop-down.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-drop-down.svg",
+      "bytes": 312,
+      "sha256": "4974e795362a991f8b69e63caf91d07aeeffad10bf69c091488835173aa02c9f"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-drop-up.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-drop-up.svg",
+      "bytes": 332,
+      "sha256": "015dfea1ea3b82a9acf8d559723b49e7136700568815705bef8fea5737b8cd5b"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-forward-ios.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-forward-ios.svg",
+      "bytes": 452,
+      "sha256": "8db71db3d7a4e94c79bfa5a00f6a403b10269b37c5d3072d4e0c21633370519e"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-forward.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-forward.svg",
+      "bytes": 588,
+      "sha256": "b97bc4fe57b9ae046031a60a9972a8f6dfa887c38964c7fd3a05eb4f7926f276"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-left.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-left.svg",
+      "bytes": 332,
+      "sha256": "b0a41cce2a929d84eff50ac18c646d7e9fad5dd71e9f0562547a31c68a235235"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-right.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-right.svg",
+      "bytes": 332,
+      "sha256": "a856fc4c5bba48044d52ca3abcd8e51bd08ba91f2700c8922432b21b17b0c539"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-top-right.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-top-right.svg",
+      "bytes": 607,
+      "sha256": "93761efef63d3b75d95d1723d70301d1178874cd0c3583518614a62dab5d18e8"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrow-upward.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrow-upward.svg",
+      "bytes": 605,
+      "sha256": "b75f48b53db084f9e772550c5261a4bf983d031d694d404df9b327d1eea777fc"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrows-back.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrows-back.svg",
+      "bytes": 905,
+      "sha256": "29f7290003b43e71e0aebad9ed7a3a172328eec08ceebff46796ec757820eaf1"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrows-downward.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrows-downward.svg",
+      "bytes": 879,
+      "sha256": "3e3dddf6daec7ed21f19be5abd489acb37b9b1f398931136cb264c7adaa7f802"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrows-forward.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrows-forward.svg",
+      "bytes": 906,
+      "sha256": "4ca0be23edd206584c7b39852ea1107fee7529a0a8dd4222a84a20ffb2f6bed3"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/arrows-upward.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/arrows-upward.svg",
+      "bytes": 899,
+      "sha256": "708f4da98381059a0a5ed166c4a578b092cc68b656bc24482efd49fe00df71f0"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/check-circle.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/check-circle.svg",
+      "bytes": 844,
+      "sha256": "946f813f5858ac6ecbe1dde540a64d30c6ea6b50e1d26d29ab4e0be85fd8db67"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/check.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/check.svg",
+      "bytes": 544,
+      "sha256": "379ad9f1c759c6bc6c4de9517b67eff644e8a8e6051c5e9ee19aee28e5f73019"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/chevron-left.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/chevron-left.svg",
+      "bytes": 494,
+      "sha256": "3ea7cce53cf6d5736c87862f79a21c8a8769553446f0171f031450b274553d93"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/chevron-right%20small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/chevron-right%20small.svg",
+      "bytes": 452,
+      "sha256": "e0aac7d4170db0d8d462ed4826485d912ed6b5456e03a1927b6bc61f2f7c1345"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/chevron-right.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/chevron-right.svg",
+      "bytes": 452,
+      "sha256": "2f5a39546519ccbeaed5f833c43bb63e1861291bdbc67339d8896f4b215e187b"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/close-small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/close-small.svg",
+      "bytes": 740,
+      "sha256": "7710e8f34b5ccff8507caa95ca4c55b6ad64cb901a793835cd26ec7fb582d403"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/close.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/close.svg",
+      "bytes": 732,
+      "sha256": "2f4e5e18058ac32afe831eb035ab301d4af3dfbecc5628a6c88ba4b8365ed96e"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/expand-less.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/expand-less.svg",
+      "bytes": 410,
+      "sha256": "799d7d928f32d670e655a7bd3483b4fc5760a40a0e56ea830eb087e0ff182769"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/expand-more-small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/expand-more-small.svg",
+      "bytes": 496,
+      "sha256": "5824f3c057542ae62c2bd2b990dfbcf7f171604ab9227b7205a5417c9dfb5586"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/expand-more.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/expand-more.svg",
+      "bytes": 476,
+      "sha256": "9ff46f6f757e2a245e93eb5d9d7e61ab380571b73f7dd452986b50a1e8586b57"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/filled-chevron-down.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/filled-chevron-down.svg",
+      "bytes": 1225,
+      "sha256": "cdc87cdb59939e5ac0f312c62e175c247f475b30f1a98e211d995e4612334d8f"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/filled-chevron-left.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/filled-chevron-left.svg",
+      "bytes": 1224,
+      "sha256": "97148a230fbbe3c3ad4597a8c58c13bf9f432d4afbf14bed928eb7a58fed614b"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/filled-chevron-right.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/filled-chevron-right.svg",
+      "bytes": 1182,
+      "sha256": "749f53e4f7436f71c5b23492fe294e127f9e56cd1f5166aae395f5304984f2f8"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/filled-chevron-up.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/filled-chevron-up.svg",
+      "bytes": 1211,
+      "sha256": "a82661560d8f1ba5d6229fe7b23386edd54d8c43462244d31e174bc2d0cfc212"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/first-page.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/first-page.svg",
+      "bytes": 625,
+      "sha256": "7f88dd825fed60d80ec920ebb4c27f945a584b3019cf1002d04e3d6bc03ad762"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/hamburger-menu.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/hamburger-menu.svg",
+      "bytes": 461,
+      "sha256": "b2e891d74aca7215ef9a9784fb0a02a042980d0e9308947855860d2493a3cb3d"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/last-page.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/last-page.svg",
+      "bytes": 642,
+      "sha256": "961b1f3c82c57f785b20bc0b741c25de3231a8a0bd53f0d548f880018fe86a2e"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/more-horiz.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/more-horiz.svg",
+      "bytes": 443,
+      "sha256": "7b34b7258d883abd437a2dd4e2cd9c12b707486aa7817334119602bb26b7cbc4"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/more-vert.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/more-vert.svg",
+      "bytes": 443,
+      "sha256": "20c8a79462f2df75e8a5c0e86ae6f162a44b9a8d96e5f8f5d56ec0ce27c29a2d"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/refresh.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/refresh.svg",
+      "bytes": 820,
+      "sha256": "735716a9179564dce67b4f1da2d2c02f8ac70ea54d4875b4e4f5600b06f25aa2"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/subdirectory-arrow-left.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/subdirectory-arrow-left.svg",
+      "bytes": 609,
+      "sha256": "6591c59d8903695021feeab935dc280dbf8612b6a09b36110e85b119f42ec632"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/subdirectory-arrow-right.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/subdirectory-arrow-right.svg",
+      "bytes": 588,
+      "sha256": "62d7959ae777f09ad43d40d0595b14d90c78b364ea8336c40916d551e54e51d6"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/unfold-less.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/unfold-less.svg",
+      "bytes": 942,
+      "sha256": "1bec1643e61fe481d8ad8eddb67e2a4a8d682f60c643c4be1c478b1d7dd471a3"
+    },
+    {
+      "path": "barbora_ui/icons/navigation/unfold-more.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/navigation/unfold-more.svg",
+      "bytes": 939,
+      "sha256": "4d949411343ec715e42bd11a0d8268a52493a5510c4a8f30c1046bddc576ba91"
+    },
+    {
+      "path": "barbora_ui/icons/other/glassware.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/glassware.svg",
+      "bytes": 474,
+      "sha256": "acd2c3dbea343f705040295bd94acdc9800a33c9e72e152d016a2018c399fe9f"
+    },
+    {
+      "path": "barbora_ui/icons/other/heart.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/heart.svg",
+      "bytes": 470,
+      "sha256": "05086c1b1edd5af3dcd178ddd4092257451fef1926a217f0ebe8db59a4782bf4"
+    },
+    {
+      "path": "barbora_ui/icons/other/lipstick.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/lipstick.svg",
+      "bytes": 682,
+      "sha256": "548692590c1e9bd116673f8d5e05a97b077c8bc4c413c6f3ce02524a22b8807c"
+    },
+    {
+      "path": "barbora_ui/icons/other/location-permission-denied.webp",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/location-permission-denied.webp",
+      "bytes": 17500,
+      "sha256": "6949cdbd5eb76da3a9ec2fd19792bbfe698de61a90b6aecf7e9fbd5db8dc59d4"
+    },
+    {
+      "path": "barbora_ui/icons/other/notification.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/notification.svg",
+      "bytes": 630,
+      "sha256": "d694648407d5a24c9dd2da5e8bef055055e01ea51739057bf933f111986e09b0"
+    },
+    {
+      "path": "barbora_ui/icons/other/play-video.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/play-video.svg",
+      "bytes": 775,
+      "sha256": "24117fdbfb41df95e404dd5a749a8a791d608ce03cdddac2733311c9b2d7a391"
+    },
+    {
+      "path": "barbora_ui/icons/other/schedule.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/schedule.svg",
+      "bytes": 793,
+      "sha256": "96fdffd522827b5a7d44bb28bfccb42c055554c5783a943cffb0f9c14264de2f"
+    },
+    {
+      "path": "barbora_ui/icons/other/shopping-cart.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/shopping-cart.svg",
+      "bytes": 730,
+      "sha256": "64cba2730656cf90e797518b4f4194494569d60aa0578ad443ebbbe9c030c90f"
+    },
+    {
+      "path": "barbora_ui/icons/other/single-dot.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/single-dot.svg",
+      "bytes": 267,
+      "sha256": "8f9544f8675beb04d10575125b97bafac884a13cd06845239e9fb1aa0196486c"
+    },
+    {
+      "path": "barbora_ui/icons/other/website-design.webp",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/other/website-design.webp",
+      "bytes": 22262,
+      "sha256": "c00815b368b8adb5a2f157dff196ac494336e610e9fca363df8c90d3ade21905"
+    },
+    {
+      "path": "barbora_ui/icons/product/additives-free.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/additives-free.svg",
+      "bytes": 821,
+      "sha256": "3f9a96d594fd76b130853311a9c6c2417418c088e5eea30f848a62d762cd95bf"
+    },
+    {
+      "path": "barbora_ui/icons/product/additives.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/additives.svg",
+      "bytes": 270,
+      "sha256": "eff99c09e95b65a8e9f8bc047301fd2b6d4c45f28f54bcad9ee3e086a9125dd3"
+    },
+    {
+      "path": "barbora_ui/icons/product/alco-unavailable-2.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/alco-unavailable-2.svg",
+      "bytes": 1639,
+      "sha256": "327494cac044db370be7eaf37ef3e8dc37752d1eadf2e20dd98ea68e23a67dd6"
+    },
+    {
+      "path": "barbora_ui/icons/product/alco-unavailable.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/alco-unavailable.svg",
+      "bytes": 1544,
+      "sha256": "0840b660b0eb6e65cc68faf1a6480f84f4151d11bb92b99b157411bec905b14b"
+    },
+    {
+      "path": "barbora_ui/icons/product/announce.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/announce.svg",
+      "bytes": 2219,
+      "sha256": "5a9db35dc5a8f8153bfd72bee7cc782ad4350ee7f68c7ecb86827b39017ebe67"
+    },
+    {
+      "path": "barbora_ui/icons/product/bookmark-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/bookmark-filled.svg",
+      "bytes": 236,
+      "sha256": "b261f9fd7a8a2bb86edc2b95e1049653449a2e9cb3e5176770ddb93cf4108bea"
+    },
+    {
+      "path": "barbora_ui/icons/product/bookmark-outline.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/bookmark-outline.svg",
+      "bytes": 295,
+      "sha256": "4832b4ec6410df61bdf363f9224b9bde2cd1d359a901b63e48a429934191b1cf"
+    },
+    {
+      "path": "barbora_ui/icons/product/chef-hat-outlines.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/chef-hat-outlines.svg",
+      "bytes": 2179,
+      "sha256": "3ba50c3d2fd63bff590326cdce12a78fd4200c1ee708f5530eaddf701ecec473"
+    },
+    {
+      "path": "barbora_ui/icons/product/chef-hat.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/chef-hat.svg",
+      "bytes": 1151,
+      "sha256": "f2dff74293941f5f1684e5e84dcffaf20d485432ae97b419695cf228d0ef3628"
+    },
+    {
+      "path": "barbora_ui/icons/product/clock-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/clock-filled.svg",
+      "bytes": 431,
+      "sha256": "09523f91d99b3ab512733b85baacab6154f971451032d0e0df66bf79e1726a22"
+    },
+    {
+      "path": "barbora_ui/icons/product/clock.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/clock.svg",
+      "bytes": 654,
+      "sha256": "2d4a199b881716cf8f814365f43471a254f26cd0abcca3d548f68b7f23a8f7ca"
+    },
+    {
+      "path": "barbora_ui/icons/product/discount-percentage.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/discount-percentage.svg",
+      "bytes": 1725,
+      "sha256": "2dc031826ae259ed28d1aa7841c82de00065e1353002425f44ccfdd2257324f5"
+    },
+    {
+      "path": "barbora_ui/icons/product/donation.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/donation.svg",
+      "bytes": 3468,
+      "sha256": "cbb2e1099ff49b36167f7de60e36da535d0bcfac778a80eedd642137d55e774f"
+    },
+    {
+      "path": "barbora_ui/icons/product/eko.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/eko.svg",
+      "bytes": 2785,
+      "sha256": "f37c885e0d6590992617dabed7fa937719f50131d0d4abd11897e49d3e63067b"
+    },
+    {
+      "path": "barbora_ui/icons/product/frozen.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/frozen.svg",
+      "bytes": 5464,
+      "sha256": "5cf673950fc958da81dbb5dddf2f7cb313e1fa01bfda9d183b6d33136e24a0b4"
+    },
+    {
+      "path": "barbora_ui/icons/product/gift-ribbon.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/gift-ribbon.svg",
+      "bytes": 2109,
+      "sha256": "a1b30b96709a4dbd94424f1651f3d78b248ad1b4113e74e97eb1c7d47bd4b026"
+    },
+    {
+      "path": "barbora_ui/icons/product/gift.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/gift.svg",
+      "bytes": 729,
+      "sha256": "d4135dd0ccd1e75805aecdd0aaf068b6f303e5b3854ff3623d3b950497f466dc"
+    },
+    {
+      "path": "barbora_ui/icons/product/gluten-free.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/gluten-free.svg",
+      "bytes": 1430,
+      "sha256": "d87050be70167d6ce075bd295ecafe6fb9be3fa4eb2dc4e820ff0fe23e592ba4"
+    },
+    {
+      "path": "barbora_ui/icons/product/gluten.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/gluten.svg",
+      "bytes": 824,
+      "sha256": "92e48de114b5d6b1d9de5e042c32173ee8032e66e59486759c1b2782464ef09d"
+    },
+    {
+      "path": "barbora_ui/icons/product/heart-filled.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/heart-filled.svg",
+      "bytes": 1150,
+      "sha256": "05ca506f1afe98b04e75e7b6c2f7828487663e763475d0db1300e48c489f37af"
+    },
+    {
+      "path": "barbora_ui/icons/product/heart-outline.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/heart-outline.svg",
+      "bytes": 2532,
+      "sha256": "3ee282550ed9a88b405e57fb1c69d79d6dc47e08de24a5924c3b26a68bfc34d1"
+    },
+    {
+      "path": "barbora_ui/icons/product/lactose-free.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/lactose-free.svg",
+      "bytes": 1888,
+      "sha256": "71ab2879ca59d5a21c67e59759dd65804fabbc2924856c39298f863cac04f240"
+    },
+    {
+      "path": "barbora_ui/icons/product/lactose.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/lactose.svg",
+      "bytes": 1299,
+      "sha256": "757fed5cf247e7b80f25d0385a06a6527b0f0b6a4c7cc9847cf45f7f7d593e35"
+    },
+    {
+      "path": "barbora_ui/icons/product/mince.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/mince.svg",
+      "bytes": 2410,
+      "sha256": "8a54f0984c0df7987744d29fe1a3fc53dc817a9b53c4a07eccf0db10c69bf35e"
+    },
+    {
+      "path": "barbora_ui/icons/product/new-product-rounded.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/new-product-rounded.svg",
+      "bytes": 563,
+      "sha256": "e2e9a554b1f9fcacad496c78bb4f6d3a637db42dd9fee123d56fc24fada2166c"
+    },
+    {
+      "path": "barbora_ui/icons/product/new-product.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/new-product.svg",
+      "bytes": 406,
+      "sha256": "e15a354b94215ddb158f99a17f509cabd15a24bd8e4a04e558fd5a70c63eec84"
+    },
+    {
+      "path": "barbora_ui/icons/product/not-found.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/not-found.svg",
+      "bytes": 634,
+      "sha256": "464c4a3d33e8615d2e5911b741427f61caf2eb82f102b66277dc26aa1a20c40a"
+    },
+    {
+      "path": "barbora_ui/icons/product/plus-one.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/plus-one.svg",
+      "bytes": 468,
+      "sha256": "da174f0c7c5d9898ac1889025a446fe92b2579cd4a7bd695abf944fcab7fe638"
+    },
+    {
+      "path": "barbora_ui/icons/product/plus-three.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/plus-three.svg",
+      "bytes": 1325,
+      "sha256": "472fc411410e896a6a3bc8c68e372d3488b07015c78bb939d3606824b34a4bad"
+    },
+    {
+      "path": "barbora_ui/icons/product/plus-two.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/plus-two.svg",
+      "bytes": 938,
+      "sha256": "2f7a1f451a53b86e04466048d97a3bb20fdf1c87329a5c923049cd25fb1ae249"
+    },
+    {
+      "path": "barbora_ui/icons/product/scales.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/scales.svg",
+      "bytes": 658,
+      "sha256": "ba87077b6f18ecf4ed05caa866efcb0f450dcbc2f86a6a9b5a174407fbbf42a4"
+    },
+    {
+      "path": "barbora_ui/icons/product/substitutes-small.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/substitutes-small.svg",
+      "bytes": 1340,
+      "sha256": "6114acddfc54b0a83823ed9302fda8a5765db2a343820ccd4b3325f964e592a7"
+    },
+    {
+      "path": "barbora_ui/icons/product/substitutes.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/substitutes.svg",
+      "bytes": 1231,
+      "sha256": "8efe10c4cb4e3326b8d25fc74eab07f46eb7082b1ac6fc3d8a9be747fe863681"
+    },
+    {
+      "path": "barbora_ui/icons/product/sugar-free.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/sugar-free.svg",
+      "bytes": 1981,
+      "sha256": "4baa0e96ad26ccc3911dc84b628e36c87ac3823792682003cc963f329eb64dd4"
+    },
+    {
+      "path": "barbora_ui/icons/product/sugar.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/sugar.svg",
+      "bytes": 1446,
+      "sha256": "d6b311430dc4acdfdfc714e9c494468b438ea3d0de980c6812e05ca0d3ce0241"
+    },
+    {
+      "path": "barbora_ui/icons/product/thin-slices.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/thin-slices.svg",
+      "bytes": 411,
+      "sha256": "c3d65f78b5f3150318865ca09dc6c071a9f616a163d861395bbebf2209d84bb3"
+    },
+    {
+      "path": "barbora_ui/icons/product/vegetarian-2.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/vegetarian-2.svg",
+      "bytes": 504,
+      "sha256": "b4c23f02863cdc82d59203934d8324bdb93b6ee537d85715fb0b486d4baced83"
+    },
+    {
+      "path": "barbora_ui/icons/product/vegetarian.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/product/vegetarian.svg",
+      "bytes": 267,
+      "sha256": "910d08e37d40edff58899eb09666941de90f5dec776be84ca21a3774274a560e"
+    },
+    {
+      "path": "barbora_ui/icons/social/apple.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/apple.svg",
+      "bytes": 976,
+      "sha256": "9d6cccc2994d716a647239c0754c8dd2fcdcadb5aba8a113da63876a0fcdedd2"
+    },
+    {
+      "path": "barbora_ui/icons/social/chat.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/chat.svg",
+      "bytes": 1975,
+      "sha256": "3199c3422b2323edd5318dc4295e49b8c6130cf654397d06146f0732b5ce0252"
+    },
+    {
+      "path": "barbora_ui/icons/social/email.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/email.svg",
+      "bytes": 525,
+      "sha256": "762afb5cb8305a1b962457edbd09daf02d269b058781646af560d923898c4066"
+    },
+    {
+      "path": "barbora_ui/icons/social/facebook-bw.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/facebook-bw.svg",
+      "bytes": 687,
+      "sha256": "87a773a78e3721db52b72acaab7c3239f332f86ccf847a7649e128dc24ec2a13"
+    },
+    {
+      "path": "barbora_ui/icons/social/facebook.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/facebook.svg",
+      "bytes": 1099,
+      "sha256": "c563afacfa9af390aaa2d51d798f8a64aa130f7b472c4753d4d208525aba30cd"
+    },
+    {
+      "path": "barbora_ui/icons/social/google-bw.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/google-bw.svg",
+      "bytes": 577,
+      "sha256": "fc37b2d30729fdd655691b1abf3f3d889193ef9c198a820e88bfb14fbfb88299"
+    },
+    {
+      "path": "barbora_ui/icons/social/google.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/google.svg",
+      "bytes": 1077,
+      "sha256": "1a0a02e217bdfb4b98d80f85bc251d34173163e328b2e24841847cc56664f428"
+    },
+    {
+      "path": "barbora_ui/icons/social/instagram-bw.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/instagram-bw.svg",
+      "bytes": 3148,
+      "sha256": "129b24e1361b161376aacc99e2f68b800ad19a92c61ee0c1f9911e96a498254a"
+    },
+    {
+      "path": "barbora_ui/icons/social/linkedin.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/linkedin.svg",
+      "bytes": 1527,
+      "sha256": "4cc531682d32d172145a055bc1f474514a0cb7a701dcbe2b27435a207c45d7e7"
+    },
+    {
+      "path": "barbora_ui/icons/social/phone.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/phone.svg",
+      "bytes": 3428,
+      "sha256": "589827277074de67c37f9c274a7d83e3edf609feb9991e744f3892315b60f8e9"
+    },
+    {
+      "path": "barbora_ui/icons/social/youtube.svg",
+      "apkEntry": "assets/flutter_assets/packages/barbora_ui/assets/icons/social/youtube.svg",
+      "bytes": 1117,
+      "sha256": "aba39f4e90312200d0ff0c4d3f460c6afd94255ad6264034e8b1a5a5aec74b5f"
+    }
+  ]
+}

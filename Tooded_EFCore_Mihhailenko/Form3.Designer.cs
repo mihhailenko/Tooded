@@ -1,4 +1,4 @@
-﻿namespace Tooded_EFCore;
+namespace Tooded_EFCore;
 
 partial class Form3
 {
@@ -6,6 +6,7 @@ partial class Form3
 
     protected override void Dispose(bool disposing)
     {
+        if (disposing) VabastaPood();
         if (disposing && components != null)
             components.Dispose();
         base.Dispose(disposing);

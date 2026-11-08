@@ -10,7 +10,7 @@ public class RegistreerimisForm : Form
     private readonly TextBox email = new TextBox();
     private readonly TextBox parool = new TextBox();
     private readonly TextBox kordus = new TextBox();
-    private readonly Button registreeru = new Button();
+    private readonly Button registreeru = new BarboraActionButton();
     private readonly Label teade = new Label();
     private bool salvestamine;
     public string RegistreeritudEmail { get; private set; } = "";
@@ -121,8 +121,7 @@ public class RegistreerimisForm : Form
         Vaade.Nupp(registreeru, true);
         registreeru.Dock = DockStyle.Top;
         registreeru.Click += Registreeru;
-        Button loobu = new Button
-        {
+        Button loobu = new BarboraActionButton {
             Text = "Tagasi sisselogimisse",
             DialogResult = DialogResult.Cancel,
             Dock = DockStyle.Top

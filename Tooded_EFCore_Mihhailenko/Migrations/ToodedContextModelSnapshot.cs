@@ -57,6 +57,51 @@ namespace Tooded_EFCore.Migrations
                     b.ToTable("Kasutajad");
                 });
 
+            modelBuilder.Entity("Tooded_EFCore.KataloogiSeaded", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ETag")
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<string>("KataloogiId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTimeOffset?>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<byte[]>("ReaVersioon")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("SisuHash")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<long>("Versioon")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTimeOffset?>("ViimaneEdu")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ViimaneKontroll")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KataloogiSeaded");
+                });
+
             modelBuilder.Entity("Tooded_EFCore.Kategooria", b =>
                 {
                     b.Property<int>("Id")
@@ -65,6 +110,9 @@ namespace Tooded_EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Jarjestus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Kategooria_nimetus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -72,7 +120,20 @@ namespace Tooded_EFCore.Migrations
                     b.Property<string>("Kirjeldus")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ValineId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("YlemId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ValineId")
+                        .IsUnique()
+                        .HasFilter("[ValineId] IS NOT NULL");
+
+                    b.HasIndex("YlemId");
 
                     b.ToTable("Kategooriatabel", (string)null);
 
@@ -80,16 +141,19 @@ namespace Tooded_EFCore.Migrations
                         new
                         {
                             Id = 1,
+                            Jarjestus = 0,
                             Kategooria_nimetus = "Joogid"
                         },
                         new
                         {
                             Id = 2,
+                            Jarjestus = 0,
                             Kategooria_nimetus = "Puu- ja köögiviljad"
                         },
                         new
                         {
                             Id = 3,
+                            Jarjestus = 0,
                             Kategooria_nimetus = "Maiustused"
                         });
                 });
@@ -237,6 +301,16 @@ namespace Tooded_EFCore.Migrations
                     b.Property<int>("Kogus")
                         .HasColumnType("int");
 
+                    b.Property<bool>("KohalikMuudatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Margis")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("PildiUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Pilt")
                         .HasColumnType("nvarchar(max)");
 
@@ -246,15 +320,44 @@ namespace Tooded_EFCore.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
+                    b.Property<decimal?>("Tavahind")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<string>("Toodenimetus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Uhik")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasDefaultValue("tk");
+
+                    b.Property<string>("ValineId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("KategooriaId");
 
+                    b.HasIndex("ValineId")
+                        .IsUnique()
+                        .HasFilter("[ValineId] IS NOT NULL");
+
                     b.ToTable("Toodetabel", (string)null);
+                });
+
+            modelBuilder.Entity("Tooded_EFCore.Kategooria", b =>
+                {
+                    b.HasOne("Tooded_EFCore.Kategooria", "Ylem")
+                        .WithMany()
+                        .HasForeignKey("YlemId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Ylem");
                 });
 
             modelBuilder.Entity("Tooded_EFCore.Tellimus", b =>

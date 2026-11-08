@@ -30,16 +30,14 @@ public class MuudaParooliForm : Form
         Vaade.Vali(paneel, "Uus parool", uus);
         Vaade.Vali(paneel, "Korda uut parooli", kordus);
         Vaade.Lisa(paneel, Vaade.Tekstirida("Vali vähemalt 8 märgi pikkune parool, mis erineb vanast."));
-        Button nupp = new Button
-        {
+        Button nupp = new BarboraActionButton {
             Text = "Salvesta parool",
             Dock = DockStyle.Top
         };
         Vaade.Nupp(nupp, true);
         nupp.Click += Salvesta;
         Vaade.Lisa(paneel, nupp);
-        Button loobu = new Button
-        {
+        Button loobu = new BarboraActionButton {
             Text = "Loobu",
             DialogResult = DialogResult.Cancel,
             Dock = DockStyle.Top

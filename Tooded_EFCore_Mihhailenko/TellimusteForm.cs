@@ -100,14 +100,12 @@ public class TellimusteForm : Form
         riba.Controls.Add(algus);
         riba.Controls.Add(new Label { Text = "Kuni", AutoSize = true, Margin = new Padding(8, 7, 6, 0) });
         riba.Controls.Add(lopp);
-        Button lae = new Button
-        {
+        Button lae = new BarboraActionButton {
             Text = "Näita perioodi"
         };
         Vaade.Nupp(lae);
         lae.Click += (s, e) => LaeTellimused();
-        Button ava = new Button
-        {
+        Button ava = new BarboraActionButton {
             Text = "Ava tellimus"
         };
         Vaade.Nupp(ava, true);
@@ -117,7 +115,7 @@ public class TellimusteForm : Form
         kokku.Dock = DockStyle.Top;
         kokku.Padding = new Padding(12);
         kokku.BackColor = Color.White;
-        kokku.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+        kokku.Font = BarboraTheme.Font(11F, FontStyle.Bold);
         sisu.Controls.Add(riba, 0, 0);
         sisu.Controls.Add(tabel, 0, 1);
         sisu.Controls.Add(kokku, 0, 2);

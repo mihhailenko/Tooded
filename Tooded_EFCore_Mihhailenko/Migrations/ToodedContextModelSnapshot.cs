@@ -83,6 +83,9 @@ namespace Tooded_EFCore.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<string>("SisuJson")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasMaxLength(2048)
@@ -118,6 +121,9 @@ namespace Tooded_EFCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Kirjeldus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LisainfoJson")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ValineId")
@@ -303,6 +309,9 @@ namespace Tooded_EFCore.Migrations
 
                     b.Property<bool>("KohalikMuudatus")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LisainfoJson")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Margis")
                         .HasMaxLength(40)

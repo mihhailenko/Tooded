@@ -11,7 +11,7 @@ public sealed class KataloogiTeenus
 {
     private static readonly SemaphoreSlim Lukk = new(1, 1);
     private static readonly HttpClient VaikimisiKlient = new(new HttpClientHandler { AllowAutoRedirect = false })
-    { Timeout = TimeSpan.FromSeconds(45) };
+    { Timeout = TimeSpan.FromMinutes(5) };
     private readonly Func<ToodedContext> looDb;
     private readonly HttpClient klient;
 
@@ -54,7 +54,7 @@ public sealed class KataloogiTeenus
         try
         {
             using var ajalimiit = CancellationTokenSource.CreateLinkedTokenSource(katkestus);
-            ajalimiit.CancelAfter(TimeSpan.FromSeconds(45));
+            ajalimiit.CancelAfter(TimeSpan.FromMinutes(10));
             katkestus = ajalimiit.Token;
             await using var db = looDb();
             var enne = await db.KataloogiSeaded.AsNoTracking().SingleOrDefaultAsync(katkestus);
@@ -106,6 +106,7 @@ public sealed class KataloogiTeenus
                     kohalik.Kategooria_nimetus = k.Name.Trim();
                     kohalik.Kirjeldus = k.Description;
                     kohalik.Jarjestus = k.SortOrder;
+                    kohalik.LisainfoJson = k.SourceData?.GetRawText();
                 }
                 // Lisa/muuda vanemad enne lapsi EF-i seoste kaudu; JSON-i järjekord pole tähtis.
                 foreach (var k in fail.Categories)
@@ -135,6 +136,7 @@ public sealed class KataloogiTeenus
                     kohalik.Uhik = t.Unit.Trim();
                     kohalik.Margis = t.Badge;
                     kohalik.PildiUrl = t.ImageUrl;
+                    kohalik.LisainfoJson = t.SourceData?.GetRawText();
                     kohalik.Aktiivne = t.Active;
                     kohalik.Kategooria = kategooriad[t.CategoryId];
                     muudetud++;
@@ -143,6 +145,7 @@ public sealed class KataloogiTeenus
                     t.Aktiivne = false; // Ka kohaliku erandiga kadunud toode eemaldatakse müügist, mitte ajaloost.
             }
             seaded.KataloogiId = fail.CatalogId;
+            if (muutus) seaded.SisuJson = fail.CatalogData?.GetRawText();
             seaded.Versioon = fail.CatalogVersion;
             seaded.SisuHash = hash;
             seaded.ETag = vastus.Headers.ETag?.ToString();
@@ -174,15 +177,15 @@ public sealed class KataloogiTeenus
 
     private static async Task<byte[]> LoePiiratudAsync(HttpContent sisu, CancellationToken katkestus)
     {
-        const int piir = 20 * 1024 * 1024;
-        if (sisu.Headers.ContentLength > piir) throw new InvalidDataException("Kataloog võib olla kuni 20 MB.");
+        const int piir = KataloogiFail.MaxBytes;
+        if (sisu.Headers.ContentLength > piir) throw new InvalidDataException("Kataloog võib olla kuni 128 MB.");
         await using var allikas = await sisu.ReadAsStreamAsync(katkestus);
         using var puhver = new MemoryStream();
         var osa = new byte[81920];
         int loetud;
         while ((loetud = await allikas.ReadAsync(osa, katkestus)) > 0)
         {
-            if (puhver.Length + loetud > piir) throw new InvalidDataException("Kataloog võib olla kuni 20 MB.");
+            if (puhver.Length + loetud > piir) throw new InvalidDataException("Kataloog võib olla kuni 128 MB.");
             await puhver.WriteAsync(osa.AsMemory(0, loetud), katkestus);
         }
         return puhver.ToArray();

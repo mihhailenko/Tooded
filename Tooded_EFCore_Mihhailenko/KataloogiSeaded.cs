@@ -14,5 +14,6 @@ public class KataloogiSeaded
     public string? SisuHash { get; set; }
     public DateTimeOffset? ViimaneEdu { get; set; }
     public DateTimeOffset? ViimaneKontroll { get; set; }
+    public string? SisuJson { get; set; }
     [Timestamp] public byte[] ReaVersioon { get; set; } = [];
 }

@@ -5,16 +5,18 @@ namespace Tooded_EFCore;
 
 public sealed class KataloogiFail
 {
+    public const int MaxBytes = 128 * 1024 * 1024;
     public required int SchemaVersion { get; set; }
     public required string CatalogId { get; set; }
     public required long CatalogVersion { get; set; }
     public bool AllowEmptyCatalog { get; set; }
     public required List<KataloogiKategooria> Categories { get; set; }
     public required List<KataloogiToode> Products { get; set; }
+    public JsonElement? CatalogData { get; set; }
 
     public static KataloogiFail Loe(byte[] sisu)
     {
-        if (sisu.Length > 20 * 1024 * 1024) throw new InvalidDataException("Kataloog võib olla kuni 20 MB.");
+        if (sisu.Length > MaxBytes) throw new InvalidDataException("Kataloog võib olla kuni 128 MB.");
         var fail = JsonSerializer.Deserialize<KataloogiFail>(sisu, new JsonSerializerOptions
         { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, MaxDepth = 32 })
             ?? throw new InvalidDataException("Kataloogi sisu puudub.");
@@ -29,7 +31,7 @@ public sealed class KataloogiFail
     private static bool Hind(decimal hind) => hind >= 0 && hind <= 99999999.99m && decimal.Round(hind, 2) == hind;
     public void Kontrolli()
     {
-        if (SchemaVersion != 1 || !OnId(CatalogId) || CatalogVersion < 1)
+        if (SchemaVersion is not (1 or 2) || !OnId(CatalogId) || CatalogVersion < 1)
             throw new InvalidDataException("Tundmatu kataloogivorming või vigane kataloogi versioon / tunnus.");
         if (Categories == null || Products == null || Categories.Count > 2000 || Products.Count > 100000
             || (Products.Count == 0 && !AllowEmptyCatalog))
@@ -38,6 +40,8 @@ public sealed class KataloogiFail
         foreach (var k in Categories)
             if (k == null || !OnId(k.Id) || !Tekst(k.Name, 150) || (k.Description?.Length ?? 0) > 2000 || !kats.TryAdd(k.Id, k))
                 throw new InvalidDataException("Kategooria andmed või korduv tunnus ei sobi.");
+        KontrolliJson(CatalogData, 32 * 1024 * 1024);
+        foreach (var k in Categories) KontrolliJson(k.SourceData, 128 * 1024);
         foreach (var k in Categories)
         {
             var seen = new HashSet<string>(StringComparer.Ordinal) { k.Id };
@@ -52,15 +56,24 @@ public sealed class KataloogiFail
         var ids = new HashSet<string>(StringComparer.Ordinal);
         foreach (var t in Products)
             if (t == null || !OnId(t.Id) || !ids.Add(t.Id) || !Tekst(t.Name, 200) || !kats.ContainsKey(t.CategoryId ?? "")
-                || !Hind(t.Price) || t.Stock < 0 || !Tekst(t.Unit, 40) || (t.Description?.Length ?? 0) > 4000
+                || !Hind(t.Price) || t.Stock < 0 || !Tekst(t.Unit, 40) || (t.Description?.Length ?? 0) > (SchemaVersion == 2 ? 100000 : 4000)
                 || (t.Badge?.Length ?? 0) > 40 || (t.ImageUrl != null && (t.ImageUrl.Length > 2048 || !OnHttps(t.ImageUrl)))
                 || (t.RegularPrice.HasValue && (!Hind(t.RegularPrice.Value) || t.RegularPrice <= t.Price)))
                 throw new InvalidDataException("Toote andmed, hind, pildi HTTPS-aadress või korduv tunnus ei sobi.");
+        foreach (var t in Products) KontrolliJson(t.SourceData, 512 * 1024);
+    }
+
+    private static void KontrolliJson(JsonElement? value, int max)
+    {
+        if (value.HasValue && value.Value.ValueKind != JsonValueKind.Null
+            && (value.Value.ValueKind != JsonValueKind.Object || System.Text.Encoding.UTF8.GetByteCount(value.Value.GetRawText()) > max))
+            throw new InvalidDataException("Kataloogi lisaandmed peavad olema piiratud suurusega JSON-objekt.");
     }
 }
 
 public sealed class KataloogiKategooria
 {
+    public JsonElement? SourceData { get; set; }
     public required string Id { get; set; }
     public required string Name { get; set; }
     public string? ParentId { get; set; }
@@ -70,6 +83,7 @@ public sealed class KataloogiKategooria
 
 public sealed class KataloogiToode
 {
+    public JsonElement? SourceData { get; set; }
     public required string Id { get; set; }
     public required string CategoryId { get; set; }
     public required string Name { get; set; }

@@ -9,5 +9,7 @@ public class Kategooria
     public int? YlemId { get; set; }
     public Kategooria? Ylem { get; set; }
     public int Jarjestus { get; set; }
+    [System.ComponentModel.Browsable(false)]
+    public string? LisainfoJson { get; set; }
     public ICollection<Toode> Tooded { get; set; } = new List<Toode>();
 }

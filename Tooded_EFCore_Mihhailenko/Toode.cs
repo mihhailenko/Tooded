@@ -14,6 +14,8 @@ public class Toode
     public string? Margis { get; set; }
     public string? PildiUrl { get; set; }
     public bool KohalikMuudatus { get; set; }
+    [System.ComponentModel.Browsable(false)]
+    public string? LisainfoJson { get; set; }
 
     [System.ComponentModel.DataAnnotations.Timestamp]
     public byte[] ReaVersioon { get; set; } = Array.Empty<byte>();

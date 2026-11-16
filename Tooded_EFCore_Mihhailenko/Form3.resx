@@ -117,4 +117,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.Text" xml:space="preserve">
+    <value>BARBORA · Pood</value>
+  </data>
+  <data name="comboLanguage.AccessibleName" xml:space="preserve">
+    <value>Keel</value>
+  </data>
+  <data name="esileht.Text" xml:space="preserve">
+    <value>Esileht</value>
+  </data>
+  <data name="tooted.Text" xml:space="preserve">
+    <value>Tooted</value>
+  </data>
+  <data name="kampaaniad.Text" xml:space="preserve">
+    <value>Kampaaniad</value>
+  </data>
+  <data name="lemmikud.Text" xml:space="preserve">
+    <value>Minu tooted</value>
+  </data>
+  <data name="varskenda.AccessibleName" xml:space="preserve">
+    <value>Uuenda kataloogi</value>
+  </data>
+  <data name="kategooriatePealkiri.Text" xml:space="preserve">
+    <value>Tootekategooriad</value>
+  </data>
+  <data name="koikTooted.Text" xml:space="preserve">
+    <value>Kõik tooted</value>
+  </data>
+  <data name="KategooriaNimi" xml:space="preserve">
+    <value>Kategooria: {0}</value>
+  </data>
+  <data name="offers.Text" xml:space="preserve">
+    <value>Sooduspakkumised</value>
+  </data>
+  <data name="inStock.Text" xml:space="preserve">
+    <value>Ainult laos</value>
+  </data>
+  <data name="order.Text" xml:space="preserve">
+    <value>Järjesta</value>
+  </data>
+  <data name="Jarjestus0" xml:space="preserve">
+    <value>Nimetus A–Z</value>
+  </data>
+  <data name="Jarjestus1" xml:space="preserve">
+    <value>Hind: odavamad enne</value>
+  </data>
+  <data name="Jarjestus2" xml:space="preserve">
+    <value>Hind: kallimad enne</value>
+  </data>
+  <data name="Jarjestus3" xml:space="preserve">
+    <value>Sooduspakkumised enne</value>
+  </data>
+  <data name="eelmine.AccessibleName" xml:space="preserve">
+    <value>Eelmine leht</value>
+  </data>
+  <data name="jargmine.AccessibleName" xml:space="preserve">
+    <value>Järgmine leht</value>
+  </data>
+  <data name="otsing.PlaceholderText" xml:space="preserve">
+    <value>Toodete otsing</value>
+  </data>
+  <data name="otsing.AccessibleName" xml:space="preserve">
+    <value>Toodete otsing</value>
+  </data>
+  <data name="OtsinguPealkiri" xml:space="preserve">
+    <value>Otsing: {0}</value>
+  </data>
+  <data name="ParimadPakkumised" xml:space="preserve">
+    <value>Parimad pakkumised</value>
+  </data>
+  <data name="Uudistooted" xml:space="preserve">
+    <value>Uudistooted</value>
+  </data>
+  <data name="YksToode" xml:space="preserve">
+    <value>1 toode</value>
+  </data>
+  <data name="MituToodet" xml:space="preserve">
+    <value>{0} toodet</value>
+  </data>
+  <data name="LaenTooteid" xml:space="preserve">
+    <value>Laen tooteid…</value>
+  </data>
+  <data name="ToodeteLaadimiseViga" xml:space="preserve">
+    <value>Laadimine ei õnnestunud. Vajuta Värskenda. Eelmine vaade jäi alles.</value>
+  </data>
+  <data name="KataloogiLaadimiseViga" xml:space="preserve">
+    <value>Kataloogi ei saanud laadida. Proovi uuesti.</value>
+  </data>
+  <data name="tyhiPealkiri.Text" xml:space="preserve">
+    <value>Sobivaid tooteid ei leitud</value>
+  </data>
+  <data name="tyhiSelgitus.Text" xml:space="preserve">
+    <value>Proovi teist otsingut või eemalda filtrid. Tühja kataloogi saab haldaja poe seadetest lisada.</value>
+  </data>
+  <data name="puhasta.Text" xml:space="preserve">
+    <value>Näita kõiki tooteid</value>
+  </data>
+  <data name="korviPealkiri.Text" xml:space="preserve">
+    <value>Ostukorv</value>
+  </data>
+  <data name="checkout.Text" xml:space="preserve">
+    <value>Vaata ostukorvi</value>
+  </data>
+  <data name="tyhiKorv.Text" xml:space="preserve">
+    <value>Sinu ostukorv on tühi</value>
+  </data>
+  <data name="korviSelgitus.Text" xml:space="preserve">
+    <value>Lisa oma lemmiktooted korvi ja alusta ostlemist.</value>
+  </data>
+  <data name="KorviKogusumma" xml:space="preserve">
+    <value>Kokku    {0:N2} €</value>
+  </data>
+  <data name="LisatudKorvi" xml:space="preserve">
+    <value>Lisatud ostukorvi</value>
+  </data>
+  <data name="KogusMuudetud" xml:space="preserve">
+    <value>Kogus muudetud</value>
+  </data>
+  <data name="KorviMuutmiseViga" xml:space="preserve">
+    <value>Korvi muutmine ei õnnestunud. Proovi uuesti.</value>
+  </data>
+  <data name="KeeleSalvestamiseViga" xml:space="preserve">
+    <value>Keelevalikut ei saanud salvestada.</value>
+  </data>
 </root>

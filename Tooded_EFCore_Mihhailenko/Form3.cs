@@ -1,9 +1,19 @@
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
+using System.Configuration;
+using System.Globalization;
 
 namespace Tooded_EFCore;
 
 public partial class Form3 : Form
 {
+    private readonly ComponentResourceManager ressursid = new ComponentResourceManager(typeof(Form3));
+    private static CultureInfo poeKeel = CultureInfo.CurrentUICulture;
+    private bool keelLaetud;
+    private ContextMenuStrip sortMenu = null!;
+    private string? olekuVoti;
+    private int leitudTooteid;
+    private string viimaneOtsing = "";
     private readonly FlowLayoutPanel kategooriad = new(), kaardid = new();
     private readonly BarboraSearchBox otsinguVaade = new();
     private readonly TextBox otsing;
@@ -35,8 +45,101 @@ public partial class Form3 : Form
 
     public Form3()
     {
-        InitializeComponent(); otsing = otsinguVaade.Input; viivitus = new System.Windows.Forms.Timer(components!) { Interval = 280 }; LooLiides();
+        InitializeComponent();
+        otsing = otsinguVaade.Input;
+        viivitus = new System.Windows.Forms.Timer(components!) { Interval = 280 };
+        if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            return;
+
+        LooLiides();
+        comboLanguage.SelectedIndex = poeKeel.Name == "en-US" ? 1 : 0;
+        RakendaKeel();
+        keelLaetud = true;
         Lemmikud.Muutus += LemmikudMuutus;
+    }
+    private void comboLanguage_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        if (!keelLaetud || comboLanguage.SelectedIndex < 0)
+            return;
+
+        string keel = comboLanguage.SelectedIndex == 1 ? "en-US" : "et-EE";
+        poeKeel = CultureInfo.GetCultureInfo(keel);
+        CultureInfo.CurrentUICulture = poeKeel;
+        CultureInfo.CurrentCulture = poeKeel;
+        RakendaKeel();
+
+        try
+        {
+            Properties.Settings.Default.UserLanguage = keel;
+            Properties.Settings.Default.Save();
+        }
+        catch (Exception ex) when (ex is ConfigurationErrorsException or IOException or UnauthorizedAccessException)
+        {
+            Vaade.Teade(Tekst("KeeleSalvestamiseViga"));
+        }
+    }
+
+    private string Tekst(string voti)
+    {
+        return ressursid.GetString(voti, poeKeel) ?? voti;
+    }
+
+    private void RakendaRessursid(Control kontroll)
+    {
+        if (!string.IsNullOrEmpty(kontroll.Name))
+            ressursid.ApplyResources(kontroll, kontroll.Name, poeKeel);
+
+        foreach (Control laps in kontroll.Controls)
+            RakendaRessursid(laps);
+    }
+
+    private void RakendaKeel()
+    {
+        RakendaRessursid(this);
+        ressursid.ApplyResources(this, "$this", poeKeel);
+        // Otsingukast asub FormMaini päises.
+        ressursid.ApplyResources(otsing, "otsing", poeKeel);
+
+        for (int i = 0; i < sortMenu.Items.Count; i++)
+            sortMenu.Items[i].Text = Tekst("Jarjestus" + i);
+
+        foreach (var nupp in kategooriad.Controls.OfType<BarboraCategoryButton>())
+        {
+            nupp.AccessibleName = string.Format(Tekst("KategooriaNimi"), nupp.Text);
+            vihjed.SetToolTip(nupp, nupp.Text);
+            nupp.Invalidate();
+        }
+        UuendaPealkiri();
+        UuendaOlek();
+        UuendaMiniHind();
+    }
+
+    private void UuendaPealkiri()
+    {
+        if (viimaneOtsing.Length > 0)
+            pealkiri.Text = string.Format(Tekst("OtsinguPealkiri"), viimaneOtsing);
+        else if (soodus.Checked)
+            pealkiri.Text = Tekst("offers.Text");
+        else
+            pealkiri.Text = kategooriaLoend.FirstOrDefault(k => k.Id == valitud)?.Kategooria_nimetus
+                ?? Tekst(ainultLemmikud ? "lemmikud.Text" : ainultUued ? "Uudistooted" : avaleht ? "ParimadPakkumised" : "koikTooted.Text");
+    }
+
+    private void NaitaOlek(string voti)
+    {
+        olekuVoti = voti;
+        UuendaOlek();
+    }
+
+    private void UuendaOlek()
+    {
+        if (olekuVoti != null)
+            olek.Text = string.Format(Tekst(olekuVoti), leitudTooteid);
+    }
+
+    private void UuendaMiniHind()
+    {
+        miniHind.Text = string.Format(poeKeel, Tekst("KorviKogusumma"), Ostukorv.Kokku);
     }
     private async Task LaeKategooriad()
     {
@@ -56,7 +159,7 @@ public partial class Form3 : Form
     {
         kategooriad.SuspendLayout();
         while (kategooriad.Controls.Count > 0) { var c = kategooriad.Controls[0]; kategooriad.Controls.Remove(c); c.Dispose(); }
-        LisaKategooria(null, "Kõik tooted", 0);
+        LisaKategooria(null, Tekst("koikTooted.Text"), 0);
         var kasutatud = new HashSet<int>();
         void LisaPuu(Kategooria k, int tase)
         {
@@ -73,11 +176,12 @@ public partial class Form3 : Form
     {
         var button = new BarboraCategoryButton
         {
+            Name = id == null ? "koikTooted" : "",
             Text = nimi,
             Tag = id,
             Depth = tase,
             Selected = id == valitud,
-            AccessibleName = "Kategooria: " + nimi,
+            AccessibleName = string.Format(Tekst("KategooriaNimi"), nimi),
             Width = Math.Max(100, kategooriad.Width - SystemInformation.VerticalScrollBarWidth - 8 * DeviceDpi / 96),
             Height = (tase == 0 ? 46 : 40) * DeviceDpi / 96,
             Margin = Padding.Empty
@@ -108,7 +212,7 @@ public partial class Form3 : Form
     {
         if (!valmis || IsDisposed) return;
         laadimine?.Cancel(); var allikasCt = CancellationTokenSource.CreateLinkedTokenSource(elu.Token);
-        laadimine = allikasCt; var ct = allikasCt.Token; olek.Text = "Laen tooteid…"; eelmine.Enabled = jargmine.Enabled = false;
+        laadimine = allikasCt; var ct = allikasCt.Token; NaitaOlek("LaenTooteid"); eelmine.Enabled = jargmine.Enabled = false;
         try
         {
             using var db = new ToodedContext(); string q = otsing.Text.Trim(); var ids = ValitudKategooriad();
@@ -141,23 +245,28 @@ public partial class Form3 : Form
             {
                 var tyhi = Vaade.Veerg(); tyhi.Width = Math.Max(280, kaardid.ClientSize.Width - 12); tyhi.Padding = new Padding(24);
                 Vaade.Lisa(tyhi, new BarboraAsset { AssetPath = "icons/ic_no_product.svg", Dock = DockStyle.Top, Height = 96 });
-                Vaade.Lisa(tyhi, Vaade.Tekstirida("Sobivaid tooteid ei leitud", true));
-                var selgitus = Vaade.Tekstirida("Proovi teist otsingut või eemalda filtrid. Tühja kataloogi saab haldaja poe seadetest lisada.");
+                var tyhiPealkiri = Vaade.Tekstirida(Tekst("tyhiPealkiri.Text"), true);
+                tyhiPealkiri.Name = "tyhiPealkiri";
+                Vaade.Lisa(tyhi, tyhiPealkiri);
+                var selgitus = Vaade.Tekstirida(Tekst("tyhiSelgitus.Text"));
+                selgitus.Name = "tyhiSelgitus";
                 selgitus.MaximumSize = new Size(440 * DeviceDpi / 96, 0); Vaade.Lisa(tyhi, selgitus);
-                var puhasta = new BarboraActionButton { Text = "Näita kõiki tooteid" }; Vaade.Nupp(puhasta);
+                var puhasta = new BarboraActionButton { Name = "puhasta", Text = Tekst("puhasta.Text") }; Vaade.Nupp(puhasta);
                 puhasta.Click += (_, _) => { valitud = null; ValiKategooriaVarv(); otsing.Clear(); laos.Checked = soodus.Checked = false; PlaaniOtsing(); };
                 Vaade.Lisa(tyhi, puhasta); kaardid.Controls.Add(tyhi);
             }
             MahutaKaardid(); kaardid.ResumeLayout(true);
-            pealkiri.Text = q.Length > 0 ? $"Otsing: {q}" : soodus.Checked ? "Sooduspakkumised" : kategooriaLoend.FirstOrDefault(k => k.Id == valitud)?.Kategooria_nimetus ?? (ainultLemmikud ? "Minu tooted" : ainultUued ? "Uudistooted" : avaleht ? "Parimad pakkumised" : "Kõik tooted");
-            olek.Text = Vaade.Tooteid(kokku);
+            viimaneOtsing = q;
+            UuendaPealkiri();
+            leitudTooteid = kokku;
+            NaitaOlek(kokku == 1 ? "YksToode" : "MituToodet");
             lehekulg.Text = kokku == 0 ? "" : $"{leht * LeheSuurus + 1}–{Math.Min(kokku, (leht + 1) * LeheSuurus)} / {kokku}";
             eelmine.Enabled = leht > 0; jargmine.Enabled = (leht + 1) * LeheSuurus < kokku;
             tervitus.Visible = avaleht && q.Length == 0 && valitud == null && !ainultLemmikud && !ainultUued && leht == 0;
             feedScroll.AutoScrollPosition = Point.Empty;
         }
         catch (OperationCanceledException) { }
-        catch { if (!IsDisposed && !ct.IsCancellationRequested) olek.Text = "Laadimine ei õnnestunud. Vajuta Värskenda. Eelmine vaade jäi alles."; }
+        catch { if (!IsDisposed && !ct.IsCancellationRequested) NaitaOlek("ToodeteLaadimiseViga"); }
         finally { if (ReferenceEquals(laadimine, allikasCt)) laadimine = null; allikasCt.Dispose(); }
     }
     private void PlaaniOtsing() { if (vahetan) return; if (otsing.TextLength > 0) avaleht = false; leht = 0; viivitus.Stop(); viivitus.Start(); }
@@ -193,11 +302,18 @@ public partial class Form3 : Form
                 if (toode == null) throw new ArgumentException("Toode pole enam müügil. Värskenda kataloogi.");
                 Ostukorv.Lisa(toode, 1);
             }
-            if (!IsDisposed) { UuendaKorv(); olek.Text = vahe > 0 ? "Lisatud ostukorvi" : "Kogus muudetud"; }
+            if (!IsDisposed) { UuendaKorv(); NaitaOlek(vahe > 0 ? "LisatudKorvi" : "KogusMuudetud"); }
         }
-        catch (ArgumentException ex) { if (!IsDisposed) olek.Text = ex.Message; }
+        catch (ArgumentException ex)
+        {
+            if (!IsDisposed)
+            {
+                olekuVoti = null;
+                olek.Text = ex.Message;
+            }
+        }
         catch (OperationCanceledException) { }
-        catch { if (!IsDisposed) olek.Text = "Korvi muutmine ei õnnestunud. Proovi uuesti."; }
+        catch { if (!IsDisposed) NaitaOlek("KorviMuutmiseViga"); }
     }
     public void UuendaKorv()
     {
@@ -208,7 +324,7 @@ public partial class Form3 : Form
     {
         try { await LaeKategooriad(); await LaeTooted(); if (!IsDisposed) UuendaKorv(); }
         catch (OperationCanceledException) { }
-        catch { if (!IsDisposed) olek.Text = "Kataloogi ei saanud laadida. Proovi uuesti."; }
+        catch { if (!IsDisposed) NaitaOlek("KataloogiLaadimiseViga"); }
     }
     private async Task KontrolliKataloogi(bool sunni)
     {
@@ -260,7 +376,7 @@ public partial class Form3 : Form
     private void UuendaMiniKorv()
     {
         while (miniRead.Controls.Count > 0) { var c = miniRead.Controls[0]; miniRead.Controls.Remove(c); c.Dispose(); }
-        miniHind.Text = $"Kokku    {Ostukorv.Kokku:N2} €";
+        UuendaMiniHind();
         if (Ostukorv.Ridad.Count == 0)
         {
             var state = new TableLayoutPanel
@@ -277,10 +393,11 @@ public partial class Form3 : Form
             state.RowStyles.Add(new RowStyle(SizeType.Absolute, 62 * DeviceDpi / 96));
             state.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             state.Controls.Add(new BarboraAsset { AssetPath = "cart/cart_logged_in.png", Dock = DockStyle.Fill, Margin = new Padding(36, 20, 36, 4) }, 0, 0);
-            state.Controls.Add(new Label { Text = "Sinu ostukorv on tühi", Font = BarboraTheme.Font(13, FontStyle.Bold), Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter }, 0, 1);
+            state.Controls.Add(new Label { Name = "tyhiKorv", Text = Tekst("tyhiKorv.Text"), Font = BarboraTheme.Font(13, FontStyle.Bold), Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter }, 0, 1);
             state.Controls.Add(new Label
             {
-                Text = "Lisa oma lemmiktooted korvi ja alusta ostlemist.",
+                Name = "korviSelgitus",
+                Text = Tekst("korviSelgitus.Text"),
                 Font = BarboraTheme.Font(10),
                 ForeColor = BarboraTheme.Muted,
                 Dock = DockStyle.Fill,
@@ -300,7 +417,7 @@ public partial class Form3 : Form
     }
     private void LooLiides()
     {
-        Vaade.Vorm(this, "BARBORA", 1400, 880); MinimumSize = new Size(960, 640);
+        Vaade.Vorm(this, "", 1400, 880); MinimumSize = new Size(960, 640);
         BackColor = BarboraTheme.Background;
         paigutus.Dock = DockStyle.Fill; paigutus.ColumnCount = 3; paigutus.RowCount = 2;
         paigutus.Padding = new Padding(24, 0, 24, 20); paigutus.Margin = Padding.Empty;
@@ -310,14 +427,14 @@ public partial class Form3 : Form
         paigutus.RowStyles.Add(new RowStyle(SizeType.Absolute, 66));
         paigutus.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         var nav = new FlowLayoutPanel { Dock = DockStyle.Fill, WrapContents = false, Margin = Padding.Empty, Padding = new Padding(0, 5, 0, 8) };
-        string[] labels = ["Esileht", "Tooted", "Kampaaniad", "Minu tooted"];
+        string[] nimed = ["esileht", "tooted", "kampaaniad", "lemmikud"];
         string[] icons = ["bottom_bar/home.svg", "bottom_bar/products.svg", "popular_categories/ic_special_offers.svg", "icons/heart_outline.svg"];
-        for (int i = 0; i < labels.Length; i++)
+        for (int i = 0; i < nimed.Length; i++)
         {
             int index = i;
             var action = new BarboraActionButton
             {
-                Text = labels[i],
+                Name = nimed[i],
                 IconPath = icons[i],
                 Width = i == 2 ? 154 : i == 3 ? 164 : 140,
                 Height = 46,
@@ -328,16 +445,18 @@ public partial class Form3 : Form
             action.Click += async (_, _) => await ValiVaadeAsync(index == 0, null, favorites: index == 3, offers: index == 2);
             navNupud.Add(action); nav.Controls.Add(action);
         }
-        varskenda.Text = ""; varskenda.AccessibleName = "Uuenda kataloogi"; varskenda.Size = new Size(42, 42);
+        varskenda.Name = "varskenda"; varskenda.Size = new Size(42, 42);
         varskenda.FlatStyle = FlatStyle.Flat; varskenda.FlatAppearance.BorderSize = 0;
         varskenda.IconPath = "icons/ic_refresh.svg"; varskenda.ShowBorder = false; varskenda.Cursor = Cursors.Hand;
         varskenda.Click += async (_, _) => { await VarskendaAsync(); await KontrolliKataloogi(true); };
-        nav.Controls.Add(varskenda); paigutus.Controls.Add(nav, 0, 0); paigutus.SetColumnSpan(nav, 3);
+        comboLanguage.Margin = new Padding(12, 10, 0, 0);
+        nav.Controls.Add(varskenda);
+        nav.Controls.Add(comboLanguage); paigutus.Controls.Add(nav, 0, 0); paigutus.SetColumnSpan(nav, 3);
         var sidebar = new BarboraSurface { Dock = DockStyle.Fill, Padding = new Padding(8, 18, 8, 12), Margin = new Padding(0, 0, 18, 0) };
         var categoryLayout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 2, Margin = Padding.Empty };
         categoryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         categoryLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42)); categoryLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        categoryLayout.Controls.Add(new Label { Text = "Tootekategooriad", Font = BarboraTheme.Font(11, FontStyle.Bold), Dock = DockStyle.Fill, Padding = new Padding(10, 0, 0, 0) }, 0, 0);
+        categoryLayout.Controls.Add(new Label { Name = "kategooriatePealkiri", Font = BarboraTheme.Font(11, FontStyle.Bold), Dock = DockStyle.Fill, Padding = new Padding(10, 0, 0, 0) }, 0, 0);
         kategooriad.Dock = DockStyle.Fill; kategooriad.FlowDirection = FlowDirection.TopDown; kategooriad.WrapContents = false; kategooriad.AutoScroll = true;
         kategooriad.Resize += (_, _) => { foreach (Control c in kategooriad.Controls) c.Width = Math.Max(100, kategooriad.Width - SystemInformation.VerticalScrollBarWidth - 8 * DeviceDpi / 96); };
         categoryLayout.Controls.Add(kategooriad, 0, 1); sidebar.Controls.Add(categoryLayout); paigutus.Controls.Add(sidebar, 0, 1);
@@ -353,19 +472,19 @@ public partial class Form3 : Form
         var promo = new BarboraAsset { AssetPath = "bento_banners/ee/mobile/twin_1.jpg", Dock = DockStyle.Fill, Cursor = Cursors.Hand, Margin = Padding.Empty };
         promo.Click += async (_, _) => await ValiVaadeAsync(false, null, news: true);
         banners.Controls.Add(campaign, 0, 0); banners.Controls.Add(promo, 1, 0); tervitus.Controls.Add(banners); feed.Controls.Add(tervitus, 0, 0);
-        pealkiri.Text = "Parimad pakkumised"; pealkiri.Font = BarboraTheme.Font(19); pealkiri.AutoSize = true;
+        pealkiri.Font = BarboraTheme.Font(19); pealkiri.AutoSize = true;
         pealkiri.Dock = DockStyle.Top; pealkiri.Margin = new Padding(0, 0, 0, 14); pealkiri.UseMnemonic = false; feed.Controls.Add(pealkiri, 0, 1);
         var status = new Label { Dock = DockStyle.Top, Height = 26, AutoEllipsis = true, Font = BarboraTheme.Font(9), ForeColor = BarboraTheme.Muted, Margin = new Padding(0,0,0,8) };
         olek.TextChanged += (_, _) => status.Text = olek.Text;
         feed.Controls.Add(status,0,2);
         var filters = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 58, WrapContents = false, Margin = Padding.Empty };
-        var offers = new BarboraActionButton { Text = "Sooduspakkumised", IconPath = "icons/ic_filter.svg", Width = 202, Height = 40, Margin = new Padding(0, 0, 10, 12) };
-        var inStock = new BarboraActionButton { Text = "Ainult laos", Width = 126, Height = 40, Margin = new Padding(0, 0, 10, 12) };
-        var order = new BarboraActionButton { Text = "Järjesta", IconPath = "icons/ic_sort.svg", Width = 142, Height = 40, Margin = new Padding(0, 0, 0, 12) };
+        var offers = new BarboraActionButton { Name = "offers", IconPath = "icons/ic_filter.svg", Width = 202, Height = 40, Margin = new Padding(0, 0, 10, 12) };
+        var inStock = new BarboraActionButton { Name = "inStock", Width = 126, Height = 40, Margin = new Padding(0, 0, 10, 12) };
+        var order = new BarboraActionButton { Name = "order", IconPath = "icons/ic_sort.svg", Width = 142, Height = 40, Margin = new Padding(0, 0, 0, 12) };
         offers.Click += (_, _) => soodus.Checked = !soodus.Checked; inStock.Click += (_, _) => laos.Checked = !laos.Checked;
         filters.Controls.AddRange([offers, inStock, order]); feed.Controls.Add(filters, 0, 3);
-        sort.Items.AddRange(["Nimetus A–Z", "Hind: odavamad enne", "Hind: kallimad enne", "Sooduspakkumised enne"]); sort.SelectedIndex = 0;
-        var sortMenu = new ContextMenuStrip(components!) { Font = BarboraTheme.Font(10) };
+        sort.Items.AddRange([Tekst("Jarjestus0"), Tekst("Jarjestus1"), Tekst("Jarjestus2"), Tekst("Jarjestus3")]); sort.SelectedIndex = 0;
+        sortMenu = new ContextMenuStrip(components!) { Font = BarboraTheme.Font(10) };
         for (int i = 0; i < sort.Items.Count; i++) { int n = i; sortMenu.Items.Add(sort.Items[i]!.ToString(), null, (_, _) => sort.SelectedIndex = n); }
         order.Click += (_, _) => sortMenu.Show(order, new Point(0, order.Height));
         kaardid.Dock = DockStyle.Top; kaardid.Height = 600; kaardid.WrapContents = true; kaardid.AutoScroll = false; kaardid.Margin = Padding.Empty;
@@ -375,7 +494,7 @@ public partial class Form3 : Form
         footer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 102)); footer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 52)); footer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 52));
         olek.Dock = DockStyle.Fill; olek.ForeColor = BarboraTheme.Muted; olek.AutoEllipsis = true; olek.Font = BarboraTheme.Font(9); olek.TextAlign = ContentAlignment.MiddleLeft;
         lehekulg.Dock = DockStyle.Fill; lehekulg.TextAlign = ContentAlignment.MiddleCenter; lehekulg.Font = BarboraTheme.Font(9);
-        eelmine.Text = "‹"; jargmine.Text = "›"; eelmine.AccessibleName = "Eelmine leht"; jargmine.AccessibleName = "Järgmine leht";
+        eelmine.Text = "‹"; jargmine.Text = "›"; eelmine.Name = "eelmine"; jargmine.Name = "jargmine";
         foreach (var button in new[] { eelmine, jargmine }) { Vaade.Nupp(button); button.MinimumSize = Size.Empty; button.Dock = DockStyle.Fill; button.Padding = Padding.Empty; }
         eelmine.Click += async (_, _) => { leht--; await LaeTooted(); }; jargmine.Click += async (_, _) => { leht++; await LaeTooted(); };
         footer.Controls.Add(olek, 0, 0); footer.Controls.Add(lehekulg, 1, 0); footer.Controls.Add(eelmine, 2, 0); footer.Controls.Add(jargmine, 3, 0); feed.Controls.Add(footer, 0, 5);
@@ -385,11 +504,11 @@ public partial class Form3 : Form
         basket.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         basket.RowStyles.Add(new RowStyle(SizeType.Absolute, 46)); basket.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         basket.RowStyles.Add(new RowStyle(SizeType.Absolute, 58)); basket.RowStyles.Add(new RowStyle(SizeType.Absolute, 52)); basket.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
-        basket.Controls.Add(new Label { Text = "Ostukorv", Font = BarboraTheme.Font(15, FontStyle.Bold), Dock = DockStyle.Fill }, 0, 0);
+        basket.Controls.Add(new Label { Name = "korviPealkiri", Font = BarboraTheme.Font(15, FontStyle.Bold), Dock = DockStyle.Fill }, 0, 0);
         miniRead.Dock = DockStyle.Fill; miniRead.FlowDirection = FlowDirection.TopDown; miniRead.WrapContents = false; miniRead.AutoScroll = true;
         miniRead.Resize += (_, _) => { foreach (Control c in miniRead.Controls) c.Width = Math.Max(180, miniRead.ClientSize.Width - 22 * DeviceDpi / 96); };
         basket.Controls.Add(miniRead, 0, 1); miniHind.Font = BarboraTheme.Font(17, FontStyle.Bold); miniHind.Dock = DockStyle.Fill; miniHind.TextAlign = ContentAlignment.MiddleLeft; basket.Controls.Add(miniHind, 0, 2);
-        var checkout = new BarboraActionButton { Text = "Vaata ostukorvi", Primary = true, Dock = DockStyle.Fill, Margin = new Padding(0, 0, 0, 6) }; checkout.Click += AvaKorv; basket.Controls.Add(checkout, 0, 3);
+        var checkout = new BarboraActionButton { Name = "checkout", Primary = true, Dock = DockStyle.Fill, Margin = new Padding(0, 0, 0, 6) }; checkout.Click += AvaKorv; basket.Controls.Add(checkout, 0, 3);
         allikas.Dock = DockStyle.Fill; allikas.Font = BarboraTheme.Font(8); allikas.ForeColor = BarboraTheme.Muted; allikas.AutoEllipsis = true; basket.Controls.Add(allikas, 0, 4);
         mini.Controls.Add(basket); paigutus.Controls.Add(mini, 2, 1); Controls.Add(paigutus);
         Resize += (_, _) => { bool show = ClientSize.Width >= 1180 * DeviceDpi / 96; mini.Visible = show; paigutus.ColumnStyles[2].Width = show ? 294 * DeviceDpi / 96 : 0; MahutaKaardid(); };

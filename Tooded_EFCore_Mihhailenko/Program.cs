@@ -1,5 +1,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+using System.Globalization;
 
 namespace Tooded_EFCore;
 internal static class Program
@@ -7,6 +9,18 @@ internal static class Program
     [STAThread]
     static void Main()
     {
+        string keel = "et-EE";
+        try
+        {
+            if (Properties.Settings.Default.UserLanguage == "en-US")
+                keel = "en-US";
+        }
+        catch (ConfigurationErrorsException)
+        {
+            // Kui seadefaili ei saa lugeda, jääb vaikimisi eesti keel.
+        }
+        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(keel);
+        CultureInfo.CurrentCulture = CultureInfo.CurrentUICulture;
         ApplicationConfiguration.Initialize();
         bool valmis = false;
         while (!valmis)

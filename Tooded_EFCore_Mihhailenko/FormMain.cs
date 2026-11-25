@@ -81,8 +81,20 @@ public partial class FormMain : Form
         }
         korv.Width = 142; korv.Height = 48; korv.Font = BarboraTheme.Font(11, FontStyle.Bold);
         korv.Margin = new Padding(0, 3, 0, 0); korv.Click += pood.AvaKorv; nav.Controls.Add(korv);
+        korv.Visible = !AktiivneKasutaja.OnAdmin;
         pood.KorvMuutus += (_, _) => UuendaKorvi();
-        header.Resize += (_, _) => { bool compact = ClientSize.Width < 1180 * DeviceDpi / 96; for (int i = 0; i < nav.Controls.Count - 1; i++) { var b = (BarboraActionButton)nav.Controls[i]; b.Text = compact ? "" : i == 0 ? "Tellimused" : i == 1 ? "Minu konto" : "Haldus"; b.Width = (compact ? 48 : i == 0 ? 142 : i == 1 ? 142 : 112) * DeviceDpi / 96; b.Invalidate(); } };
+        header.Resize += (_, _) =>
+        {
+            bool compact = ClientSize.Width < 1180 * DeviceDpi / 96;
+            foreach (BarboraActionButton nupp in nav.Controls)
+            {
+                if (nupp == korv) continue;
+                nupp.Text = compact ? "" : nupp.AccessibleName;
+                int laius = nupp.AccessibleName == "Haldus" ? 112 : 142;
+                nupp.Width = (compact ? 48 : laius) * DeviceDpi / 96;
+                nupp.Invalidate();
+            }
+        };
         header.Controls.Add(nav, 2, 0); root.Controls.Add(header, 0, 0); root.Controls.Add(pood, 0, 1); Controls.Add(root);
         pood.Show(); UuendaKorvi();
         FormClosed += (_, _) => { pood.Close(); pood.Dispose(); };

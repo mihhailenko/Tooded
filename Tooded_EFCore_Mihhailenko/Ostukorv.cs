@@ -61,6 +61,11 @@ public static class Ostukorv
 
     public static void Lisa(Toode toode, int kogus)
     {
+        if (AktiivneKasutaja.OnAdmin)
+        {
+            throw new ArgumentException("Administraator ei saa tooteid ostukorvi lisada.");
+        }
+
         if (OstuKontrollVajalik)
         {
             throw new ArgumentException("Kontrolli enne ostukorvis eelmise ostu tulemust.");

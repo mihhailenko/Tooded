@@ -286,6 +286,7 @@ public partial class Form3 : Form
     }
     private async Task MuudaKorvi(Toode t, int vahe)
     {
+        if (AktiivneKasutaja.OnAdmin) return;
         try
         {
             if (Ostukorv.OstuKontrollVajalik) throw new ArgumentException("Kontrolli ostukorvis eelmise ostu tulemust.");
@@ -344,6 +345,7 @@ public partial class Form3 : Form
     }
     public async void AvaKorv(object? s, EventArgs e)
     {
+        if (AktiivneKasutaja.OnAdmin) return;
         using var vorm = new ArveForm(); vorm.ShowDialog(TopLevelControl); await VarskendaAsync();
     }
     private void AvaToode(Toode toode)
@@ -423,7 +425,7 @@ public partial class Form3 : Form
         paigutus.Padding = new Padding(24, 0, 24, 20); paigutus.Margin = Padding.Empty;
         paigutus.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 224));
         paigutus.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-        paigutus.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 294));
+        paigutus.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, AktiivneKasutaja.OnAdmin ? 0 : 294));
         paigutus.RowStyles.Add(new RowStyle(SizeType.Absolute, 66));
         paigutus.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         var nav = new FlowLayoutPanel { Dock = DockStyle.Fill, WrapContents = false, Margin = Padding.Empty, Padding = new Padding(0, 5, 0, 8) };
@@ -510,8 +512,9 @@ public partial class Form3 : Form
         basket.Controls.Add(miniRead, 0, 1); miniHind.Font = BarboraTheme.Font(17, FontStyle.Bold); miniHind.Dock = DockStyle.Fill; miniHind.TextAlign = ContentAlignment.MiddleLeft; basket.Controls.Add(miniHind, 0, 2);
         var checkout = new BarboraActionButton { Name = "checkout", Primary = true, Dock = DockStyle.Fill, Margin = new Padding(0, 0, 0, 6) }; checkout.Click += AvaKorv; basket.Controls.Add(checkout, 0, 3);
         allikas.Dock = DockStyle.Fill; allikas.Font = BarboraTheme.Font(8); allikas.ForeColor = BarboraTheme.Muted; allikas.AutoEllipsis = true; basket.Controls.Add(allikas, 0, 4);
+        mini.Visible = !AktiivneKasutaja.OnAdmin;
         mini.Controls.Add(basket); paigutus.Controls.Add(mini, 2, 1); Controls.Add(paigutus);
-        Resize += (_, _) => { bool show = ClientSize.Width >= 1180 * DeviceDpi / 96; mini.Visible = show; paigutus.ColumnStyles[2].Width = show ? 294 * DeviceDpi / 96 : 0; MahutaKaardid(); };
+        Resize += (_, _) => { bool show = !AktiivneKasutaja.OnAdmin && ClientSize.Width >= 1180 * DeviceDpi / 96; mini.Visible = show; paigutus.ColumnStyles[2].Width = show ? 294 * DeviceDpi / 96 : 0; MahutaKaardid(); };
         otsing.TextChanged += (_, _) => PlaaniOtsing(); sort.SelectedIndexChanged += (_, _) => PlaaniOtsing();
         laos.CheckedChanged += (_, _) => { inStock.Selected = laos.Checked; inStock.Invalidate(); PlaaniOtsing(); };
         soodus.CheckedChanged += (_, _) => { offers.Selected = soodus.Checked; offers.Invalidate(); PlaaniOtsing(); };

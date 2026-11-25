@@ -30,14 +30,7 @@ internal static class Program
                 Kaustad.Loo();
                 using ToodedContext db = new ToodedContext();
                 UuendaAndmebaas(db);
-                if (!db.Kasutajad.Any())
-                {
-                    using KasutajateHaldusForm seadistus = new KasutajateHaldusForm(true);
-                    if (seadistus.ShowDialog() != DialogResult.OK)
-                    {
-                        return;
-                    }
-                }
+                LooAlgkasutajad(db);
 
                 valmis = true;
             }
@@ -53,6 +46,30 @@ internal static class Program
         }
 
         Application.Run(new LoginForm());
+    }
+
+    private static void LooAlgkasutajad(ToodedContext db)
+    {
+        if (db.Kasutajad.Any())
+        {
+            return;
+        }
+
+        db.Kasutajad.Add(new Kasutaja
+        {
+            Nimi = "Admin",
+            Email = "admin@admin.ee",
+            ParoolHash = PasswordHelper.Hash("admin123"),
+            Roll = "admin"
+        });
+        db.Kasutajad.Add(new Kasutaja
+        {
+            Nimi = "Kasutaja",
+            Email = "kasutaja@pood.ee",
+            ParoolHash = PasswordHelper.Hash("kasutaja123"),
+            Roll = "kasutaja"
+        });
+        db.SaveChanges();
     }
 
     private static void UuendaAndmebaas(ToodedContext db)

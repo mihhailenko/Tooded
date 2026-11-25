@@ -48,27 +48,31 @@ internal sealed class TooteDetailForm : Form
         {
             var vana = Vaade.Tekstirida($"{toode.Tavahind:N2} €"); vana.Font = BarboraTheme.Font(12, FontStyle.Strikeout); Vaade.Lisa(parem, vana);
         }
-        var korvis = Vaade.Tekstirida("");
-        var lisa = new BarboraActionButton
+        if (!AktiivneKasutaja.OnAdmin)
         {
-            Text = "Ostukorvi",
-            Primary = true,
-            Height = 48,
-            Dock = DockStyle.Top,
-            Enabled = toode.Aktiivne && toode.Kogus > 0,
-            Margin = new Padding(0, 8, 0, 14)
-        };
-        lisa.Click += async (_, _) =>
-        {
-            lisa.Enabled = false; await muuda(toode, 1);
-            if (!IsDisposed)
+            var korvis = Vaade.Tekstirida("");
+            var lisa = new BarboraActionButton
             {
-                int mitu = Ostukorv.Ridad.FirstOrDefault(r => r.ToodeId == toode.Id)?.Kogus ?? 0;
-                korvis.Text = $"Ostukorvis {mitu} tk";
-                lisa.Enabled = mitu < toode.Kogus && !Ostukorv.OstuKontrollVajalik;
-            }
-        };
-        Vaade.Lisa(parem, lisa); Vaade.Lisa(parem, korvis);
+                Text = "Ostukorvi",
+                Primary = true,
+                Height = 48,
+                Dock = DockStyle.Top,
+                Enabled = toode.Aktiivne && toode.Kogus > 0,
+                Margin = new Padding(0, 8, 0, 14)
+            };
+            lisa.Click += async (_, _) =>
+            {
+                lisa.Enabled = false; await muuda(toode, 1);
+                if (!IsDisposed)
+                {
+                    int mitu = Ostukorv.Ridad.FirstOrDefault(r => r.ToodeId == toode.Id)?.Kogus ?? 0;
+                    korvis.Text = $"Ostukorvis {mitu} tk";
+                    lisa.Enabled = mitu < toode.Kogus && !Ostukorv.OstuKontrollVajalik;
+                }
+            };
+            Vaade.Lisa(parem, lisa);
+            Vaade.Lisa(parem, korvis);
+        }
         var saadavus = Vaade.Tekstirida(toode.Kogus > 0 ? "Toode on laos" : "Toode on hetkel otsas"); Vaade.Lisa(parem, saadavus);
         string description = toode.LisainfoJson == null || toode.KohalikMuudatus ? toode.Kirjeldus ?? "" : info.Loe("description");
         if (description.Length > 0)

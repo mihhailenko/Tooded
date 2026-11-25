@@ -12,6 +12,10 @@ public static class OstuTeenus
         {
             throw new ArgumentException("Logi uuesti sisse.");
         }
+        if (ostja.Roll == "admin")
+        {
+            throw new ArgumentException("Administraator ei saa tellimust teha.");
+        }
         if (Ostukorv.Ridad.Count == 0)
         {
             throw new ArgumentException("Ostukorv on tühi.");
@@ -54,6 +58,11 @@ public static class OstuTeenus
 
     public static void Salvesta(ToodedContext db, Tellimus tellimus)
     {
+        if (AktiivneKasutaja.OnAdmin)
+        {
+            throw new ArgumentException("Administraator ei saa tellimust teha.");
+        }
+
         using IDbContextTransaction tehing = db.Database.BeginTransaction();
         foreach (TellimuseRida rida in tellimus.Read)
         {

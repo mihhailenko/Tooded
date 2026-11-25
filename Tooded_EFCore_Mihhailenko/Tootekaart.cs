@@ -41,7 +41,9 @@ internal sealed class Tootekaart : Control
         ForeColor = BarboraTheme.Text;
         TabStop = true;
         AccessibleRole = AccessibleRole.Grouping;
-        AccessibleDescription = "Enter avab toote üksikasjad. Tühik lisab toote ostukorvi.";
+        AccessibleDescription = "Enter avab toote üksikasjad.";
+        if (!AktiivneKasutaja.OnAdmin)
+            AccessibleDescription += " Tühik lisab toote ostukorvi.";
 
         lisa.Text = "Ostukorvi";
         lisa.Taitmine = true;
@@ -123,8 +125,18 @@ internal sealed class Tootekaart : Control
 
     public void UuendaKogus()
     {
-        korvis = Ostukorv.Ridad.FirstOrDefault(r => r.ToodeId == toode.Id)?.Kogus ?? 0;
         bool saab = toode.Aktiivne && toode.Kogus > 0;
+        if (AktiivneKasutaja.OnAdmin)
+        {
+            korvis = 0;
+            lisa.Visible = miinus.Visible = pluss.Visible = false;
+            lisa.Enabled = miinus.Enabled = pluss.Enabled = false;
+            AccessibleName = $"{toode.Toodenimetus}, {toode.Hind:N2} eurot.";
+            Invalidate();
+            return;
+        }
+
+        korvis = Ostukorv.Ridad.FirstOrDefault(r => r.ToodeId == toode.Id)?.Kogus ?? 0;
         lisa.Visible = korvis == 0;
         lisa.Text = saab ? "Ostukorvi" : "Hetkel otsas";
         lisa.Enabled = saab && !muutmine && !Ostukorv.OstuKontrollVajalik;

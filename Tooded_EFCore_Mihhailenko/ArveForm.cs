@@ -38,7 +38,8 @@ public partial class ArveForm : Form
 
     public ArveForm(int? tellimuseId = null)
     {
-        if (AktiivneKasutaja.Id == 0) throw new UnauthorizedAccessException();
+        if (AktiivneKasutaja.Id == 0 || (AktiivneKasutaja.OnAdmin && tellimuseId == null))
+            throw new UnauthorizedAccessException();
         kasutajaId = AktiivneKasutaja.Id;
         InitializeComponent();
         LooLiides();
@@ -222,7 +223,7 @@ public partial class ArveForm : Form
 
     private async void KinnitaOst(object? sender, EventArgs e)
     {
-        if (kinnitamine || koguseMuutmine || tellimus != null || Ostukorv.Ridad.Count == 0)
+        if (AktiivneKasutaja.OnAdmin || kinnitamine || koguseMuutmine || tellimus != null || Ostukorv.Ridad.Count == 0)
         {
             return;
         }

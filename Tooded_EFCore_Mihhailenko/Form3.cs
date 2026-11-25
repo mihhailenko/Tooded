@@ -26,6 +26,7 @@ public partial class Form3 : Form
     private readonly List<BarboraActionButton> navNupud = [];
     private bool avaleht = true, ainultLemmikud, ainultUued, vahetan;
     private readonly ComboBox sort = new();
+    private readonly ComboBox comboLanguage = new();
     private readonly CheckBox laos = new() { Text = "Ainult laos", AutoSize = true };
     private readonly CheckBox soodus = new() { Text = "Sooduspakkumised", AutoSize = true };
     private readonly Label pealkiri = new(), olek = new(), allikas = new(), korviSumma = new(), lehekulg = new();
@@ -451,7 +452,14 @@ public partial class Form3 : Form
         varskenda.FlatStyle = FlatStyle.Flat; varskenda.FlatAppearance.BorderSize = 0;
         varskenda.IconPath = "icons/ic_refresh.svg"; varskenda.ShowBorder = false; varskenda.Cursor = Cursors.Hand;
         varskenda.Click += async (_, _) => { await VarskendaAsync(); await KontrolliKataloogi(true); };
+        Name = "Form3";
+        comboLanguage.Name = "comboLanguage";
+        comboLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
+        comboLanguage.FormattingEnabled = true;
+        comboLanguage.Items.AddRange(new object[] { "Eesti", "English" });
+        comboLanguage.Size = new Size(108, 24);
         comboLanguage.Margin = new Padding(12, 10, 0, 0);
+        comboLanguage.SelectedIndexChanged += comboLanguage_SelectedIndexChanged;
         nav.Controls.Add(varskenda);
         nav.Controls.Add(comboLanguage); paigutus.Controls.Add(nav, 0, 0); paigutus.SetColumnSpan(nav, 3);
         var sidebar = new BarboraSurface { Dock = DockStyle.Fill, Padding = new Padding(8, 18, 8, 12), Margin = new Padding(0, 0, 18, 0) };

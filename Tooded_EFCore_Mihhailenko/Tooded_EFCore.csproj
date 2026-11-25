@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Tooded_EFCore</RootNamespace>
+    <AssemblyName>Tooded_EFCore_Mihhailenko</AssemblyName>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>

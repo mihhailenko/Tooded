@@ -9,6 +9,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <ApplicationIcon>Tooded.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

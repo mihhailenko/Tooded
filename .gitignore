@@ -48,6 +48,7 @@ tools/__pycache__/
 !/Tooded.sln
 !/Tooded_EFCore_Mihhailenko.slnx
 !/Tooded_EFCore_Mihhailenko/
+!/ToodedInstaller/
 
 # Development notes and helper scripts are local even inside the application tree.
 *.md
